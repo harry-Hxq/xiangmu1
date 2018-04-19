@@ -28,7 +28,7 @@ function PC_jiesuan(){
         $codes = explode(',', $opencode);
         if(count($codes) != 20){
             echo 'ERROR! --pc开奖没有对应'."\n" ;
-            exit();
+            continue;
         }else{
             if($openType == 4){
                 $number1 = (int)$codes[0] + (int)$codes[1] + (int)$codes[2] + (int)$codes[3] + (int)$codes[4] + (int)$codes[5];
@@ -382,7 +382,6 @@ function SSC_jiesuan(){
             }else{
                 $zym_4['杂六'] = true;
             }
-            var_dump($zym_4);
             $zong = (int)$codes[0] + (int)$codes[1] + (int)$codes[2] + (int)$codes[3] + (int)$codes[4];
         }
         if($zym_1 == '总'){
