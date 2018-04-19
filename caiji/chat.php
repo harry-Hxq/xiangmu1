@@ -8,7 +8,7 @@ function 管理员喊话($Content, $roomid, $game){
 }
 
 function fengpanSay($game_type,$table,$roomid,$term){
-    管理员喊话('第 ' .$term. ' 期,-----------------封盘----------------以下全接，不改不退，以上全部无效 已投注记录显示为准。', $roomid, 'pk10');
+    管理员喊话('第 ' .$term. ' 期,-----------------封盘----------------以下全接，不改不退，以上全部无效 已投注记录显示为准。', $roomid, $game_type);
 
     // 下注核对
     var_dump("term".$term);
@@ -20,20 +20,15 @@ function fengpanSay($game_type,$table,$roomid,$term){
     var_dump($cons);
     if(!empty($cons)){
         foreach ($cons as $c){
-            $names[$c['username']] += $c['content']."/".$c['money']." ";
+            $names[$c['username']] .= $c['content']."/".$c['money']." ";
         }
         var_dump($names);
         $nameInfo = '';
         foreach ($names as $name => $res){
-            $nameInfo += $name.": [".$res."]<br />";
+            $nameInfo .= $name.": [".$res."]<br />";
         }
         var_dump($nameInfo);
-        管理员喊话($term. '期下注核对：<br /> '.$nameInfo.'
-                            ===============
-                            以上未列出的.表示未下注<br /> 
-                            如封盘会提示封盘无效.<br /> 
-                            没有任何理由需要纠结.<br /> 
-                            包括系统遇突发事情时.', $roomid, $game_type);
+        管理员喊话($term.'期下注核对：<br /> '.$nameInfo.'===============<br />以上未列出的.表示未下注<br /> 如封盘会提示封盘无效.<br /> 没有任何理由需要纠结.<br /> 包括系统遇突发事情时.', $roomid, $game_type);
     }
 
 
