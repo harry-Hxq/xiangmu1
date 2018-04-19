@@ -27,7 +27,7 @@ function PC_jiesuan(){
         if($opencode == "")continue;
         $codes = explode(',', $opencode);
         if(count($codes) != 20){
-            echo 'ERROR!';
+            echo 'ERROR! --pc开奖没有对应'."\n" ;
             exit();
         }else{
             if($openType == 4){
@@ -337,7 +337,7 @@ function SSC_jiesuan(){
         if($opencode == "")continue;
         $codes = explode(',', $opencode);
         if(count($codes) != 5){
-            echo 'ERROR!';
+            echo 'ERROR! --重启时时彩开奖没有对应'."\n" ;
             exit();
         }else{
             $zym_2 = array('豹子' => false, '半顺' => false, '顺子' => false, '对子' => false, '杂六' => false);
@@ -608,7 +608,7 @@ function JSSSC_jiesuan(){
         if($opencode == "")continue;
         $codes = explode(',', $opencode);
         if(count($codes) != 5){
-            echo 'ERROR!';
+            echo 'ERROR! --极速时时彩开奖没有对应'."\n" ;
             exit();
         }else{
             $zym_2 = array('豹子' => false, '半顺' => false, '顺子' => false, '对子' => false, '杂六' => false);
