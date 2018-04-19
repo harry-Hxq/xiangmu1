@@ -1,0 +1,9 @@
+Array
+(
+    [0] => 数据库链接出错
+    [1] => 1045
+    [2] => Access denied for user 'root'@'localhost' (using password: YES)
+)
+
+------------------------------
+
