@@ -1,0 +1,289 @@
+<?
+$g = $_GET['game'] == '' ? 'pk10' : $_GET['game'];
+
+switch($g){
+    case 'pk10': $game = '北京赛车'; break;
+    case 'xyft': $game = '幸运飞艇'; break;
+    case 'xy28': $game = '幸运28'; break;
+    case 'jnd28': $game = '加拿大28'; break;
+    case 'jsmt': $game = '极速摩托'; break;
+	case 'jssc': $game = '极速赛车'; break;
+	case 'jsssc': $game = '极速时时彩'; break;
+	case 'cqssc': $game = '重庆时时彩'; break;
+	case 'jsk3': $game = '江苏快三'; break;
+}
+?>
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            房间聊天<small>聊天管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li><a href="#"> 聊天管理</a></li>
+            <li class="active">房间聊天</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-info">
+            <div class="box-header">
+                <h3 class="box-title"></h3>
+                <div class="btn-group">
+                    <button onclick="window.location.href='index.php?m=chat&c=room&game=pk10'" type="button" class="btn btn-danger btn-xs">北京赛车</button>
+                    <button onclick="window.location.href='index.php?m=chat&c=room&game=xyft'" type="button" class="btn btn-danger btn-xs">幸运飞艇</button>
+					<button onclick="window.location.href='index.php?m=chat&c=room&game=cqssc'" type="button" class="btn btn-danger btn-xs">重庆时时彩</button>
+                    <button onclick="window.location.href='index.php?m=chat&c=room&game=xy28'" type="button" class="btn btn-danger btn-xs">幸运28</button>
+                    <button onclick="window.location.href='index.php?m=chat&c=room&game=jnd28'" type="button" class="btn btn-danger btn-xs">加拿大28</button>
+                    
+                    <button onclick="window.location.href='index.php?m=chat&c=room&game=jsmt'" type="button" class="btn btn-danger btn-xs">极速摩托</button>
+                    <button onclick="window.location.href='index.php?m=chat&c=room&game=jssc'" type="button" class="btn btn-danger btn-xs">极速赛车</button>
+                    <button onclick="window.location.href='index.php?m=chat&c=room&game=jsssc'" type="button" class="btn btn-danger btn-xs">极速时时彩</button>
+                  <button onclick="window.location.href='index.php?m=chat&c=room&game=jsk3'" type="button" class="btn btn-danger btn-xs">江苏快三</button>
+                </div>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="box box-success direct-chat direct-chat-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">房间聊天</h3>
+
+                        <div class="box-tools pull-right">
+                            <span data-toggle="tooltip" title="本期共收到3条投注消息" class="badge bg-green">3</span>
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <!-- Conversations are loaded here -->
+                        <div class="direct-chat-messages" id="messages" style="height:550px;">
+
+                        </div>
+                        <!--/.direct-chat-messages-->
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                            <div class="input-group">
+                                <input type="text" id="sendmsg" name="message" placeholder="发送消息 ..." class="form-control">
+                                <span class="input-group-btn">
+                        <button onclick="sendmsg()" class="btn btn-success btn-flat">发送</button>
+                      </span>
+                            </div>
+                    </div>
+                    <!-- /.box-footer-->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box box-warning box-solid">
+                    <div class="box-header">
+                        <h3 class="box-title">开奖管理</h3>
+                    </div>
+                    <div class="box-body">
+                        <label>当前彩种:</label><span><? echo $game; ?></span><br/>
+                        <label>当前期号:</label><span id="term">000期</span><br/>
+                        <label>开奖号码:</label><span id="opencode">01,02,03,04,05,06,07,08,09,10</span><br/>
+                        <label>距离下期开奖:</label><span style="font-size:20px;font-weight:bold;color:cornflowerblue;" id="time">00秒</span>
+                    </div>
+                </div>
+                <div class="box box-danger box-solid">
+                    <div class="box-header">
+                        <h3 class="box-title">在线人员</h3>
+
+                        <div class="box-tools pull-right">
+                            <button href="#" class="btn btn-box-tool" data-toggle="tooltip" data-title="每把封盘后会刷新对应余额" data-placement="left"><i class="fa fa-question-circle"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered table-striped" id="tableList">
+                            <thead>
+                                <tr>
+                                    <th>昵称</th>
+                                    <th>余额</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+        var id = 0;
+        var game = '<? echo $g; ?>';
+        var first = true;
+        var time = 0;
+        FirstGetContent();
+        getgame();
+        tablestart();
+
+        function sendmsg(){
+            var content = $('#sendmsg').val();
+            $.ajax({
+                url: 'Application/ajax_chat.php?type=send&game=' + game,
+                type: 'post',
+                data: {content: content},
+                dataType: 'json',
+                success: function(data){
+                    alert('发送成功');
+                    $('#sendmsg').val('');
+                }
+            })
+        }
+        function FirstGetContent() {
+            $.ajax({
+                url: 'Application/ajax_chat.php?type=first&game=' + game,
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    addMessage(data);
+                },
+                error: function () { }
+            });
+            setInterval(updateContent, 3000);
+        }
+
+        function updateContent() {
+            $.ajax({
+                url: 'Application/ajax_chat.php?type=update&id=' + id + '&game=' + game,
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    addMessage(data);
+                },
+                error: function () { }
+            });
+        }
+
+        function addMessage(data) {
+            if (data == null || data.length < 0) {
+                return;
+            }
+            //S1代理  S2待定  S3机器人  S4全局公告
+            var str = "";
+            for (i = 0; i < data.length; i++) {
+                if (parseInt(data[i].id) > id) {
+                    id = data[i].id;
+                }
+                var type = data[i].type;
+                if (type.substr(0, 1) == 'U') {
+                    str = str + '<div class="direct-chat-msg">'
+                        + '<div class="direct-chat-info clearfix">'
+                        + '<span class="direct-chat-name pull-left">'  + data[i].nickname + '</span>'
+                        + '<span class="direct-chat-timestamp pull-right">' + data[i].addtime + '</span>'
+                        + '</div>'
+                        + '<img class="direct-chat-img" src="' + data[i].headimg + '" alt="message user image">'
+                        + '<div class="direct-chat-text">' + data[i].content + '</div></div>';
+
+
+                } else if (type == 'S3') {
+                    var headimg = data[i].headimg == "" ? "/Style/images/robot.png" : data[i].headimg;
+                    str = str + '<div class="direct-chat-msg right">'
+                        + '<div class="direct-chat-info clearfix">'
+                        + '<span class="direct-chat-name pull-right">' + data[i].nickname + '</span>'
+                        + '<span class="direct-chat-timestamp pull-left">' + data[i].addtime + '</span>'
+                        + '</div>'
+                        + '<img class="direct-chat-img" src="' + headimg + '" alt="message user image">'
+                        + '<div class="direct-chat-text">' + data[i].content + '</div></div>'
+                } else if (type == 'S1') {
+                    var headimg = data[i].headimg == "" ? "/Style/images/Sys.png" : data[i].headimg;
+                    str = str + '<div class="direct-chat-msg right">'
+                        + '<div class="direct-chat-info clearfix">'
+                        + '<span class="direct-chat-name pull-right">'  + data[i].nickname + '</span>'
+                        + '<span class="direct-chat-timestamp pull-left">' + data[i].addtime + '</span>'
+                        + '</div>'
+                        + '<img class="direct-chat-img" src="' + headimg + '" alt="message user image">'
+                        + '<div class="direct-chat-text">' + data[i].content + '</div></div>'
+                }
+            }
+            $('#messages').prepend(str);
+        }
+        function getgame(){
+            $.ajax({
+                url: 'Application/ajax_getcode.php?g=' + game,
+                type: 'get',
+                dataType:'json',
+                success: function(data){
+                    $('#term').text(data.term + '期');
+                    $('#opencode').text(data.code);
+                    time = data.time;
+                    if(first){
+                        gotime();
+                        first = false;
+                    }
+                },
+                error: function() { }
+            });
+        }
+        function gotime(){
+            time = time - 1;
+            if(time < 0){
+                getgame();
+                $('#time').text('开奖中...');
+                setTimeout(function() {
+                    gotime();
+                    tablestart();
+                }, 5000);
+                return;
+            }
+            
+            $('#time').text(time + '秒');
+            setTimeout(function() {
+                gotime();
+            }, 1000);
+        }
+        
+        function tablestart(){
+            $('#tableList').DataTable({
+                "destroy": true,
+                "searching":false,
+                "scrollX": true,
+                "lengthChange": false,
+                "ajax":{
+                    "url": "Application/ajax_getonline.php",
+                    "dataSrc":function(json){
+                        if(json.data[0] == 'null'){
+                            return json;
+                        }
+                        for(var i=0;i<json.data.length; i++){
+                            json.data[i][2] = "<a href='javascript:ban(\"" + json.data[i][2] + "\")' class='btn btn-danger btn-xs'>禁言玩家</a>";
+                        }
+                        return json.data;
+                    }
+                }
+            });
+        }
+
+        function ban(id){
+            $.ajax({
+                url:'Application/ajax_banuser.php',
+                type: 'post',
+                data: {id: id},
+                dataType: 'json',
+                success: function( data ){
+                    if(data.success){
+                        alert('禁言成功..');
+                    }else{
+                        alert(data.msg);
+                    }
+                },
+                error: function() { }
+            })
+        }
+</script>

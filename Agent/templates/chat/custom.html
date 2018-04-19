@@ -1,0 +1,300 @@
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            客服管理<small>聊天管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li><a href="#"> 聊天管理</a></li>
+            <li class="active">客服管理</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">房间欢迎语</h3>
+
+                <div class="box-tools pull-right">
+                    <button onclick="diswel();" class="btn btn-success btn-sm">添加欢迎语</button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>内容</th>
+                            <th>添加时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?
+                        select_query('fn_welcome','*',"roomid = {$_SESSION['agent_room']}");
+                        while($con = db_fetch_array()){
+                       ?>
+                            <tr>
+                                <td>
+                                    <? echo $con['id']; ?>
+                                </td>
+                                <td>
+                                    <? echo $con['content']; ?>
+                                </td>
+                                <td>
+                                    <? echo $con['addtime']; ?>
+                                </td>
+                                <td>
+                                    <a href="javascript:delwel('<? echo $con['id']; ?>');" class="btn btn-danger btn-sm">删除该条</a>
+                                </td>
+                            </tr>
+                    <?
+                        }
+                    ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">客服聊天</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>消息ID</th>
+                                    <th>头像</th>
+                                    <th>昵称</th>
+                                    <th>内容</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?
+                                select_query('fn_custom','*',"roomid = {$_SESSION['agent_room']} and type = 'U2'");
+                                while($con = db_fetch_array()){
+
+                            ?>
+                                <tr>
+                                    <td><? echo $con['id']; ?></td>
+                                    <td><img src="<? echo $con['headimg']; ?>" alt="<? echo $con['username']; ?>" width="35" height="35"></td>
+                                    <td><? echo $con['username']; ?></td>
+                                    <td><? echo $con['content']; ?></td>
+                                    <td><? echo $con['status']; ?></td>
+                                    <td><a href="javascript:custom('<? echo $con['id']; ?>')" class="btn btn-success btn-sm">回复</a></td>
+                                </tr>
+                            <?        
+                                }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">房间@消息</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>消息ID</th>
+                                    <th>头像</th>
+                                    <th>昵称</th>
+                                    <th>内容</th>
+                                    <th>房间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?
+                                select_query('fn_chat','*',"roomid = '{$_SESSION['agent_room']}' and type = 'U1' order by id desc");
+                                while($con = db_fetch_array()){
+                                    switch($con['game']){
+                                        case 'pk10': $game = '北京赛车'; break;
+                                        case 'xyft': $game = '幸运飞艇'; break;
+                                        case 'xy28': $game = '幸运28'; break;
+                                        case 'jnd28': $game = '加拿大28'; break;
+                                    }
+                            ?>
+                                <tr>
+                                    <td><? echo $con['id']; ?></td>
+                                    <td><img src="<? echo $con['headimg']; ?>" alt="<? echo $con['username']; ?>" width="35" height="35"></td>
+                                    <td><? echo $con['username']; ?></td>
+                                    <td><? echo $con['content']; ?></td>
+                                    <td><? echo $game; ?></td>
+                                    <td><a href="javascript:sendmessage('<? echo $con['id']; ?>');" class="btn btn-success btn-sm">回复</a></td>
+                                </tr>
+                            <?
+                                }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<div class="modal fade" id="diswel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">添加欢迎语</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <span class="input-group-addon">欢迎语</span>
+                    <input id="welcometext" type="text" class="form-control" placeholder="输入欢迎语,支持html代码">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                <button type="button" onclick="addwelcom();" class="btn btn-primary">添加</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="disroom">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">回复消息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <span class="input-group-addon">回复内容</span>
+                    <input id="sendtext" type="text" class="form-control" placeholder="回复内容,支持html代码">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                <button type="button" onclick="sendmsg();" class="btn btn-primary">回复</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+    $('.table').dataTable({
+        "autoWidth":false
+    });
+
+    function diswel(){
+        $('#diswel').modal('toggle');
+    }
+
+    function addwelcom(){
+        var text = $('#welcometext').val();
+
+        if(text == ''){
+            alert('欢迎语不得为空..');
+            return
+        }
+        $.ajax({
+            url: 'Application/ajax_addwelcome.php?t=add',
+            type: 'post',
+            data: {text: text},
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('欢迎语添加成功!');
+                    window.location.reload();
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function() { }
+        })
+    }
+
+    function delwel(id){
+        $.ajax({
+            url: 'Application/ajax_addwelcome.php?t=del',
+            type: 'post',
+            data: {id: id},
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('删除欢迎语成功!');
+                    window.location.reload();
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function() { }
+        })
+    }
+
+    function sendmessage(id){
+        $('#disroom').data('id',id);
+        $('#disroom').data('type','send');
+        $('#disroom').modal('toggle');
+    }
+    
+    function custom(id){
+        $('#disroom').data('id',id);
+        $('#disroom').data('type','custom');
+        $('#disroom').modal('toggle');
+    }
+
+    function sendmsg(){
+        var text = $('#sendtext').val();
+        var id = $('#disroom').data('id');
+
+        var url = "";
+        if($('#disroom').data('type') == 'custom'){
+            url = 'Application/ajax_addwelcome.php?t=sendcustom';
+        }else{
+            url = 'Application/ajax_addwelcome.php?t=sendmsg';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {text: text, id: id},
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('回复完成!');
+                    $('#sendtext').val('');
+                    $('#disroom').modal('toggle');
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function() { }
+        })
+    }
+</script>

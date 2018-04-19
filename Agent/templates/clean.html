@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      数据清理<small>加快您系统的运行速度</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+      <li class="active">数据清理</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">清理</h3>
+
+        <div class="pull-right box-tools">
+          <button onclick="deletepic();" class="btn btn-danger btn-sm">立即删除</button>
+        </div>
+      </div>
+      <div class="box-body">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td style="text-align:center;width:130px;line-height:34px"><b>数据清理日期:</b></td>
+              <td>
+                <div class="row">
+                  <div class="col-md-2 col-xs-12">
+                    <input id="datepicker" type="text" class="form-control">
+                  </div>
+                  <div class="col-md-2">
+                    <label style="line-height:34px;color:red;" >* 将会清除日期之前的所有数据</label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:center;width:130px;line-height:34px"><b>验证安全码:</b></td>
+              <td>
+                <div class="row">
+                  <div class="col-md-2 col-xs-12">
+                    <input id="pass" type="password" class="form-control">
+                  </div>
+                  <div class="col-md-2">
+                    <label style="line-height:34px;color:red;" >* 系统验证码,以防客户误清除</label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <b style="color:red;">* 随着系统长期运行积压大量数据缓存导致部分功能加载缓慢，此功能可清洗陈旧冗余数据，使后台部分板块加载速度更快。
+                                        清理后数据不可恢复，请谨慎操作。请不要选择今天或者近几天的日期，以免误清除了当前运行中的数据。<br>
+                                        * 清除操作可能会影响到代理系统下的总流水报表记录,为了确保您能够正常使用,该操作最好请求客服人员来为您操作 :-)</b>
+                <br>
+                <b>数据清除将会清除下列数据:</b><br>
+                <p>* 聊天记录</p>
+                <p>* 客服记录</p>
+                <p>* 客户投注记录</p>
+                <p>* 客户账变记录</p>
+                <p>* 日前开奖记录</p>
+                <p>* 上下分记录</p>
+                <p>* 飞单记录</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script>
+    $('#datepicker').datepicker({
+      autoclose: true,
+      language: 'zh-CN',
+      format: 'yyyy-mm-dd',
+    });
+
+    function deletepic(){
+      var time = $('#datepicker').val();
+      var pass = $('#pass').val();
+
+      $.post('Application/ajax_delete.php',{time: time,pass: pass},function(data){
+        if(data.success){
+          alert('数据清理成功..');
+        }else{
+          alert(data.msg)
+        }
+
+      },'json');
+    }
+</script>

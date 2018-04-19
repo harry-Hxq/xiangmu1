@@ -1,0 +1,302 @@
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="plugins/select2/select2.min.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            机器人管理<small>自动拖管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li><a href="#"> 自动拖管理</a>></li>
+            <li class="active">机器人管理</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">机器人列表</h3>
+
+                <div class="box-tools pull-right">
+                    <a class="btn btn-success btn-sm" href="robot.php" target="_blank">运行机器人</a>
+                    <button class="btn btn-primary btn-sm" onclick="$('#modal').modal('toggle');loadplan();">添加机器人</button>
+                    <button class="btn btn-info btn-sm"  onclick="$('#robotsetting').modal('toggle');">参数设置</button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="box box-info">
+                    <div class="box-body">
+                        <div class="input-group pull-left" style="width:80%">
+                            <span class="input-group-addon">所属游戏</span>
+                            <select id="selectgame" class="form-control">
+                              <option value="pk10" <? if($_GET['game'] == 'pk10') echo 'selected'; ?>>北京赛车</option>
+                              <option value="xyft" <? if($_GET['game'] == 'xyft') echo 'selected'; ?>>幸运飞艇</option>
+                              <option value="xy28" <? if($_GET['game'] == 'xy28') echo 'selected'; ?>>幸运28</option>
+                              <option value="jnd28" <? if($_GET['game'] == 'jnd28') echo 'selected'; ?>>加拿大28</option>
+                              <option value="cqssc" <? if($_GET['game'] == 'cqssc') echo 'selected'; ?>>重庆时时彩</option>
+                              <option value="jsmt">极速摩托</option>
+                            </select>
+                        </div>
+
+                        <butoon onclick="searchgame();" class="btn btn-success btn-sm pull-right">查询</butoon>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>机器人ID</th>
+                            <th>头像</th>
+                            <th>昵称</th>
+                            <th>使用方案</th>
+                            <th>所属游戏</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <? 
+                        if($_GET['game'] != ""){
+                            $sql = " and game = '{$_GET['game']}'";
+                        }else{
+                            $sql = "";
+                        }
+                        select_query('fn_robots','*',"roomid = {$_SESSION['agent_room']}".$sql);
+                        while($con = db_fetch_array()){
+                            switch($con['game']){
+                                case 'pk10': $game = '北京赛车'; break;
+                                case 'xyft': $game = '幸运飞艇'; break;
+                                case 'cqssc': $game = '重庆时时彩'; break;
+                                case 'xy28': $game = '幸运28'; break;
+                                case 'jnd28': $game = '加拿大28'; break;
+                                case 'jsmt': $game = '极速摩托'; break;
+                                case 'jssc': $game = '极速赛车'; break;
+                                case 'jsssc': $game = '极速时时彩'; break;
+                            }
+                    ?>
+                            <tr>
+                                <td><? echo $con['id']; ?></td>
+                                <td><img src="<? echo $con['headimg']; ?>" alt="" width="35" height="35"></td>
+                                <td><? echo $con['name']; ?></td>
+                                <td><? echo $con['plan']; ?></td>
+                                <td><? echo $game; ?></td>
+                                <td>
+                                    <!--a href="javascript:" class="btn btn-primary btn-sm">修改信息</a-->&nbsp;&nbsp;
+                                    <a href="javascript:delrobots('<? echo $con['id']; ?>')" class="btn btn-danger btn-sm">删除机器人</a>&nbsp;&nbsp;
+                                </td>
+                            </tr>
+                    <?       
+                        }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="overlay" id="loading">
+                <i class="fa fa-refresh fa-spin"></i>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<div class="modal modal-default fade" id="modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">添加机器人</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form" method="post"  enctype='multipart/form-data' action="Application/ajax_addrobot.php?t=addrobot">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">所属游戏</span>
+                                <select id="addgame" name="addgame" onchange="loadplan()" class="form-control">
+                                    <option value="pk10">北京赛车</option>
+                                    <option value="xyft">幸运飞艇</option>
+                                    <option value="xy28">幸运28</option>
+                                    <option value="jnd28">加拿大28</option>
+                                    <option value="cqssc">重庆时时彩</option>
+                                    <option value="jsmt">极速摩托</option>
+                                    <option value="jssc">极速赛车</option>
+                                    <option value="jsssc">极速时时彩</option>
+                                </select>
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">选择方案</span>
+                                <select id="addplan" name="addplan[]" class="form-control select2 " multiple="multiple" data-placeholder="选择方案 ..." style="width: 100%;">
+
+                                </select>
+                            </div>
+                            <br/>
+                            <label id="labelerr" style="color: red;display:none;">添加成功..刷新页面后即可显示..</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">昵称</span>
+                                <input id="addname" name="addname" type="text" class="form-control" placeholder="输入机器人名字 ...">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="exampleInputFile">上传头像</label>
+                                <input type="file" name="addheadimg" id="addheadimg" accept="image/x-png,image/gif,image/jpeg,image/bmp">
+
+                                <p class="help-block">选择机器人头像</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                <button type="button" onclick="addrobot()" class="btn btn-primary">添加机器人</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal modal-default fade" id="robotsetting">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">参数设置</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <span class="input-group-addon">下注频率</span>
+                    <input type="number" id="setting_min" class="form-control" placeholder="最小几秒(默认3秒)" value="<? echo get_query_val('fn_setting','setting_robot_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                    <span class="input-group-addon"> - </span>
+                    <input type="number" id="setting_max" class="form-control" placeholder="最大几秒(默认8秒)" value="<? echo get_query_val('fn_setting','setting_robot_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                    <span class="input-group-addon">秒</span>
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">上下分频率</span>
+                    <input type="number" id="point_min" class="form-control" placeholder="最小几秒(默认90秒)" value="<? echo get_query_val('fn_setting','setting_robot_pointmin',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                    <span class="input-group-addon"> - </span>
+                    <input type="number" id="point_max" class="form-control" placeholder="最大几秒(默认180秒)" value="<? echo get_query_val('fn_setting','setting_robot_pointmax',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                    <span class="input-group-addon">秒</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                <button type="button" onclick="setRobot()" class="btn btn-primary">保存设置</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- Select2 -->
+<script src="plugins/select2/select2.full.min.js"></script>
+<script src="plugins/select2/i18n/zh-CN.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+    $(".select2").select2({
+        language: 'zh-CN'
+    });
+    $('.table').dataTable({});
+    $('#loading').remove();
+
+    function searchgame(){
+        var game = $('#selectgame option:selected').val();
+        window.location.href="index.php?m=robot&r=robots&game=" + game;
+    }
+
+    function loadplan(){
+        var game = $('#addgame option:selected').val();
+        $('#addplan').html('<option disabled>正在加载方案中...</option>');
+
+        $.ajax({
+            url: 'Application/ajax_addrobot.php?t=getplan',
+            type: 'post',
+            dataType: 'html',
+            data: {game: game},
+            success: function(data){
+                $('#addplan').html(data);
+            },
+            error: function() { }
+        })
+    }
+
+    function addrobot(){
+        var arr = new Array();
+        var form = new FormData(document.getElementById("form"))
+        if($('#addname').val() == ""){
+            alert('机器人名字不得为空');
+            return;
+        }else if($('#addplan option:selected').val() == undefined || $('#addplan option:selected').val == ""){
+            alert('选择的方案不得为空');
+            return;
+        }else if($('#addheadimg').val() == ''){
+            alert('机器人头像不得为空');
+            return;
+        }
+
+        $('#addplan option:selected').each(function(index){
+            arr[index] = $(this).val();
+        })
+        $.ajax({
+            url: 'Application/ajax_addrobot.php?t=addrobot',
+            type: 'post',
+            dataType: 'json',
+            data: form,
+            cache: false,  
+            processData: false,  
+            contentType: false,  
+            success: function (data){
+                if(data.success){
+                    $('#labelerr').fadeIn(1500);
+                    setTimeout(function() {
+                        $('#labelerr').fadeOut(1500);
+                    }, 3000);
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function() { }
+        })
+    }
+
+    function delrobots(id){
+        if(confirm('确定删除该机器人吗?一旦执行该操作将无法恢复噢!')){
+            $.post('Application/ajax_addrobot.php?t=delrobot',{id: id},function(data){
+                if(data.success){
+                    alert('删除成功..');
+                    window.location.reload();
+                }else{
+                    alert(data.msg);
+                }
+            },'json');
+        }
+    }
+
+    function setRobot(){
+        var min = $('#setting_min').val();
+        var max = $('#setting_max').val();
+        var point_min = $('#point_min').val();
+        var point_max = $('#point_max').val();
+        if(min == "" || max == "" || point_min == "" || point_max == ''){
+            alert('如需设置,请将最小延迟和最大延迟都要填写完整哦~');
+            return;
+        }
+        $.post('Application/ajax_addrobot.php?t=set',{min: min, max: max, point_min: point_min, point_max: point_max},function(data){
+            if(data.success){
+                alert('设置成功..');
+                $('#robotsetting').modal('toggle');
+            }else{
+                alert(data.msg);
+            }
+        },'json');
+    }
+</script>

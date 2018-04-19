@@ -1,0 +1,445 @@
+<style>
+  .pk_1,
+  .pk_2,
+  .pk_3,
+  .pk_4,
+  .pk_5,
+  .pk_6,
+  .pk_7,
+  .pk_8,
+  .pk_9,
+  .pk_10 {
+    width: 30px;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    color: #000;
+    font-weight: normal;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px;
+    margin: 0 10px 2px 0;
+    text-align: center;
+    text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    -webkit-text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    -moz-text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    *filter: Glow(color=#000, strength=1);
+  }
+
+  .pk_1 {
+    background: #FFFF00;
+  }
+
+  .pk_2 {
+    background: #0099FF;
+  }
+
+  .pk_3 {
+    background: #666666;
+  }
+
+  .pk_4 {
+    background: #FF9900;
+  }
+
+  .pk_5 {
+    background: #66CCCC;
+  }
+
+  .pk_6 {
+    background: #3300FF;
+  }
+
+  .pk_7 {
+    background: #CCCCCC;
+  }
+
+  .pk_8 {
+    background: #FF0000;
+  }
+
+  .pk_9 {
+    background: #780B00;
+  }
+
+  .pk_10 {
+    background: #009900;
+  }
+
+  .pk_he {
+    font-size: 20px;
+    font-weight: bold;
+    color: cornflowerblue;
+  }
+
+  .pk_pink {
+    font-size: 20px;
+    font-weight: bold;
+    color: #F00078;
+  }
+
+  .pk_blue {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0072E3;
+  }
+
+  .money_n {
+    font-size: 23px;
+    font-weight: bold;
+    color: #000;
+  }
+
+  .money_y {
+    font-size: 23px;
+    font-weight: bold;
+    color: #FF0000;
+  }
+
+  .pcdd {
+    width: 30px;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    color: #fff;
+    background-color: #0099FF;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 14px;
+    margin: 0 10px 2px 0;
+    text-align: center;
+    text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    -webkit-text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    -moz-text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    *filter: Glow(color=#000, strength=1);
+  }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      当期统计<small>统计当期投注数据</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+      <li class="active">当期统计</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active" onclick="start('pk10');"><a href="#tab_1" data-toggle="tab" aria-expanded="true">北京赛车</a></li>
+        <li class="" onclick="start('xyft');"><a href="#tab_2" data-toggle="tab" aria-expanded="false">幸运飞艇</a></li>
+        <li class="" onclick="start('cqssc');"><a href="#tab_5" data-toggle="tab" aria-expanded="false">重庆时时彩</a></li>
+		<li class="" onclick="start('xy28');"><a href="#tab_3" data-toggle="tab" aria-expanded="false">幸运28</a></li>
+        <li class="" onclick="start('jnd28');"><a href="#tab_4" data-toggle="tab" aria-expanded="false">加拿大28</a></li>
+        <li class="" onclick="start('jsmt');"><a href="#tab_6" data-toggle="tab" aria-expanded="false">极速摩托</a></li>
+        <li class="" onclick="start('jssc');"><a href="#tab_7" data-toggle="tab" aria-expanded="false">极速赛车</a></li>
+        <li class="" onclick="start('jsssc');"><a href="#tab_8" data-toggle="tab" aria-expanded="false">极速时时彩</a></li>
+		<li class="" onclick="start('kuai3');"><a href="#tab_9" data-toggle="tab" aria-expanded="false">江苏快三</a></li>
+
+        <li class="pull-right">
+          <span style="font-weight:bold;font-size:12px"><span id="betterm">0000</span>期下注总额:<font id="betmoney" style="font-size:20px;" color="red">0</font></span>&nbsp;&nbsp;
+          <button id="duichongbtn" onclick="duichong()" class="btn btn-primary btn-sm">对冲数据</button>
+          <button id="duichongbtn" onclick="start($.cookie('code'));" class="btn btn-primary btn-sm"><i class="fa fa-refresh"></i></button>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:center" colspan="2">冠军</th>
+                <th style="text-align:center" colspan="2">亚军</th>
+                <th style="text-align:center" colspan="2">第三名</th>
+                <th style="text-align:center" colspan="2">第四名</th>
+                <th style="text-align:center" colspan="2">第五名</th>
+                <th style="text-align:center" colspan="2">第六名</th>
+                <th style="text-align:center" colspan="2">第七名</th>
+                <th style="text-align:center" colspan="2">第八名</th>
+                <th style="text-align:center" colspan="2">第九名</th>
+                <th style="text-align:center" colspan="2">第十名</th>
+                <th style="text-align:center" colspan="2">和值</th>
+              </tr>
+            </thead>
+            <tbody align="center" id="pk10List">
+              <tr>
+                <td align="center" colspan="22"><label>Loading...</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_2">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:center" colspan="2">冠军</th>
+                <th style="text-align:center" colspan="2">亚军</th>
+                <th style="text-align:center" colspan="2">第三名</th>
+                <th style="text-align:center" colspan="2">第四名</th>
+                <th style="text-align:center" colspan="2">第五名</th>
+                <th style="text-align:center" colspan="2">第六名</th>
+                <th style="text-align:center" colspan="2">第七名</th>
+                <th style="text-align:center" colspan="2">第八名</th>
+                <th style="text-align:center" colspan="2">第九名</th>
+                <th style="text-align:center" colspan="2">第十名</th>
+                <th style="text-align:center" colspan="2">和值</th>
+              </tr>
+            </thead>
+            <tbody align="center" id="xyftList">
+              <tr>
+                <td align="center" colspan="22"><label>Loading...</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_3">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:center" colspan="4">特码</th>
+                <th style="text-align:center" colspan="2">双面</th>
+                <th style="text-align:center" colspan="2">极值</th>
+                <th style="text-align:center" colspan="2">组合</th>
+                <th style="text-align:center" colspan="2">特殊</th>
+              </tr>
+            </thead>
+            <tbody align="center" id="xy28List">
+              <tr>
+                <td align="center" colspan="22"><label>Loading...</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_4">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:center" colspan="4">特码</th>
+                <th style="text-align:center" colspan="2">双面</th>
+                <th style="text-align:center" colspan="2">极值</th>
+                <th style="text-align:center" colspan="2">组合</th>
+                <th style="text-align:center" colspan="2">特殊</th>
+              </tr>
+            </thead>
+            <tbody align="center" id="jnd28List">
+              <tr>
+                <td align="center" colspan="22"><label>Loading...</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_5">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:center" colspan="2">万位</th>
+                <th style="text-align:center" colspan="2">千位</th>
+                <th style="text-align:center" colspan="2">百位</th>
+                <th style="text-align:center" colspan="2">十位</th>
+                <th style="text-align:center" colspan="2">个位</th>
+                <th style="text-align:center" colspan="2">总和</th>
+                <th style="text-align:center" colspan="2">前三</th>
+                <th style="text-align:center" colspan="2">中三</th>
+                <th style="text-align:center" colspan="2">后三</th>
+              </tr>
+            </thead>
+            <tbody align="center" id="cqsscList">
+              <tr>
+                <td align="center" colspan="22"><label>Loading...</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_6">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:center" colspan="2">冠军</th>
+                <th style="text-align:center" colspan="2">亚军</th>
+                <th style="text-align:center" colspan="2">第三名</th>
+                <th style="text-align:center" colspan="2">第四名</th>
+                <th style="text-align:center" colspan="2">第五名</th>
+                <th style="text-align:center" colspan="2">第六名</th>
+                <th style="text-align:center" colspan="2">第七名</th>
+                <th style="text-align:center" colspan="2">第八名</th>
+                <th style="text-align:center" colspan="2">第九名</th>
+                <th style="text-align:center" colspan="2">第十名</th>
+                <th style="text-align:center" colspan="2">和值</th>
+              </tr>
+            </thead>
+            <tbody align="center" id="jsmtList">
+              <tr>
+                <td align="center" colspan="22"><label>Loading...</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_7">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:center" colspan="2">冠军</th>
+                <th style="text-align:center" colspan="2">亚军</th>
+                <th style="text-align:center" colspan="2">第三名</th>
+                <th style="text-align:center" colspan="2">第四名</th>
+                <th style="text-align:center" colspan="2">第五名</th>
+                <th style="text-align:center" colspan="2">第六名</th>
+                <th style="text-align:center" colspan="2">第七名</th>
+                <th style="text-align:center" colspan="2">第八名</th>
+                <th style="text-align:center" colspan="2">第九名</th>
+                <th style="text-align:center" colspan="2">第十名</th>
+                <th style="text-align:center" colspan="2">和值</th>
+              </tr>
+            </thead>
+            <tbody align="center" id="jsscList">
+              <tr>
+                <td align="center" colspan="22"><label>Loading...</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_8">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:center" colspan="2">万位</th>
+                <th style="text-align:center" colspan="2">千位</th>
+                <th style="text-align:center" colspan="2">百位</th>
+                <th style="text-align:center" colspan="2">十位</th>
+                <th style="text-align:center" colspan="2">个位</th>
+                <th style="text-align:center" colspan="2">总和</th>
+                <th style="text-align:center" colspan="2">前三</th>
+                <th style="text-align:center" colspan="2">中三</th>
+                <th style="text-align:center" colspan="2">后三</th>
+              </tr>
+            </thead>
+            <tbody align="center" id="jssscList">
+              <tr>
+                <td align="center" colspan="22"><label>Loading...</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+		<div class="tab-pane" id="tab_9">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th style="text-align:center" colspan="2">百位</th>
+                <th style="text-align:center" colspan="2">十位</th>
+                <th style="text-align:center" colspan="2">个位</th>
+              </tr>
+            </thead>
+            <tbody align="center" id="kuai3List">
+              <tr>
+                <td align="center" colspan="22"><label>Loading...</label></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- /.tab-content -->
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<script src="plugins/jQuery/jquery.cookie.js"></script>
+<script>
+  $(function () {
+    start('pk10');
+    if($.cookie('duichong') == 'true'){
+      $('#duichongbtn').removeClass('btn-primary');
+      $('#duichongbtn').addClass('btn-danger');
+      $('#duichongbtn').text('取消对冲');
+    }else{
+      $('#duichongbtn').removeClass('btn-danger');
+      $('#duichongbtn').addClass('btn-primary');
+      $('#duichongbtn').text('对冲数据');
+    }
+  })
+
+  function start(code){
+    var loading = '<tr><td align="center" colspan="22"><label>Loading...</label></td></tr>';
+    var duichong = '';
+    $.cookie('code',code);
+    if($.cookie('duichong') == 'true'){
+      duichong = '&dui=true';
+    }
+    if(code == 'pk10'){
+      $('#pk10List').html(loading);
+      $.get('Application/ajax_gettermcount.php?code=pk10' + duichong,function(data){
+        $('#pk10List').html(data);
+      },'html');
+    }else if(code == 'xyft'){
+      $('#xyftList').html(loading);
+      $.get('Application/ajax_gettermcount.php?code=xyft' + duichong,function(data){
+        $('#xyftList').html(data);
+      },'html');
+    }else if(code == 'cqssc'){
+      $('#cqsscList').html(loading);
+      $.get('Application/ajax_gettermcount.php?code=cqssc' + duichong,function(data){
+        $('#cqsscList').html(data);
+      },'html');
+    }else if(code == 'xy28'){
+      $('#xy28List').html(loading);
+      $.get('Application/ajax_gettermcount.php?code=xy28',function(data){
+        $('#xy28List').html(data);
+      },'html');
+    }else if(code == 'jnd28'){
+      $('#jnd28List').html(loading);
+      $.get('Application/ajax_gettermcount.php?code=jnd28',function(data){
+        $('#jnd28List').html(data);
+      },'html');
+    }else if(code == 'jsmt'){
+      $('#jsmtList').html(loading);
+      $.get('Application/ajax_gettermcount.php?code=jsmt',function(data){
+        $('#jsmtList').html(data);
+      },'html');
+    }else if(code == 'jssc'){
+      $('#jsmtList').html(loading);
+      $.get('Application/ajax_gettermcount.php?code=jssc',function(data){
+        $('#jsscList').html(data);
+      },'html');
+    }else if(code == 'jsssc'){
+      $('#jsmtList').html(loading);
+      $.get('Application/ajax_gettermcount.php?code=jsssc',function(data){
+        $('#jssscList').html(data);
+      },'html');
+    }
+	else if(code == 'kuai3'){
+      $('#jsmtList').html(loading);
+      $.get('Application/ajax_gettermcount.php?code=kuai3',function(data){
+        $('#kuai3List').html(data);
+      },'html');
+    }
+
+    $.get('Application/ajax_gettermcount.php?t=getterm&code='+code,function(data){
+      var str = data.split('|');
+      $('#betterm').text(str[0]);
+      $('#betmoney').text(str[1]);
+    });
+  }
+
+  function duichong(){
+    if($.cookie('duichong') == 'true'){
+      $.cookie('duichong','');
+      $('#duichongbtn').removeClass('btn-danger');
+      $('#duichongbtn').addClass('btn-primary');
+      $('#duichongbtn').text('对冲数据');
+    }else{
+      $.cookie('duichong','true',{expires: 10});
+      $('#duichongbtn').removeClass('btn-primary');
+      $('#duichongbtn').addClass('btn-danger');
+      $('#duichongbtn').text('取消对冲');
+    }
+    
+  }
+
+</script>

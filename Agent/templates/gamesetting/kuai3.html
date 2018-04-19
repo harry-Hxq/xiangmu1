@@ -1,0 +1,459 @@
+<link rel="stylesheet" href="plugins/iCheck/all.css">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            快3(多地)
+            <small>游戏设置</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+            <li><a href="#"> 游戏设置</a></li>
+            <li class="active">快3(多地)</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title">赔率设置</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" onclick="$('#form1').submit();" class="btn btn-sm btn-warning">保存</button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <form id="form1" action="Application/gamesetting/ajax_savekuai3.php?form=form1" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="box box-primary box-solid">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">总和赔率</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">大</span>
+                                                <input name="peilv_da" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','da',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                            <br />
+                                            <div class="input-group">
+                                                <span class="input-group-addon">单</span>
+                                                <input name="peilv_dan" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','dan',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                            <br />
+                                            <div class="input-group">
+                                                <span class="input-group-addon">大单</span>
+                                                <input name="peilv_dadan" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','dadan',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                            <br />
+                                            <div class="input-group">
+                                                <span class="input-group-addon">大双</span>
+                                                <input name="peilv_dashuang" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','dashuang',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">小</span>
+                                                <input name="peilv_xiao" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','xiao',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                            <br />
+                                            <div class="input-group">
+                                                <span class="input-group-addon">双</span>
+                                                <input name="peilv_shuang" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','shuang',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                            <br />
+                                            <div class="input-group">
+                                                <span class="input-group-addon">小单</span>
+                                                <input name="peilv_xiaodan" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','xiaodan',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                            <br />
+                                            <div class="input-group">
+                                                <span class="input-group-addon">小双</span>
+                                                <input name="peilv_xiaoshuang" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','xiaoshuang',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <div class="pull-right">
+                                        <label>
+                                            <input class="bluecheck" type="checkbox" name="setting_10shazuhe" <? if(get_query_val('fn_lottery9','setting_10shazuhe',array('roomid'=>$_SESSION['agent_room'])) == 'true') echo "checked"; ?> />&nbsp;&nbsp;开10杀组合
+                                        </label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <label>
+                                            <input class="bluecheck" type="checkbox" name="setting_baozitongsha" <? if(get_query_val('fn_lottery9','setting_baozitongsha',array('roomid'=>$_SESSION['agent_room'])) == 'true') echo "checked"; ?> />&nbsp;&nbsp;豹子通杀
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="box box-primary box-solid">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">通选赔率</h3>
+                                </div>
+
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">豹子(三同号)</span>
+                                                <input name="peilv_baozi_tong" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','tong_baozi',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                            <br />
+                                            <div class="input-group">
+                                                <span class="input-group-addon">对子(二同号)</span>
+                                                <input name="peilv_duizi_tong" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','tong_duizi',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">顺子(三连号)</span>
+                                                <input name="peilv_shunzi_tong" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','tong_shunzi',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                            <br />
+                                            <div class="input-group">
+                                                <span class="input-group-addon">三杂(三不同)</span>
+                                                <input name="peilv_sanza_tong" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','tong_sanza',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="input-group">
+                                        <span class="input-group-addon">二杂(二不同)</span>
+                                        <input name="peilv_erza_tong" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','tong_erza',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box box-primary box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">直选赔率</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">豹子(三同号)</span>
+                                        <input name="peilv_baozi_zhi" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','zhi_baozi',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br />
+                                    <div class="input-group">
+                                        <span class="input-group-addon">对子(二同号)</span>
+                                        <input name="peilv_duizi_zhi" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','zhi_duizi',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br />
+                                    <div class="input-group">
+                                        <span class="input-group-addon">二杂(二不同)</span>
+                                        <input name="peilv_erza_zhi" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','zhi_erza',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">顺子(三连号)</span>
+                                        <input name="peilv_shunzi_zhi" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','zhi_shunzi',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br />
+                                    <div class="input-group">
+                                        <span class="input-group-addon">三杂(三不同)</span>
+                                        <input name="peilv_sanza_zhi" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','zhi_sanza',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br />
+                                    <div class="input-group">
+                                        <span class="input-group-addon">三军</span>
+                                        <input name="peilv_sanjun_zhi" type="number" class="form-control" step="0.01" placeholder="输入赔率..." value="<? echo get_query_val('fn_lottery9','zhi_sanjun',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">下注限制</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" onclick="$('#form2').submit();" class="btn btn-sm btn-success">保存</button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <form id="form2" action="Application/gamesetting/ajax_savekuai3.php?form=form2" method="post">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和大小 单注最低</span>
+                                        <input name="daxiao_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','dx_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和单双 单注最低</span>
+                                        <input name="danshuang_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','ds_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和大单 单注最低</span>
+                                        <input name="dadan_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','dadan_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和小单 单注最低</span>
+                                        <input name="xiaodan_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','xiaodan_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和大双 单注最低</span>
+                                        <input name="dashuang_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','dashuang_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和小双 单注最低</span>
+                                        <input name="xiaoshuang_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','xiaoshuang_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">豹子通选 单注最低</span>
+                                        <input name="tong_baozi_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','tong_baozi_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">顺子通选 单注最低</span>
+                                        <input name="tong_shunzi_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','tong_shunzi_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">对子通选 单注最低</span>
+                                        <input name="tong_duizi_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','tong_duizi_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">三杂通选 单注最低</span>
+                                        <input name="tong_sanza_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','tong_sanza_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">二杂通选 单注最低</span>
+                                        <input name="tong_erza_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','tong_erza_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">豹子直选 单注最低</span>
+                                        <input name="zhi_baozi_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','zhi_baozi_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">顺子直选 单注最低</span>
+                                        <input name="zhi_shunzi_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','zhi_shunzi_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">对子直选 单注最低</span>
+                                        <input name="zhi_duizi_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','zhi_duizi_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">三杂直选 单注最低</span>
+                                        <input name="zhi_sanza_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','zhi_sanza_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">二杂直选 单注最低</span>
+                                        <input name="zhi_erza_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','zhi_erza_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">三军 单注最低</span>
+                                        <input name="zhi_sanjun_min" type="number" class="form-control" placeholder="输入最低下注..." value="<? echo get_query_val('fn_lottery9','zhi_sanjun_min',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和大小 单注最高</span>
+                                        <input name="daxiao_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','dx_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和单双 单注最高</span>
+                                        <input name="danshuang_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','ds_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和大单 单注最高</span>
+                                        <input name="dadan_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','dadan_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和小单 单注最高</span>
+                                        <input name="xiaodan_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','xiaodan_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和大双 单注最高</span>
+                                        <input name="dashuang_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','dashuang_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">总和小双 单注最高</span>
+                                        <input name="xiaoshuang_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','xiaoshuang_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">豹子通选 单注最高</span>
+                                        <input name="tong_baozi_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','tong_baozi_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">顺子通选 单注最高</span>
+                                        <input name="tong_shunzi_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','tong_shunzi_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">对子通选 单注最高</span>
+                                        <input name="tong_duizi_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','tong_duizi_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">三杂通选 单注最高</span>
+                                        <input name="tong_sanza_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','tong_sanza_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">二杂通选 单注最高</span>
+                                        <input name="tong_erza_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','tong_erza_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">豹子直选 单注最高</span>
+                                        <input name="zhi_baozi_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','zhi_baozi_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">顺子直选 单注最高</span>
+                                        <input name="zhi_shunzi_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','zhi_shunzi_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">对子直选 单注最高</span>
+                                        <input name="zhi_duizi_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','zhi_duizi_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">三杂直选 单注最高</span>
+                                        <input name="zhi_sanza_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','zhi_sanza_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">二杂直选 单注最高</span>
+                                        <input name="zhi_erza_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','zhi_erza_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">三军 单注最高</span>
+                                        <input name="zhi_sanjun_max" type="number" class="form-control" placeholder="输入最高下注..." value="<? echo get_query_val('fn_lottery9','zhi_sanjun_max',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                                    </div>
+                                    <br/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3 class="box-title">其他设置</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" onclick="$('#form3').submit()" class="btn btn-sm btn-success">保存</button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <form id="form3" action="Application/gamesetting/ajax_savekuai3.php?form=form3" method="post">
+                            <div class="form-group">
+                                <label>
+                                <input name="opengame" type="checkbox" class="flat-red" <? if(get_query_val('fn_lottery9','gameopen',array('roomid'=>$_SESSION['agent_room'])) == 'true') echo 'checked'; ?>>
+                                    开启游戏
+                                </label>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">封盘时间</span>
+                                <input name="fengtime" type="number" class="form-control" placeholder="输入封盘时间..." value="<? echo get_query_val('fn_lottery9','fengtime',array('roomid'=>$_SESSION['agent_room'])); ?>">
+                            </div>
+                            <br/>
+                            <?
+                                $setting_open = get_query_val('fn_lottery9', 'setting_open', array('roomid'=>$_SESSION['agent_room']));
+                            ?>
+                            <div class="input-group">
+                                <span class="input-group-addon">开奖地区</span>
+                                <span class="input-group-addon"><input name="setting_open" value="1" type="radio" class="flat-red" <? if($setting_open == '' || $setting_open == '1') echo "checked"; ?> > 江苏快三</span>
+                                <span class="input-group-addon"><input name="setting_open" value="2" type="radio" class="flat-red" <? if($setting_open == '2') echo "checked"; ?> disabled> 吉林快三</span>
+                                <span class="input-group-addon"><input name="setting_open" value="3" type="radio" class="flat-red" <? if($setting_open == '3') echo "checked"; ?> disabled> 广西快三</span>
+                                <span class="input-group-addon"><input name="setting_open" value="4" type="radio" class="flat-red" <? if($setting_open == '4') echo "checked"; ?> disabled> 安徽快三</span>
+                                <span class="input-group-addon"><input name="setting_open" value="5" type="radio" class="flat-red" <? if($setting_open == '5') echo "checked"; ?> disabled> 湖北快三</span>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">开奖地区</span>
+                                <span class="input-group-addon"><input name="setting_open" value="6" type="radio" class="flat-red" <? if($setting_open == '6') echo "checked"; ?> disabled> 河北快三</span>
+                                <span class="input-group-addon"><input name="setting_open" value="7" type="radio" class="flat-red" <? if($setting_open == '7') echo "checked"; ?> disabled> 江西快三</span>
+                                <span class="input-group-addon"><input name="setting_open" value="8" type="radio" class="flat-red" <? if($setting_open == '8') echo "checked"; ?> disabled> 北京快三</span>
+                                <span class="input-group-addon"><input name="setting_open" value="9" type="radio" class="flat-red" <? if($setting_open == '9') echo "checked"; ?> disabled> 上海快三</span>
+                                <span class="input-group-addon"><input name="setting_open" value="10" type="radio" class="flat-red" <? if($setting_open == '10') echo "checked"; ?> disabled> 福建快三</span>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">开奖地区</span>
+                                <span class="input-group-addon"><input name="setting_open" value="11" type="radio" class="flat-red" <? if($setting_open == '11') echo "checked"; ?> disabled> 极速快三</span>
+                                <span class="input-group-addon"><input name="setting_open" value="12" type="radio" class="flat-red" <? if($setting_open == '12') echo "checked"; ?> disabled> 幸运快三</span>
+                            </div>
+                            <br/>
+                        </form>
+                    </div>
+                </div>
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">彩种规则设置</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" onclick="$('#form4').submit();" class="btn btn-sm btn-success">保存</button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <form id="form4" action="Application/gamesetting/ajax_savekuai3.php?form=form4" method="post">
+                            <textarea name="customcont" class="textarea" placeholder="设置彩种规则" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><? echo get_query_val('fn_lottery9','rules',array('roomid'=>$_SESSION['agent_room'])); ?></textarea>
+                        </form>
+                    </div>
+                    <div class="box-footer">
+                        <center><b>如要使用默认样式 请直接修改要修改的文字即可</b></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script>
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass: 'iradio_flat-green'
+    });
+    $('input[type="checkbox"].bluecheck').iCheck({
+        checkboxClass: 'icheckbox_minimal-blue',
+    });
+
+</script>

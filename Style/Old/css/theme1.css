@@ -1,0 +1,435 @@
+body {
+	/*font-family: Arial, Helvetica, sans-serif;*/
+	font-family: "Microsoft YaHei", Arial;
+	background: #eee url(/Style/images/bg03b.jpg);
+	font-size: 20px;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	height: auto;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:link {
+	color: #00f;
+}
+
+a:visited {
+	color: #00f;
+}
+
+a:hover {
+	color: #F00;
+}
+
+.algC, .AlgC {
+	text-align: center;
+}
+
+.algR, .AlgR {
+	text-align: right;
+}
+
+.algL, .AlgL {
+	text-align: left;
+}
+
+.clrR {
+	color: red;
+}
+
+.clrG {
+	color: green;
+}
+
+.clrB {
+	color: blue;
+}
+
+.msgNote {
+	color: #ccc;
+}
+
+.msgError {
+	color: #f00;
+}
+
+table, table td, table th {
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+}
+
+.bbtn {
+	-webkit-border-radius: 10;
+	-moz-border-radius: 10;
+	border-radius: 10px;
+	text-shadow: 1px 1px 3px #aaa;
+	-webkit-box-shadow: 3px 3px 5px #aaa;
+	-moz-box-shadow: 3px 3px 5px #aaa;
+	box-shadow: 3px 3px 5px #aaa;
+	font-size: 26px;
+	padding: 0 15px;
+	text-decoration: none;
+	display: inline-block;
+	height: 60px;
+}
+
+.bbtn1 {
+	background: #ff3399;
+	background-image: -webkit-linear-gradient(top, #ff80bf, #ff3399);
+	background-image: -moz-linear-gradient(top, #ff80bf, #ff3399);
+	background-image: -ms-linear-gradient(top, #ff80bf, #ff3399);
+	background-image: -o-linear-gradient(top, #ff80bf, #ff3399);
+	background-image: linear-gradient(to bottom, #ff80bf, #ff3399);
+}
+
+/* ----- pgFuncBar ----- */
+.pgFuncBar {
+	text-align: right;
+}
+
+.pgFuncBar div {
+	width: 800px;
+	display: inline-block;
+	text-align: center;
+	font-size: 30px;
+}
+
+.pgFuncBut1 {
+	background: transparent url(../images/buttons-bg2.jpg) center center no-repeat;
+	padding: 10px 20px;
+	border: 1px solid #ccc;
+	vertical-align: middle;
+	font-size: 24px;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+.pgFuncBut1:hover {
+	background: transparent url(../images/buttons-bg2d.jpg) center center no-repeat;
+}
+
+/* ------------------ */
+.link_button {
+	display: inline-block;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 10px;
+	border: solid 1px #20538D;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	padding: 10px 20px;
+	text-decoration: none;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.link_button a:link, .link_button a:visited {
+	text-decoration: none;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.link_button_c1 {
+	background: #1AAD19;
+	color: #FFFFFF !important;
+}
+
+.link_button_c1 a:link, .link_button_c1 a:visited {
+	color: #FFFFFF !important;
+}
+
+.link_button_c2 {
+	background: #E64340;
+	color: #FFFFFF !important;
+}
+
+.link_button_c2 a:link, .link_button_c2 a:visited {
+	color: #FFFFFF !important;
+}
+
+.link_button_c3 {
+	background: #1a75ff;
+	color: #FFFFFF !important;
+}
+
+.link_button_c3 a:link, .link_button_c3 a:visited {
+	color: #FFFFFF !important;
+}
+
+/* ------------------ */
+.infoType {
+	background: url(../images/buttons/buttons_bg_c01.jpg) center center no-repeat;
+	color: #fff;
+	margin-right: 20px;
+}
+
+.infoType2 {
+	background: url(../images/buttons/buttons_bg_c03.jpg) center center no-repeat;
+	color: #fff;
+}
+
+.infoType2a {
+	background: url(../images/buttons/buttons_bg_c05.jpg) center center no-repeat;
+	color: #fff;
+}
+
+.infoType2d {
+	background: url(../images/buttons/buttons_bg_c07.jpg) center center no-repeat;
+	color: #fff;
+}
+
+.homeBlkMeasuring {
+	
+}
+
+#HomeBut2 {
+	display: inline-block;
+}
+
+.ContTop {
+	
+}
+
+.HomeTab {
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+	border: 0 solid gray;
+}
+
+.HomeTabButt {
+	width: 100px;
+	vertical-align: top;
+	text-align: left;
+}
+
+.HomeTabMesg {
+	width: 870px;
+	vertical-align: top;
+}
+
+a.HomeBut {
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	/*background: url(../images/home_but/i64_circle.svg) left top;*/
+	background: url(../images/home_but/i64_rect2.svg) left top;
+	margin: 0;
+	padding: 0;
+}
+
+a.HomeBut div {
+	padding-top: 20px;
+	color: white;
+	font-weight: blod;
+	text-align: center;
+	font-family: "Microsoft YaHei";
+	font-size: 28px;
+	text-shadow: 2px 2px #000;
+	line-height: 1.1em;
+}
+
+#popData a {
+	margin: 10px;
+}
+
+.CC0 {
+	background-position: 0px 0px !important;
+}
+
+.CC1 {
+	background-position: 0px -100px !important;
+}
+
+.CC2 {
+	background-position: 0px -200px !important;
+}
+
+.CC3 {
+	background-position: 0px -300px !important;
+}
+
+.CC4 {
+	background-position: 0px -400px !important;
+}
+
+.CC5 {
+	background-position: 0px -500px !important;
+}
+
+.CC6 {
+	background-position: 0px -600px !important;
+}
+
+.CC7 {
+	background-position: 0px -700px !important;
+}
+
+.CC8 {
+	background-position: 0px -800px !important;
+}
+
+.CC9 {
+	background-position: 0px -900px !important;
+}
+
+.CC10 {
+	background-position: 0px -1000px !important;
+}
+
+.CC11 {
+	background-position: 0px -1100px !important;
+}
+
+.CC12 {
+	background-position: 0px -1200px !important;
+}
+
+.CC13 {
+	background-position: 0px -1300px !important;
+}
+
+.CC14 {
+	background-position: 0px -1400px !important;
+}
+
+.CC15 {
+	background-position: 0px -1500px !important;
+}
+
+/* ---  �\�� MENU --- */
+#popBox1 {
+	margin: 5px;
+}
+
+#popBox1 img {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#popData1 {
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 30px;
+}
+
+#popData1 a {
+	margin: 15px;
+	display: inline-block;
+	/*
+	width: 128px;
+	height:128px;
+	background-size: 128px 768px;
+	*/
+}
+
+/* --- �W�D --- */
+#popData2 {
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 30px;
+}
+
+#popData2 a {
+	margin: 15px;
+	display: inline-block;
+	text-align: center;
+	font-size: 26px;
+	/*line-height: 30px;*/
+	color: white !important;
+	font-weight: blod !important;
+}
+
+#popData2 a img {
+	width: 144px;
+	height: 144px;
+}
+
+#homeBlkMeasuring {
+	text-align: center;
+	color: #888;
+	font-family: "Microsoft YaHei";
+	font-size: 28px;
+}
+
+.infoUser {
+	font-size: 24px;
+	text-align: left;
+	color: #000;
+}
+
+.infoMeasuring {
+	font-family: "Microsoft YaHei";
+	font-size: 28px;
+	width: 100px;
+	text-align: center;
+}
+/*----- acc BILL -----*/
+.AccTrans {
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+.AccTrans td, .AccTrans th, .AccTrans input {
+	font-size: 24px;
+	padding: 5px 10px;
+	border: 2px solid gray;
+}
+/*----- acc HIST -----*/
+.AccHist {
+	margin: 0 auto;
+	border-collapse: collapse;
+	width: 95%;
+}
+
+.AccHist td, .AccHist th, .AccHist input {
+	font-size: 24px;
+	padding: 5px 10px;
+	border: 2px solid gray;
+}
+
+/*----- rule -----*/
+.RuleT0 {
+	font-size: 28px;
+	line-height: 1.5em;
+	padding: 15px;
+}
+
+.RuleT1 {
+	color: red;
+	font-size: 32px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.RuleT2 {
+	color: #f73;
+	font-size: 32px;
+	text-align: left;
+	font-weight: bold;
+}
+
+.RuleT3 {
+	color: #55F;
+	font-size: 28px;
+	text-align: left;
+	font-weight: bold;
+}
+
+/*  gift */
+.GiftBtn1 {
+	background: url(../images/buttons/buttons_bg_c07.jpg) center center no-repeat;
+	color: #fff;
+}
+
+.GiftBtn1a, .GiftBtn2 {
+	background: url(../images/buttons/buttons_bg_c03.jpg) center center no-repeat;
+	color: #fff;
+}
+
+.GiftBtn3 {
+	background: url(../images/buttons/buttons_bg_c01.jpg) center center no-repeat;
+	color: #fff;
+}

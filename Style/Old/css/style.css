@@ -1,0 +1,276 @@
+@CHARSET "BIG5";
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background: #000 url(/Style/images/bg03b.jpg);
+	font-size: 24px;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:link {
+	color: #00f;
+}
+
+a:visited {
+	color: #00f;
+}
+
+a:hover {
+	color: #F00;
+}
+
+.algC {
+	text-align: center;
+}
+
+.algR {
+	text-align: right;
+}
+
+.clrR {
+	color: red;
+}
+
+.msgNote {
+	color: #ccc;
+}
+
+.msgError {
+	color: #f00;
+	font-size: 32px;
+}
+
+table, table td, table th {
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+}
+
+/* ----- cont ----- */
+.Cont_Mid {
+	padding: 3px;
+}
+
+.Cont_Inp {
+	padding: 3px;
+}
+
+.Cont_Msg {
+	padding: 3px;
+}
+/* ----- chat ----- */
+.MenuBut {
+	width: 100px;
+	vertical-align: top;
+	text-align: center;
+}
+
+.MenuBut img {
+	
+}
+
+.MenuBut a, .MenuBut a:link, .MenuBut a:visited, .MenuBut a:hover {
+	color: black;
+	font-size: 24px;
+	padding-top: 15px;
+	display: block;
+}
+
+/* ----- show num ----- */
+.NumC01 {
+	color: #ff0;
+}
+
+.NumC02 {
+	color: #08f;
+}
+
+.NumC03 {
+	color: #555;
+}
+
+.NumC04 {
+	color: #fb0;
+}
+
+.NumC05 {
+	color: #5ee;
+}
+
+.NumC06 {
+	color: #20f;
+}
+
+.NumC07 {
+	color: #ccc;
+}
+
+.NumC08 {
+	color: #f00;
+}
+
+.NumC09 {
+	color: #b00;
+}
+
+.NumC10 {
+	color: #0a0;
+}
+
+.NumC01, .NumC02, .NumC03, .NumC04, .NumC05, .NumC06, .NumC07, .NumC08,
+	.NumC09, .NumC10 {
+	text-shadow: 1px 1px 2px black;
+}
+
+.NumCA1 {
+	color: #f00;
+}
+
+.NumCA2 {
+	color: #00f;
+}
+
+.ShowNumNew1 {
+	font-size: 24px;
+	text-align: center;
+}
+
+.ShowNumNew2 {
+	margin: 0 auto;
+	border-width: 0px;
+}
+
+.ShowNumNew2 td {
+	padding: 5px;
+	border-width: 0px;
+}
+
+.ShowNumNew21, .ShowNumNew22, .ShowNumNew23 {
+	width: 100px;
+	height: 90px;
+	font-size: 64px;
+	text-align: center;
+	color: #fff;
+	text-shadow: 3px 3px 4px black;
+}
+
+.ShowNumNew21 {
+	background: transparent url(../images/award100-1.png) center center
+		no-repeat;
+}
+
+.ShowNumNew22 {
+	background: transparent url(../images/award100-2.png) center center
+		no-repeat;
+}
+
+.ShowNumNew23 {
+	background: transparent url(../images/award100-3.png) center center
+		no-repeat;
+}
+
+.ShowNumNew24 {
+	font-size: 36px;
+	text-shadow: 2px 2px 3px black;
+}
+
+.ShowNumList {
+	margin: 0 auto;
+	border-collapse: collapse;
+	border: 1px solid #888;
+}
+
+.ShowNumList th, .ShowNumList td {
+	font-size: 24px;
+	border: 1px solid #888;
+	padding: 3px;
+	text-align: center;
+}
+/* ----- color table ----- */
+.TableColor1 th {
+	background: transparent url(../images/bg10-r.png) center center;
+}
+
+.TableColor1 tr:nth-child(2n) td {
+	background: transparent url(../images/bg10-b.png) center center;
+}
+
+.TableColor1 tr:nth-child(2n+1) td {
+	background: transparent url(../images/bg10-g.png) center center;
+}
+
+/* ----- hist ----- */
+.HistUser, .HistUser td {
+	margin: 0 auto;
+	border-collapse: collapse;
+	border: 0px solid #888;
+}
+
+.HistUser td {
+	font-size: 24px;
+	color: #000;
+}
+
+.HistUser td img {
+	width: 96px;
+	height: 96px;
+	padding: 10px 10px 0 10px;
+}
+
+.HistList {
+	margin: 0 auto;
+}
+
+.HistList, .HistList td, .HistList th {
+	border-collapse: collapse;
+	font-size: 18px;
+	border: 1px solid #888;
+	padding: 3px;
+}
+
+.HistList th {
+	background: transparent url(../images/bg25-g.png) center center;
+}
+
+/* ----- acc - Pasv ----- */
+.AccPvTab {
+	margin: auto;
+}
+
+.AccPvTab td, .AccPvTab th, .AccPvTab input {
+	font-size: 24px;
+}
+
+.AccPvTab img {
+	vertical-align: middle;
+}
+
+.AccPvTab th {
+	text-align: right;
+	padding: 10px;
+}
+/*----- acc BILL -----*/
+.AccTrans {
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+.AccTrans td, .AccTrans th, .AccTrans input {
+	font-size: 24px;
+	padding: 3px;
+	border: 1px solid gray;
+}
+/*----- acc HIST -----*/
+.AccHist {
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+.AccHist td, .AccHist th, .AccHist input {
+	font-size: 18px;
+	padding: 3px;
+	border: 1px solid gray;
+}

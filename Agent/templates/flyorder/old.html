@@ -1,0 +1,161 @@
+<?php
+    if($version != "尊享版" && $version != '飞单版'){
+        require 'templates/versionerr.html';
+        exit();
+    }
+?>
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      飞单历史<small>Flyorder History</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+      <li><a href="#">飞单系统</a>></li>
+      <li class="active">飞单历史</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title">历史记录</h3>
+
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="box box-info">
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-2">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    期号
+                  </div>
+                  <input type="text" id="term" class="form-control pull-right" value="<? echo $_GET['term']; ?>" data-toggle="tooltip" data-title="输入期号 选择日期则无效" placeholder="输入飞单期号">
+                </div>
+                <br/>
+              </div>
+              <div class="col-md-2">
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    日期
+                  </div>
+                  <input type="text" class="form-control pull-right" value="<? echo $_GET['date']; ?>" id="datepicker" placeholder="选择飞单日期">
+                </div>
+                <br/>
+              </div>
+              <div class="col-md-2">
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    彩种
+                  </div>
+                  <select id="selectgame" class="form-control">
+                    <option value="pk10" <? if($_GET['game'] == 'pk10') echo 'selected';?>>北京赛车</option>
+                    <option value="xyft" <? if($_GET['game'] == 'xyft') echo 'selected';?>>幸运飞艇</option>
+                    <option value="cqssc" <? if($_GET['game'] == 'cqssc') echo 'selected';?>>重庆时时彩</option>
+                  </select>
+                </div>
+                <br/>
+              </div>
+              <div class="col-md-6">
+                <button data-toggle="tooltip" onclick="start()" data-placement="left" data-title="系统会定期清理报表 以保证系统稳定性" class="btn btn-info pull-right">查询</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>订单ID</th>
+              <th>飞单彩种</th>
+              <th>飞单期号</th>
+              <th>飞单内容</th>
+              <th>飞单盘口</th>
+              <th>飞单账号</th>
+              <th>飞单后余额</th>
+              <th>飞单时间</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?
+              switch($_GET['game']){
+                case 'pk10': $game = '北京赛车'; break;
+                case 'xyft': $game = '幸运飞艇'; break;
+                case 'cqssc': $game = '重庆时时彩'; break;
+              }
+              $game = $game == "" ? '北京赛车' : $game;
+              $sql = '';
+              if($_GET['term'] != ""){
+                $sql = " and term = '{$_GET['term']}'";
+              }elseif($_GET['date'] != ""){
+                $sql = " and (`time` between '{$_GET['date']} 00:00:00' and '{$_GET['date']} 23:59:59')";
+              }
+              select_query('fn_flyorder','*',"roomid = {$_SESSION['agent_room']} and game = '{$game}'".$sql."order by id desc");
+              while($con = db_fetch_array()){
+            ?>
+              <tr>
+                <td><? echo $con['id']; ?></td>
+                <td><? echo $con['game']; ?></td>
+                <td><? echo $con['term']; ?></td>
+                <td style="text-align:center"><a id="pop<? echo $con['id']; ?>" data-toggle="popover" data-trigger="focus" title="<? echo $con['term']; ?> 期注单" data-content="<textarea style='width:500px;height:100px;'><? echo $con['content']; ?></textarea>" data-html="true" tabindex="0" class="badge bg-green" role="button">查看注单</a></td>
+                <script>
+                  $('#pop<? echo $con["id"]; ?>').click(function () {
+                    $('#pop<? echo $con["id"]; ?>').popover('show');
+                  });
+                </script>
+                <td><? echo $con['pan']; ?></td>
+                <td><? echo $con['panuser']; ?></td>
+                <td><? echo $con['money']; ?></td>
+                <td><? echo $con['time']; ?></td>
+                <td><? echo $con['status']; ?></td>
+              </tr>
+            <?
+              }
+            ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="overlay" id="loading">
+        <i class="fa fa-refresh fa-spin"></i>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- bootstrap datepicker -->
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+  $(function () {
+    $('#datepicker').datepicker({
+      autoclose: true,
+      language: 'zh-CN',
+      format: 'yyyy-mm-dd',
+    });
+
+    $('.table').DataTable({
+      "order":[[0,'desc']]
+    });
+    $('#loading').remove();
+  });
+
+  function start(){
+    var term = $('#term').val();
+    var date = $('#datepicker').val()
+    var game = $('#selectgame option:selected').val();
+
+    window.location.href="index.php?m=flyorder&f=old&game=" + game + "&date=" + date + "&term=" + term;
+  }
+</script>

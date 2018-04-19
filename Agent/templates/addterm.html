@@ -1,0 +1,546 @@
+<style>
+  .pk_1,
+  .pk_2,
+  .pk_3,
+  .pk_4,
+  .pk_5,
+  .pk_6,
+  .pk_7,
+  .pk_8,
+  .pk_9,
+  .pk_10 {
+    width: 30px;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    color: #000;
+    font-weight: normal;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px;
+    margin: 0 10px 2px 0;
+    text-align: center;
+    text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    -webkit-text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    -moz-text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    *filter: Glow(color=#000, strength=1);
+  }
+
+  .pk_1 {
+    background: #FFFF00;
+  }
+
+  .pk_2 {
+    background: #0099FF;
+  }
+
+  .pk_3 {
+    background: #666666;
+  }
+
+  .pk_4 {
+    background: #FF9900;
+  }
+
+  .pk_5 {
+    background: #66CCCC;
+  }
+
+  .pk_6 {
+    background: #3300FF;
+  }
+
+  .pk_7 {
+    background: #CCCCCC;
+  }
+
+  .pk_8 {
+    background: #FF0000;
+  }
+
+  .pk_9 {
+    background: #780B00;
+  }
+
+  .pk_10 {
+    background: #009900;
+  }
+
+  .pk_he {
+    font-size: 20px;
+    font-weight: bold;
+    color: cornflowerblue;
+  }
+
+  .pk_pink {
+    font-size: 20px;
+    font-weight: bold;
+    color: #F00078;
+  }
+
+  .pk_blue {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0072E3;
+  }
+
+  .money_n {
+    font-size: 23px;
+    font-weight: bold;
+    color: #000;
+  }
+
+  .money_y {
+    font-size: 23px;
+    font-weight: bold;
+    color: #FF0000;
+  }
+
+  .pcdd {
+    width: 30px;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    color: #fff;
+    background-color: #0099FF;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 14px;
+    margin: 0 10px 2px 0;
+    text-align: center;
+    text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    -webkit-text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    -moz-text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;
+    *filter: Glow(color=#000, strength=1);
+  }
+
+  .ball_s_ {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 6px;
+    text-align: center;
+    font-size: 16px;
+    font-family: "微软雅黑";
+    color: #000;
+    font-weight: bold;
+    float: left;
+  }
+</style>
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      手动补期<small>没开奖？来这里！</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+      <li class="active">手动补期</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="box box-success">
+      <div class="box-header with-border">
+        <h3 class="box-title">手动开奖</h3>
+
+        <div class="box-tools pull-right">
+          <button type="button" onclick="add()" class="btn btn-sm btn-danger">添加</button>
+        </div>
+        <!-- /.box-tools -->
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-3">
+            <select id="slectgame" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+              <option value="1" selected="selected">北京赛车</option>
+              <option value="2">幸运飞艇</option>
+              <option value="3">重庆时时彩</option>
+              <option value="4">北京幸运28</option>
+              <option value="5">加拿大幸运28</option>
+              <option value="6">极速摩托</option>
+              <option value="7">极速赛车</option>
+              <option value="8">极速时时彩</option>
+              <option value="9">快三娱乐</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <div class="input-group">
+              <div class="input-group-addon">
+                期号
+              </div>
+              <input type="number" id="addterm" class="form-control pull-right">
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="input-group">
+              <div class="input-group-addon">
+                开奖结果
+              </div>
+              <input type="text" id="addcode" placeholder="(以英文逗号 ',' 分隔开奖结果)" class="form-control pull-right">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">北京赛车</a></li>
+        <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">幸运飞艇</a></li>
+        <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">重庆时时彩</a></li>
+        <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">北京幸运28</a></li>
+        <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">加拿大幸运28</a></li>
+        <li class=""><a href="#tab_6" data-toggle="tab" aria-expanded="false">极速摩托</a></li>
+        <li class=""><a href="#tab_7" data-toggle="tab" aria-expanded="false">极速赛车</a></li>
+        <li class=""><a href="#tab_8" data-toggle="tab" aria-expanded="false">极速时时彩</a></li>
+        <li class=""><a href="#tab_9" data-toggle="tab" aria-expanded="false">快三</a></li>
+        <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>期数</th>
+                <th>开奖号码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+                select_query("fn_open", "*", "type = 1 order by term desc limit 179");
+                while($con = db_fetch_array()){
+                  $codes = explode(',', $con['code']);
+              ?>
+                <tr>
+                  <td>
+                    <? echo $con['term']; ?>
+                  </td>
+                  <td>
+                    <span class="pk_<? echo (int)$codes[0]; ?>"><? echo (int)$codes[0]; ?></span>
+                    <span class="pk_<? echo (int)$codes[1]; ?>"><? echo (int)$codes[1]; ?></span>
+                    <span class="pk_<? echo (int)$codes[2]; ?>"><? echo (int)$codes[2]; ?></span>
+                    <span class="pk_<? echo (int)$codes[3]; ?>"><? echo (int)$codes[3]; ?></span>
+                    <span class="pk_<? echo (int)$codes[4]; ?>"><? echo (int)$codes[4]; ?></span>
+                    <span class="pk_<? echo (int)$codes[5]; ?>"><? echo (int)$codes[5]; ?></span>
+                    <span class="pk_<? echo (int)$codes[6]; ?>"><? echo (int)$codes[6]; ?></span>
+                    <span class="pk_<? echo (int)$codes[7]; ?>"><? echo (int)$codes[7]; ?></span>
+                    <span class="pk_<? echo (int)$codes[8]; ?>"><? echo (int)$codes[8]; ?></span>
+                    <span class="pk_<? echo (int)$codes[9]; ?>"><? echo (int)$codes[9]; ?></span>
+                  </td>
+                </tr>
+                <? } ?>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.tab-pane -->
+        <div class="tab-pane" id="tab_2">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>期数</th>
+                <th>开奖号码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+                    select_query("fn_open", "*", "type = 2 order by term desc limit 180");
+                    while($con = db_fetch_array()){
+                      $codes = explode(',', $con['code']);
+                  ?>
+                <tr>
+                  <td>
+                    <? echo $con['term']; ?>
+                  </td>
+                  <td>
+                    <span class="pk_<? echo (int)$codes[0]; ?>"><? echo (int)$codes[0]; ?></span>
+                    <span class="pk_<? echo (int)$codes[1]; ?>"><? echo (int)$codes[1]; ?></span>
+                    <span class="pk_<? echo (int)$codes[2]; ?>"><? echo (int)$codes[2]; ?></span>
+                    <span class="pk_<? echo (int)$codes[3]; ?>"><? echo (int)$codes[3]; ?></span>
+                    <span class="pk_<? echo (int)$codes[4]; ?>"><? echo (int)$codes[4]; ?></span>
+                    <span class="pk_<? echo (int)$codes[5]; ?>"><? echo (int)$codes[5]; ?></span>
+                    <span class="pk_<? echo (int)$codes[6]; ?>"><? echo (int)$codes[6]; ?></span>
+                    <span class="pk_<? echo (int)$codes[7]; ?>"><? echo (int)$codes[7]; ?></span>
+                    <span class="pk_<? echo (int)$codes[8]; ?>"><? echo (int)$codes[8]; ?></span>
+                    <span class="pk_<? echo (int)$codes[9]; ?>"><? echo (int)$codes[9]; ?></span>
+                  </td>
+                </tr>
+                <? } ?>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.tab-pane -->
+        <div class="tab-pane" id="tab_3">
+          <table class="table table-striped table-bordered" id="pkList">
+            <thead>
+              <tr>
+                <th>期数</th>
+                <th>开奖号码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+                    select_query("fn_open", "*", "type = 3 order by term desc limit 120");
+                    while($con = db_fetch_array()){
+                      $codes = explode(',', $con['code']);
+                  ?>
+                <tr>
+                  <td>
+                    <? echo $con['term']; ?>
+                  </td>
+                  <td>
+                    <span class="pcdd"><? echo (int)$codes[0]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[1]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[2]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[3]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[4]; ?></span>
+                  </td>
+                </tr>
+                <? } ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_4">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>期数</th>
+                <th>开奖号码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+                      select_query("fn_open", "*", "type = 4 order by term desc limit 179");
+                      while($con = db_fetch_array()){
+                        $codes = explode(',', $con['code']);
+                        if(count($codes) != 20){
+                          continue;
+                        }else{
+                          $number1 = (int)$codes[0] + (int)$codes[1] + (int)$codes[2] + (int)$codes[3] + (int)$codes[4] + (int)$codes[5];
+                          $number2 = (int)$codes[6] + (int)$codes[7] + (int)$codes[8] + (int)$codes[9] + (int)$codes[10] + (int)$codes[11];
+                          $number3 = (int)$codes[12] + (int)$codes[13] + (int)$codes[14] + (int)$codes[15] + (int)$codes[16] + (int)$codes[17];
+                          $number1 = substr($number1,-1);
+                          $number2 = substr($number2,-1);
+                          $number3 = substr($number3,-1);
+                          $hz = (int)$number1 + (int)$number2 + (int)$number3;
+                        }
+                    ?>
+                <tr>
+                  <td>
+                    <? echo $con['term']; ?>
+                  </td>
+                  <td>
+                    <span class="pcdd"><? echo (int)$number1 ?></span>
+                    <span class="ball_s_">+</span>
+                    <span class="pcdd"><? echo (int)$number2; ?></span>
+                    <span class="ball_s_">+</span>
+                    <span class="pcdd"><? echo (int)$number3; ?></span>
+                  </td>
+                </tr>
+                <? } ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_5">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>期数</th>
+                <th>开奖号码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+                        select_query("fn_open", "*", "type = 5 order by term desc limit 179");
+                        while($con = db_fetch_array()){
+                          $codes = explode(',', $con['code']);
+                          if(count($codes) != 20){
+                            continue;
+                          }else{
+                            $number1 = (int)$codes[1] + (int)$codes[4] + (int)$codes[7] + (int)$codes[10] + (int)$codes[13] + (int)$codes[16];
+                            $number2 = (int)$codes[2] + (int)$codes[5] + (int)$codes[8] + (int)$codes[11] + (int)$codes[14] + (int)$codes[17];
+                            $number3 = (int)$codes[3] + (int)$codes[6] + (int)$codes[9] + (int)$codes[12] + (int)$codes[15] + (int)$codes[18];
+                            $number1 = substr($number1,-1);
+                            $number2 = substr($number2,-1);
+                            $number3 = substr($number3,-1);
+                            $hz = (int)$number1 + (int)$number2 + (int)$number3;
+                          }
+                      ?>
+                <tr>
+                  <td>
+                    <? echo $con['term']; ?>
+                  </td>
+                  <td>
+                    <span class="pcdd"><? echo (int)$number1 ?></span>
+                    <span class="ball_s_">+</span>
+                    <span class="pcdd"><? echo (int)$number2; ?></span>
+                    <span class="ball_s_">+</span>
+                    <span class="pcdd"><? echo (int)$number3; ?></span>
+                  </td>
+                </tr>
+                <? } ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_6">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>期数</th>
+                <th>开奖号码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+                      select_query("fn_open", "*", "type = 6 order by term desc limit 180");
+                      while($con = db_fetch_array()){
+                        $codes = explode(',', $con['code']);
+                    ?>
+                <tr>
+                  <td>
+                    <? echo $con['term']; ?>
+                  </td>
+                  <td>
+                    <span class="pk_<? echo (int)$codes[0]; ?>"><? echo (int)$codes[0]; ?></span>
+                    <span class="pk_<? echo (int)$codes[1]; ?>"><? echo (int)$codes[1]; ?></span>
+                    <span class="pk_<? echo (int)$codes[2]; ?>"><? echo (int)$codes[2]; ?></span>
+                    <span class="pk_<? echo (int)$codes[3]; ?>"><? echo (int)$codes[3]; ?></span>
+                    <span class="pk_<? echo (int)$codes[4]; ?>"><? echo (int)$codes[4]; ?></span>
+                    <span class="pk_<? echo (int)$codes[5]; ?>"><? echo (int)$codes[5]; ?></span>
+                    <span class="pk_<? echo (int)$codes[6]; ?>"><? echo (int)$codes[6]; ?></span>
+                    <span class="pk_<? echo (int)$codes[7]; ?>"><? echo (int)$codes[7]; ?></span>
+                    <span class="pk_<? echo (int)$codes[8]; ?>"><? echo (int)$codes[8]; ?></span>
+                    <span class="pk_<? echo (int)$codes[9]; ?>"><? echo (int)$codes[9]; ?></span>
+                  </td>
+                </tr>
+                <? } ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_7">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>期数</th>
+                <th>开奖号码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+                        select_query("fn_open", "*", "type = 7 order by term desc limit 180");
+                        while($con = db_fetch_array()){
+                          $codes = explode(',', $con['code']);
+                      ?>
+                <tr>
+                  <td>
+                    <? echo $con['term']; ?>
+                  </td>
+                  <td>
+                    <span class="pk_<? echo (int)$codes[0]; ?>"><? echo (int)$codes[0]; ?></span>
+                    <span class="pk_<? echo (int)$codes[1]; ?>"><? echo (int)$codes[1]; ?></span>
+                    <span class="pk_<? echo (int)$codes[2]; ?>"><? echo (int)$codes[2]; ?></span>
+                    <span class="pk_<? echo (int)$codes[3]; ?>"><? echo (int)$codes[3]; ?></span>
+                    <span class="pk_<? echo (int)$codes[4]; ?>"><? echo (int)$codes[4]; ?></span>
+                    <span class="pk_<? echo (int)$codes[5]; ?>"><? echo (int)$codes[5]; ?></span>
+                    <span class="pk_<? echo (int)$codes[6]; ?>"><? echo (int)$codes[6]; ?></span>
+                    <span class="pk_<? echo (int)$codes[7]; ?>"><? echo (int)$codes[7]; ?></span>
+                    <span class="pk_<? echo (int)$codes[8]; ?>"><? echo (int)$codes[8]; ?></span>
+                    <span class="pk_<? echo (int)$codes[9]; ?>"><? echo (int)$codes[9]; ?></span>
+                  </td>
+                </tr>
+                <? } ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_8">
+          <table class="table table-striped table-bordered" id="pkList">
+            <thead>
+              <tr>
+                <th>期数</th>
+                <th>开奖号码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+                      select_query("fn_open", "*", "type = 8 order by term desc limit 120");
+                      while($con = db_fetch_array()){
+                        $codes = explode(',', $con['code']);
+                    ?>
+                <tr>
+                  <td>
+                    <? echo $con['term']; ?>
+                  </td>
+                  <td>
+                    <span class="pcdd"><? echo (int)$codes[0]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[1]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[2]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[3]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[4]; ?></span>
+                  </td>
+                </tr>
+                <? } ?>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tab_9">
+          <table class="table table-striped table-bordered" id="pkList">
+            <thead>
+              <tr>
+                <th>期数</th>
+                <th>开奖号码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?
+                   // select_query("fn_open", "*", "type = '9-".get_query_val('fn_lottery9', 'setting_open', array('roomid'=>$_SESSION['agent_room']))."' order by term desc limit 120");
+				   select_query("fn_open", "*", "type = 9 order by term desc limit 120");
+                    while($con = db_fetch_array()){
+                      $codes = explode(',', $con['code']);
+                  ?>
+                <tr>
+                  <td>
+                    <? echo $con['term']; ?>
+                  </td>
+                  <td>
+                    <span class="pcdd"><? echo (int)$codes[0]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[1]; ?></span>
+                    <span class="pcdd"><? echo (int)$codes[2]; ?></span>
+                  </td>
+                </tr>
+                <? } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- /.tab-content -->
+  </section>
+  <!-- /.content -->
+</div>
+<script src="plugins/select2/select2.full.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+  $('.select2').select2()
+  $('table').DataTable({
+    'searching': false,
+    "order": [[0, 'desc']]
+  })
+
+  function add(){
+    $.post('Application/ajax_addterm.php',{addterm: $('#addterm').val(), addcode: $('#addcode').val(), game: $('#slectgame option:selected').val()},function(data){
+      if(data.status){
+        alert('结算完成,请到未结算报表查看是否结算成功!');
+      }else{
+        alert(data.msg);
+      }
+    },'json')
+  }
+
+</script>

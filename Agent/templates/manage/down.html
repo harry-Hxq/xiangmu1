@@ -1,0 +1,131 @@
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            下分管理<small>分数管理</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li><a href="#"> 分数管理</a></li>
+            <li class="active">下分管理</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">管理</h3>
+
+                <div class="box-tools pull-right">
+                    <?
+                    if(get_query_val('fn_setting','setting_downmark', array('roomid'=>$_SESSION['agent_room'])) == 'true'){
+                    ?>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="downmark('false')" data-toggle="tooltip" data-title="开启后玩家下分直接扣分,拒绝回分分数则返回" data-placement="left">关闭回分直接下分</button>
+                    <?
+                    }else{
+                    ?>
+                        <button type="button" class="btn btn-success btn-sm" onclick="downmark('true')" data-toggle="tooltip" data-title="开启后玩家下分直接扣分,拒绝回分分数则返回" data-placement="left">开启回分直接下分</button>
+                    <?
+                    }
+                    ?>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+
+            <div class="box-body">
+                <table class="table table-bordered table-striped" id="tableList">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center">订单ID</th>
+                            <th style="text-align:center">昵称</th>
+                            <th style="text-align:center">账号</th>
+                            <th style="text-align:center">申请类型</th>
+                            <th style="text-align:center">申请金额</th>
+                            <th style="text-align:center">时间</th>
+                            <th style="text-align:center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody align="center">
+                        <? 
+                            select_query('fn_upmark','*',"roomid = '{$_SESSION['agent_room']}' and status = '未处理' and type = '下分'");
+                            while($con = db_fetch_array()){
+                        ?>
+                        <tr>
+                            <td>#<? echo $con['id']; ?></td>
+                            <td><img src="<? echo $con['headimg']; ?>" width="30" height="30"><? echo $con['username']; ?></td>
+                            <td><? echo $con['userid']; ?></td>
+                            <td><? echo $con['type']; ?></td>
+                            <td><? echo $con['money']; ?></td>
+                            <td><? echo $con['time']; ?></td>
+                            <td>
+                                <a href="javascript:tongyi('<? echo $con['id']; ?>')" class="btn btn-success btn-sm">同意请求</a>
+                                <a href="javascript:jujue('<? echo $con['id']; ?>')" class="btn btn-danger btn-sm">拒绝请求</a>
+                            </td>
+                        </tr>
+                        <?
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $('#tableList').DataTable();
+    });
+
+    function tongyi(id){
+        $.ajax({
+            url: 'Application/ajax_reportupmark.php?t=down',
+            type: 'get',
+            data: {id: id},
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('下分成功!');
+                    window.location.reload();
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function() { }
+        });
+    }
+
+    function jujue(id){
+        $.ajax({
+            url: 'Application/ajax_reportupmark.php?t=exit',
+            type: 'get',
+            data: {id: id},
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('已成功拒绝下分请求!');
+                    window.location.reload();
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function() { }
+        });
+    }
+
+    function downmark(status){
+        $.post('Application/ajax_reportupmark.php?t=set',{status: status},function(data){
+            if(data.success){
+                alert(data.msg);
+                window.location.reload();
+            }else{
+                alert(data.msg);
+            }
+        },'json');
+    }
+</script>

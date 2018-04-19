@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <audio id="mp3">
+	    <source = src="dist/audio.mp3" type="audio/mp3">
+    </audio>
+    <style type="text/css">
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+    </style>
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" language="javascript">
+        var First = true;
+        var time = new Array();
+        var sxtime = 10;
+        var feng = new Array();
+        var fly = 'false';
+        var roomid = 0;
+        var flys = new Array();
+        function iFrameHeight() {
+            var ifm = document.getElementById("iframepage");
+            var subWeb = document.frames ? document.frames["iframepage"].document
+                : ifm.contentDocument;
+            if (ifm != null && subWeb != null) {
+                ifm.height = subWeb.body.scrollHeight;
+            }
+            updateNew();
+            if (First == true) {
+                getNewMsg();
+                First = false;
+            }
+        }
+
+        function startfly(code){
+            if(fly == 'false'){
+                return;
+            }
+            if(code == 'pk10'){
+                if(flys['pk10'] == 'false'){
+                    return;
+                }
+                $.ajax({
+                    url: 'flyorder.php?t=start&roomid=' + roomid,
+                    type: 'get',
+                    dataType: 'html',
+                    success: function(data){
+                    
+                        $('#iframepage').contents().find('body #flycallout').fadeIn(1500);
+                        setTimeout(function() {
+                            $('#iframepage').contents().find('body #flycallout').fadeOut(1500);
+                        }, 3000);
+                    
+                    },
+                    error: function(){
+
+                    }
+                })
+            }else if(code == 'cqssc'){
+                if(flys['cqssc'] == 'false'){
+                    return;
+                }
+                $.ajax({
+                    url: 'flyorder.php?t=sscstart&roomid=' + roomid,
+                    type: 'get',
+                    dataType: 'html',
+                    success: function(data){
+                    
+                        $('#iframepage').contents().find('body #flycallout').fadeIn(1500);
+                        setTimeout(function() {
+                            $('#iframepage').contents().find('body #flycallout').fadeOut(1500);
+                        }, 3000);
+                    
+                    },
+                    error: function(){
+
+                    }
+                })
+            }else if(code == 'xyft'){
+                if(flys['xyft'] == 'false'){
+                    return;
+                }
+                $.ajax({
+                    url: 'flyorder.php?t=xyftstart&roomid=' + roomid,
+                    type: 'get',
+                    dataType: 'html',
+                    success: function(data){
+                    
+                        $('#iframepage').contents().find('body #flycallout').fadeIn(1500);
+                        setTimeout(function() {
+                            $('#iframepage').contents().find('body #flycallout').fadeOut(1500);
+                        }, 3000);
+                    
+                    },
+                    error: function(){
+
+                    }
+                })
+            }
+        }
+
+        function startdjs(){
+            sxtime = sxtime - 1;
+            time['pk10'] = time['pk10'] - 1;
+            time['xyft'] = time['xyft'] - 1;
+            time['cqssc'] = time['cqssc'] - 1;
+            $('#pk10djs').text(time['pk10']);
+            $('#xyftdjs').text(time['xyft']);
+            $('#cqsscdjs').text(time['cqssc']);
+            $('#shuaxin').text(sxtime);
+
+            if(time['pk10'] == feng['pk10']){
+                startfly('pk10');
+            }
+            if(time['cqssc'] == feng['cqssc']){
+                startfly('cqssc');
+            }
+            if(time['xyft'] == feng['xyft']){
+                startfly('xyft');
+            }
+            if(sxtime < 0){
+                sxtime = 10;
+                getdjs();
+
+            }
+            setTimeout(function() {
+                startdjs();
+            }, 1000);
+        } 
+
+        function getdjs(){
+            $.get('Application/ajax_getcode.php?g=pk10',function(data){
+                time['pk10'] = data.time;
+                feng['pk10'] = data.feng;
+                flys['pk10'] = data.flys;
+                fly = data.flyorder;
+                roomid = data.roomid;
+            },'json');
+            $.get('Application/ajax_getcode.php?g=xyft',function(data){
+                time['xyft'] = data.time;
+                feng['xyft'] = data.feng;
+                flys['xyft'] = data.flys;
+            },'json');
+            $.get('Application/ajax_getcode.php?g=cqssc',function(data){
+                time['cqssc'] = data.time;
+                feng['cqssc'] = data.feng;
+                flys['cqssc'] = data.flys;
+            },'json');
+			if(fly != 'false'){
+				$.get('flyorder.php?t=heart',function(data){
+					if(!data.success){
+						alert("盘口登录失效，请重新登录！");
+					}
+				},'json');
+			}
+            if(parseInt(time['pk10']) <= parseInt(feng['pk10']) && parseInt(time['pk10']) > 0){
+                $.get('flyorder.php?t=isfly&roomid='+roomid,function(data){
+                    if(!data.isfly){
+                        startfly('pk10');
+                    }
+                },'json');
+            }
+            if(parseInt(time['xyft']) <= parseInt(feng['xyft']) && parseInt(time['xyft']) > 0){
+                $.get('flyorder.php?t=xyftisfly&roomid='+roomid,function(data){
+                    if(!data.isfly){
+                        startfly('xyft');
+                    }
+                },'json');
+            }
+            if(parseInt(time['cqssc']) <= parseInt(feng['cqssc']) && parseInt(time['cqssc']) > 0){
+                $.get('flyorder.php?t=sscisfly&roomid='+roomid,function(data){
+                    if(!data.isfly){
+                        startfly('cqssc');
+                    }
+                },'json');
+            }
+        }
+        getdjs();
+        startdjs();
+        setInterval(function(){ iFrameHeight(); },5000);
+    </script>
+    <script>
+        var isNewsf = 0;
+        var isNewxf = 0;
+        var isNewpay = 0;
+        var isNewmsg = 0;
+        var audio = document.getElementById("mp3");
+        function updateNew() {
+            if (isNewsf == '0') {
+                $('#iframepage').contents().find('body .sf').addClass('fade');
+                $('#iframepage').contents().find('body .sf').text(isNewsf);
+            } else {
+                $('#iframepage').contents().find('body .sf').removeClass('fade');
+                $('#iframepage').contents().find('body .sf').text(isNewsf);
+            }
+
+            if (isNewxf == '0') {
+                $('#iframepage').contents().find('body .xf').addClass('fade');
+                $('#iframepage').contents().find('body .xf').text(isNewxf);
+            } else {
+                $('#iframepage').contents().find('body .xf').removeClass('fade');
+                $('#iframepage').contents().find('body .xf').text(isNewxf);
+            }
+
+            if (isNewpay == '0') {
+                $('.pay').addClass('fade');
+                $('.pay').text(isNewpay);
+            } else {
+                $('.pay').removeClass('fade');
+                $('.pay').text(isNewpay);
+            }
+
+            if (isNewmsg == '0') {
+                $('#iframepage').contents().find('body .msg').addClass('fade');
+                $('#iframepage').contents().find('body .msgdown').removeClass('fade');
+                $('#iframepage').contents().find('body .msg').text(isNewmsg);
+            } else {
+                $('#iframepage').contents().find('body .msg').removeClass('fade');
+                $('#iframepage').contents().find('body .msgdown').addClass('fade');
+                $('#iframepage').contents().find('body .msg').text(isNewmsg);
+            }
+
+        }
+
+        function getNewMsg() {
+            $.ajax({
+                url: 'Application/ajax_getnew.php',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length < 0 || data == null) {
+                        return;
+                    } else {
+                        if (isNewsf != data.newsf) {
+                            isNewsf = data.newsf;
+                            if (isNewsf == '0') {
+                                $('#iframepage').contents().find('body .sf').addClass('fade');
+                                $('#iframepage').contents().find('body .sf').text(data.newsf);
+                                return;
+                            }
+                            $('#iframepage').contents().find('body .sf').removeClass('fade');
+                            $('#iframepage').contents().find('body .sf').text(data.newsf);
+                            audio.play();
+                            addData(1, data.sfdata);
+                        }
+                        if (isNewxf != data.newxf) {
+                            isNewxf = data.newxf;
+                            if (isNewxf == '0') {
+                                $('#iframepage').contents().find('body .xf').addClass('fade');
+                                $('#iframepage').contents().find('body .xf').text(data.newxf);
+                                return;
+                            }
+                            $('#iframepage').contents().find('body .xf').removeClass('fade');
+                            $('#iframepage').contents().find('body .xf').text(data.newxf);
+                            audio.play();
+                            addData(2, data.xfdata);
+                        }
+                        if (isNewpay != data.newpay) {
+                            isNewpay = data.newpay;
+                            if (isNewpay == '0') {
+                                $('.pay').addClass('fade');
+                                $('.pay').text(data.newpay);
+                                return;
+                            }
+                            $('.pay').removeClass('fade');
+                            $('.pay').text(data.newpay);
+                            audio.play();
+                        }
+                        if (isNewmsg != data.newmsg) {
+                            isNewmsg = data.newmsg;
+                            if (isNewmsg == '0') {
+                                $('#iframepage').contents().find('body .msg').addClass('fade');
+                                $('#iframepage').contents().find('body .msgdown').removeClass('fade');
+                                $('#iframepage').contents().find('body .msg').text(data.newmsg);
+                                return;
+                            }
+                            $('#iframepage').contents().find('body .msg').removeClass('fade');
+                            $('#iframepage').contents().find('body .msgdown').addClass('fade');
+                            $('#iframepage').contents().find('body .msg').text(data.newmsg);
+                            audio.play();
+                        }
+                    }
+                },
+                error: function () {
+
+                }
+            });
+            setTimeout(function () {
+                getNewMsg()
+            }, 5000);
+        }
+
+        function addData(type, data) {
+            switch (type) {
+                case 1:
+                    var str = "";
+                    for(var i=0;i<data.length;i++){
+                        str += '<a href="index.php?m=manage&a=up"><div class="pull-left"><img src="' + data[i].headimg + '" class="img-circle" alt="User Image"></div><h4>' + data[i].nickname + '<small><i class="fa fa-clock-o"></i> ' + data[i].time + '</small></h4><p>收到一笔提交上分' + data[i].money + '元的订单</p></a>';
+                        showMsgNotification('收到一笔上分请求', data[i].nickname + "请求上分" + data[i].money + "元", data[i].headimg);
+                    }
+                    $('#iframepage').contents().find('body #sfdata').html(str);
+                    
+                    $('#iframepage').contents().find('#callout').addClass('callout-success');
+                    $('#iframepage').contents().find('#callout #title').text('收到一笔上分请求');
+                    $('#iframepage').contents().find('#callout #cont').text('来自'+data[0].nickname+'的上分消息');
+                    $('#iframepage').contents().find('#callout').fadeIn(1500);
+                    setTimeout(function() {
+                        $('#iframepage').contents().find('#callout').fadeOut(1500);
+                        $('#iframepage').contents().find('#callout').removeClass('callout-success');
+                    }, 3000);
+                    break;
+                case 2:
+                var str = "";
+                    for(var i=0;i<data.length;i++){
+                        str += '<a href="index.php?m=manage&a=down"><div class="pull-left"><img src="' + data[i].headimg + '" class="img-circle" alt="User Image"></div><h4>' + data[i].nickname + '<small><i class="fa fa-clock-o"></i> ' + data[i].time + '</small></h4><p>收到一笔提交下分' + data[i].money + '元的订单</p></a>';
+                        showMsgNotification('收到一笔下分请求', data[i].nickname + "请求下分" + data[i].money + "元", data[i].headimg);
+                    }
+                    $('#iframepage').contents().find('body #xfdata').html(str);
+
+                    $('#iframepage').contents().find('#callout').addClass('callout-info');
+                    $('#iframepage').contents().find('#callout #title').text('收到一笔下分请求');
+                    $('#iframepage').contents().find('#callout #cont').text('来自'+data[0].nickname+'的下分消息');
+                    $('#iframepage').contents().find('#callout').fadeIn(1500);
+                    setTimeout(function() {
+                        $('#iframepage').contents().find('#callout').fadeOut(1500);
+                        $('#iframepage').contents().find('#callout').removeClass('callout-info');
+                    }, 3000);
+                    break;
+                case 3:
+                    var str = '<a href="#"><div class="pull-left"><img src="' + data.headimg + '" class="img-circle" alt="User Image"></div><h4>' + data.nickname + '<small><i class="fa fa-clock-o"></i> ' + data.time + '</small></h4><p>收到一笔提交上分' + data.money + '元的订单</p></a>';
+                    $('#iframepage').contents().find('body #paydata').html(str);
+                    showMsgNotification('收到一笔充值订单', data.nickname + "充值" + data.money + "元", data.headimg)
+                    break;
+            }
+        }
+
+        function showMsgNotification(title, msg, icon) {
+            var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+
+            if (Notification && Notification.permission === "granted") {
+                var instance = new Notification(
+                    title, {
+                        body: msg,
+                        icon: icon
+                    }
+                );
+
+                instance.onclick = function () {
+                    window.focus();
+                    instance.close;
+                };
+                instance.onerror = function () {
+                    // Something to do
+                };
+                instance.onshow = function () {
+                    // Something to do
+                    // console.log(instance.close);
+                    setTimeout(instance.close, 3000);
+                };
+                instance.onclose = function () {
+                    // Something to do
+                };
+            } else if (Notification && Notification.permission !== "denied") {
+                Notification.requestPermission(function (status) {
+                    if (Notification.permission !== status) {
+                        Notification.permission = status;
+                    }
+                    // If the user said okay
+                    if (status === "granted") {
+                        var instance = new Notification(
+                            title, {
+                                body: msg,
+                                icon: icon
+                            }
+                        );
+
+                        instance.onclick = function () {
+                            // Something to do
+                        };
+                        instance.onerror = function () {
+                            // Something to do
+                        };
+                        instance.onshow = function () {
+                            // Something to do
+                            setTimeout(instance.close, 3000);
+                        };
+                        instance.onclose = function () {
+                            // Something to do
+                        };
+
+                    } else {
+                        return false
+                    }
+                });
+            } else {
+                return false;
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <span style="display:none">
+        PK10倒计时: <span id="pk10djs">0</span>
+        <br>
+        XYFT倒计时: <span id="xyftdjs">0</span>
+        <br>
+        CQSSC倒计时: <span id="cqsscdjs">0</span>
+        <br>
+        距离刷新还有:<span id="shuaxin">0</span>
+    </span>
+    <iframe src="index.php" id="iframepage" name="iframepage" frameBorder=0 scrolling=no width="100%" onLoad="iFrameHeight()"></iframe>
+</body>
+
+</html>

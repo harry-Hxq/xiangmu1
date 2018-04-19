@@ -1,0 +1,452 @@
+<link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      用户管理
+      <small>在这里 管理您的系统用户</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+      <li class="active">用户管理</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+  <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+	  <li class="active"><a href="#" >用户管理</a></li>
+	  <li class=""><a href="index.php?m=userjia" >假人管理</a></li>
+	  <li class=""><a href="index.php?m=userdata" >用户报表</a></li>
+	  </ul>
+  </div>
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title">用户管理</h3>
+
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <table id="userList" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>用户名</th>
+              <th>账号</th>
+              <th>余额</th>
+              <th>状态</th>
+              <th>是否代理</th>
+              <th>上级</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+              select_query('fn_user','*',"jia ='false' and roomid = {$_SESSION['agent_room']}");
+              while($con = db_fetch_array()){
+                $cons[] = $con;
+              }
+              foreach($cons as $con){
+            ?>
+              <tr>
+                <td>
+                  <? echo $con['id']; ?>
+                </td>
+                <td>
+                  <img src="<? echo $con['headimg']; ?>" width="35" height="35">&nbsp;<? echo $con['username']; if($con['jia'] == 'true') echo '<span class="badge bg-purple">假人</span>'; ?>
+                </td>
+                <td>
+                  <? echo $con['userid']; ?>
+                </td>
+                <td>
+                  <? echo $con['money']; ?>
+                </td>
+                <td>
+                  <? if(time() - (int)$con['statustime'] > 5000){ echo '离线'; }else{ echo '在线'; } ?>
+                </td>
+                <td>
+                  <? $isagent = $con['isagent'] == 'false' ? '否' : '是'; echo $isagent; ?>
+                </td>
+                <td>
+                  <? if($con['agent'] == 'null'){ 
+                      echo '无'; 
+                    }else{ 
+                      echo get_query_val('fn_user','username',"roomid = {$_SESSION['agent_room']} and userid = '{$con['agent']}'"); 
+                    } 
+                  ?>
+                </td>
+                <td>
+                  <a href="#" onclick="disupmark('<? echo $con['id']; ?>','<? echo $con['username']; ?>')" class="btn btn-primary btn-sm">分数操作</a>
+                  <a href="#" onclick="disreport('<? echo $con['id']; ?>','<? echo $con['username']; ?>')" class="btn btn-success btn-sm">报表查询</a>
+                  <a href="#" onclick="banuser('<? echo $con['id']; ?>','<? echo $con['username']; ?>')" class="btn btn-info btn-sm">禁言玩家</a>
+                  <a href="#" onclick="changejia('<? echo $con['id']; ?>','<? echo $con['username']; ?>')" class="btn btn-warning btn-sm"><? if($con['jia'] == 'true'){ echo '取消假人'; }else{ echo '设置假人'; } ?></a>
+                  <a href="#" onclick="deluser('<? echo $con['id']; ?>','<? echo $con['username']; ?>')" class="btn btn-danger btn-sm">删除玩家</a>
+                  <a href="#" onclick="dischat('<? echo $con['id']; ?>','<? echo $con['username']; ?>')" class="btn btn-primary btn-sm"><i class="fa fa-comments"></i> 私信TA</a>
+                </td>
+              </tr>
+              <?
+            }
+          ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="overlay" id="loading">
+        <i class="fa fa-refresh fa-spin"></i>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- 分数操作 -->
+<div class="modal fade" id="upmark">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">分数操作<small>(id:<span id="mark_id"></span>)</small></h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <span class="input-group-addon">分数操作</span>
+          <select class="form-control" id="mark_type">
+            <option value="up">上分</option>
+            <option value="down">下分</option>
+          </select>
+        </div>
+        <br />
+        <div class="input-group">
+          <span class="input-group-addon">金额</span>
+          <input type="number" id="mark_money" class="form-control" step="0.01" placeholder="输入操作金额 ...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        <button type="button" onclick="upmark();" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.分数操作 -->
+<!-- 聊天框 -->
+<div class="modal fade" id="chat">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">私信玩家<small>(id:<span id="chat_id"></span>)</small></h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <span class="input-group-addon">内容</span>
+          <input type="text" id="chatcontent" class="form-control" placeholder="聊天内容 ...">
+        </div>
+        <label for="">该内容将会出现在玩家的【客服】栏内噢</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        <button type="button" onclick="startchat();" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.聊天框 -->
+<!-- 报表查询 -->
+<div class="modal fade" id="report">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">报表查询<small>(id:<span id="report_id"></span>)</small></h4>
+      </div>
+      <div class="modal-body">
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs pull-right">
+            <li class="active"><a href="#tab_1-1" data-toggle="tab" aria-expanded="true">账变报表</a></li>
+            <li class=""><a href="#tab_2-2" data-toggle="tab" aria-expanded="false">游戏报表</a></li>
+            <li class="pull-left header"><i class="fa fa-th"></i> 玩家报表</li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab_1-1">
+              <div class="row">
+                <div class="col-md-4 pull-right">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-clock-o"></i> 时间</span>
+                    <input id="zhangbiantime" type="text" class="form-control datepicker" placeholder="选择时间 ..">
+                    <span class="input-group-btn">
+                      <button onclick="getzhangbian();" class="btn btn-info btn-flat">查询</button>
+                    </span>
+                  </div>
+                  <br/>
+                </div>
+              </div>
+              <table class="table table-bordered table-striped" id="zhangbiantable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>用户名</th>
+                    <th>账变类型</th>
+                    <th>账变金额</th>
+                    <th>账变原因</th>
+                    <th>账变时间</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="6" align="center" class="loading">选择时间并点击查询</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.tab-pane -->
+            <div class="tab-pane" id="tab_2-2">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="btn-group">
+                     <button type="button" onclick="getgame('');" class="btn btn-info btn-flat btn-xs">全部</button>
+                     <button type="button" onclick="getgame('pk10');" class="btn btn-info btn-flat btn-xs">北京赛车</button>
+                     <button type="button" onclick="getgame('xyft');" class="btn btn-info btn-flat btn-xs">幸运飞艇</button>
+                     <button type="button" onclick="getgame('cqssc');" class="btn btn-info btn-flat btn-xs">重庆时时彩</button>
+                     <button type="button" onclick="getgame('xy28');" class="btn btn-info btn-flat btn-xs">幸运28</button>
+                     <button type="button" onclick="getgame('jnd28');" class="btn btn-info btn-flat btn-xs">加拿大28</button>
+                     <button type="button" onclick="getgame('jsmt');" class="btn btn-info btn-flat btn-xs">极速摩托</button>
+                     <button type="button" onclick="getgame('jssc');" class="btn btn-info btn-flat btn-xs">极速赛车</button>
+                     <button type="button" onclick="getgame('jsssc');" class="btn btn-info btn-flat btn-xs">极速时时彩</button>
+                  </div>
+                </div>
+                <div class="col-md-4 pull-right">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-clock-o"></i> 时间</span>
+                    <input id="gametime" type="text" class="form-control datepicker" placeholder="选择时间 ..">
+                    <span class="input-group-btn">
+                      <button onclick="getgame('');" class="btn btn-info btn-flat">查询</button>
+                    </span>
+                  </div>
+                  <br/>
+                </div>
+              </div>
+              <table class="table table-bordered table-striped" id="gamereport">
+                <thead>
+                  <th>订单ID</th>
+                  <th>用户名</th>
+                  <th>游戏</th>
+                  <th>期号</th>
+                  <th>下注内容</th>
+                  <th>下注金额</th>
+                  <th>下注时间</th>
+                  <th>状态</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="8" align="center">选择时间并点击查询</td>
+                  </tr>
+                </tbody>
+                <tbody style="border-top: 1px solid #ddd;">
+                  <tr style="background-color:#f6fcff;font-weight:bold;font-size:12px;">
+                    <td>全部合计:</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td id="allmoney">0.00</td>
+                    <td>-</td>
+                    <td id="allstatus">0.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.tab-pane -->
+          </div>
+          <!-- /.tab-content -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+        <button type="button" onclick="" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.报表查询 -->
+<!-- DataTables -->
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+  $(function () {
+    $('#userList').DataTable({
+      "scrollX": true,
+      "autoWidth": false
+    });
+    $('.datepicker').datepicker({
+      autoclose: true,
+      language: 'zh-CN',
+      format: 'yyyy-mm-dd',
+    });
+    $("#loading").remove();
+  });
+
+  function disupmark(id, username) {
+    $('#upmark').modal('toggle');
+    $('#mark_id').text(id + " " + username);
+    $('#upmark').data('id', id);
+  }
+
+  function upmark() {
+    var id = $('#upmark').data('id');
+    var type = $('#mark_type option:selected').val();
+    var money = $('#mark_money').val();
+    if (!confirm('您将进行以下操作:\n类型:' + $('#mark_type option:selected').text() + '\n用户:' + $('#mark_id').text() + '\n操作金额:' + money + '元')) {
+      return;
+    }
+    $.ajax({
+      url: 'Application/ajax_upmark.php',
+      type: 'POST',
+      dataType: 'json',
+      data: { id: id, type: type, money: money },
+      success: function (data) {
+        if (data.success) {
+          alert('操作成功!');
+          window.location.href = 'index.php?m=user';
+        } else {
+          alert(data.msg);
+        }
+      },
+      error: function () { console.log('error') }
+    });
+  }
+
+  function disreport(id, username) {
+    $('#report').modal('toggle');
+    $('#report_id').text(id + " " + username);
+    $('#report').data('id', id);
+  }
+
+  function dischat(id, username) {
+    $('#chat').modal('toggle');
+    $('#chat_id').text(id + " " + username);
+    $('#chat').data('id', id);
+  }
+
+  function getzhangbian(){
+    $('#report #zhangbiantable').dataTable({
+      "destroy": true,
+      "autoWidth": false,
+      "ajax": {
+        "url": 'Application/ajax_getreport.php?t=1&userid=' + $('#report').data('id') + '&time=' + $('#zhangbiantime').val(),
+        "dataSrc": function(json){
+            if(json.data[0] == null) {
+              return json;
+            }
+            return json.data; 
+        }
+      }
+    });
+  }
+
+  function getgame(cp){
+    var table = $('#report #gamereport').dataTable({
+      "destroy": true,
+      "autoWidth": false,
+      "scrollX": true,
+      "ajax": {
+        "url":'Application/ajax_getreport.php?t=2&userid=' + $('#report').data('id') + '&time=' + $('#gametime').val() + '&code=' + cp,
+        "dataSrc": function( json ){
+            $('#gamereport #allmoney').text(json.allmoney);
+            $('#gamereport #allstatus').text(json.allstatus);
+            if(json.data[0] == null) {
+              return json;
+            }
+            return json.data; 
+          }
+        }
+    });
+  }
+
+  function banuser(id, username){
+    if(confirm('您将禁言玩家:' + username + '\n确定禁言该玩家吗?')){
+      $.ajax({
+        url: 'Application/ajax_banuser.php',
+        type: 'POST',
+        data: {id: id},
+        dataType: 'json',
+        success:function(data){
+          if(data.success){
+            alert('该玩家已被禁言');
+          }else{
+            alert(data.msg);
+          }
+        },
+        error: function(){}
+      });
+    }
+  }
+
+  function changejia(id, username){
+    if(confirm('您确定将玩家: ' + username + ' 设为假人吗?\n设置后每期的下注报表将不会计入该玩家的投注信息!')){
+      $.ajax({
+        url: "Application/ajax_changejia.php",
+        type: 'POST',
+        data: {id: id},
+        dataType: 'json',
+        success: function(data){
+          if(data.success){
+            alert(data.msg);
+            window.location.href="index.php?m=user";
+          }else{
+            alert(data.msg)
+          }
+        },
+        error: function() {}
+      })
+    }
+  }
+
+  function deluser(id, username) {
+    if(confirm('确定删除玩家: '+ username + ' 吗?此操作将无法复原!')){
+      $.ajax({
+        url: 'Application/ajax_deluser.php?t=1',
+        type: 'POST',
+        data: {id: id},
+        dataType: 'json',
+        success:function(data){
+          if(data.success){
+            alert('删除成功..');
+            window.location.href="index.php?m=user";
+          }else{
+            alert(data.msg);
+          }
+        },
+        error:function(){ }
+      })
+    }
+  }
+
+  function startchat(){
+    var id = $('#chat').data('id');
+    var cont = $('#chatcontent').val();
+    $.ajax({
+      url: 'Application/ajax_customchat.php',
+      type: 'POST',
+      data: {id: id, cont: cont},
+      dataType: 'json',
+      success: function(data){
+        if(data.success){
+          alert('操作成功');
+          $('#chatcontent').val("");
+        }else{
+          alert(data.msg);
+        }
+      },
+      error:function(){ }
+    })
+  }
+</script>

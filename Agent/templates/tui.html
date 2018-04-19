@@ -1,0 +1,533 @@
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      退水设置<small>在这里设置您的退水方案</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+      <li class="active">退水设置</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">单日退水</a></li>
+        <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">多日退水</a></li>
+        <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">退水报表</a></li>
+        <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title"></h3>
+              <div class="box-tools pull-right">
+                <a id="popover" tabindex="0" class="btn btn-box-tool" style="font-size:20px" role="button" data-toggle="popover" data-trigger="focus"
+                  title="说明" data-placement="left" data-content=""><i class="fa fa-question-circle"></i></a>
+                <button onclick="onetui();" class="btn btn-info btn-sm">立即退水</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i> 退水日期
+                </div>
+                <input placeholder="选择退水日期 ..." type="text" class="form-control pull-right" id="datepicker">
+              </div>
+              <br/>
+              <div class="input-group">
+                <span class="input-group-addon">退水模式</span>
+                <select class="form-control select2" id="mode" style="width: 100%;">
+                  <option value="-1">请选择退水模式 ...</option>
+                  <option value="liushui">根据用户当日流水退水</option>
+                  <option value="kuisun">根据用户当日亏损退水</option>
+                  <option value="yingli">根据用户当日盈利退水</option>
+                  <option value="shangfen">根据用户当日上分退水</option>
+                  <option value="xiafen">根据用户当日下分退水</option>
+                </select>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">方案1 :</span>
+                    <input id="plan1_1" type="number" class="form-control" placeholder="100">
+                    <span class="input-group-addon">到</span>
+                    <input id="plan1_2" type="number" class="form-control" placeholder="1000">
+                  </div>
+                  <br/>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">退水百分比:</span>
+                    <input id="plan1s" type="number" step="0.001" class="form-control" placeholder="0.1">
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <br/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">方案2 :</span>
+                    <input id="plan2_1" type="number" class="form-control" placeholder="1001">
+                    <span class="input-group-addon">到</span>
+                    <input id="plan2_2" type="number" class="form-control" placeholder="3000">
+                  </div>
+                  <br/>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">退水百分比:</span>
+                    <input id="plan2s" type="number" step="0.001" class="form-control" placeholder="0.2">
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <br/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">方案3 :</span>
+                    <input id="plan3_1" type="number" class="form-control" placeholder="3001">
+                    <span class="input-group-addon">到</span>
+                    <input id="plan3_2" type="number" class="form-control" placeholder="4000">
+                  </div>
+                  <br/>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">退水百分比:</span>
+                    <input id="plan3s" type="number" step="0.001" class="form-control" placeholder="0.3">
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <br/>
+                </div>
+              </div>
+              <table id="tuiTable" class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>用户ID</th>
+                    <th>用户名</th>
+                    <th>账号</th>
+                    <th id="tuimode">退水模式</th>
+                    <th>退水所得</th>
+                  </tr>
+                </thead>
+                <tbody id="tuibody">
+                  <tr>
+                    <td align="center" colspan="5">等待退水 ...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="tab_2">
+          <div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title"></h3>
+              <div class="box-tools pull-right">
+                <a id="popover2" tabindex="0" class="btn btn-box-tool" style="font-size:20px" role="button" data-toggle="popover" data-trigger="focus"
+                  title="说明" data-placement="left" data-content=""><i class="fa fa-question-circle"></i></a>
+                <button onclick="twotui();" class="btn btn-info btn-sm">立即退水</button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="input-group date">
+                <div class="input-group-addon ">
+                  <i class="fa fa-clock-o"></i> 退水时间
+                </div>
+                <input type="text" class="form-control pull-right" id="reservationtime">
+              </div>
+              <br/>
+              <div class="input-group">
+                <span class="input-group-addon">退水模式</span>
+                <select id="mode" class="form-control select2" style="width: 100%;">
+                  <option>请选择退水模式 ...</option>
+                  <option value="liushui">根据用户总流水退水</option>
+                  <option value="kuisun">根据用户总亏损退水</option>
+                  <option value="yingli">根据用户总盈利退水</option>
+                  <option value="shangfen">根据用户总上分退水</option>
+                  <option value="xiafen">根据用户总回分退水</option>
+                </select>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">方案1 :</span>
+                    <input id="plan1_1" type="number" class="form-control" placeholder="100">
+                    <span class="input-group-addon">到</span>
+                    <input id="plan1_2" type="number" class="form-control" placeholder="1000">
+                  </div>
+                  <br/>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">退水百分比:</span>
+                    <input id="plan1s" type="number" step="0.001" class="form-control" placeholder="0.1">
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <br/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">方案2 :</span>
+                    <input id="plan2_1" type="number" class="form-control" placeholder="1001">
+                    <span class="input-group-addon">到</span>
+                    <input id="plan2_2" type="number" class="form-control" placeholder="2000">
+                  </div>
+                  <br/>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">退水百分比:</span>
+                    <input id="plan2s" type="number" step="0.001" class="form-control" placeholder="0.2">
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <br/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">方案3 :</span>
+                    <input id="plan3_1" type="number" class="form-control" placeholder="2001">
+                    <span class="input-group-addon">到</span>
+                    <input id="plan3_2" type="number" class="form-control" placeholder="3000">
+                  </div>
+                  <br/>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">退水百分比:</span>
+                    <input id="plan3s" type="number" step="0.001" class="form-control" placeholder="0.3">
+                    <span class="input-group-addon">%</span>
+                  </div>
+                  <br/>
+                </div>
+              </div>
+              <table id="tuiTable" class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>用户ID</th>
+                    <th>用户名</th>
+                    <th>账号</th>
+                    <th id="tuimode">退水模式</th>
+                    <th>退水所得</th>
+                  </tr>
+                </thead>
+                <tbody id="tuibody">
+                  <tr>
+                    <td align="center" colspan="5">等待退水 ...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="tab_3">
+          <div class="box box-info">
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="input-group date">
+                    <div class="input-group-addon ">
+                      <i class="fa fa-clock-o"></i> 查询时间
+                    </div>
+                    <input type="text" class="form-control pull-right" id="datetimepicker">
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <button onclick="start();" class="btn btn-info btn-sm pull-right">查询</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table class="table table-bordered table-striped" id="userList">
+            <thead>
+              <tr>
+                <th>用户ID</th>
+                <th>用户名</th>
+                <th>账号</th>
+                <th>上分</th>
+                <th>下分</th>
+                <th>盈亏</th>
+                <th>流水</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="7" align="center">选择时间点击查询按钮刷新</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.tab-pane -->
+      </div>
+      <!-- /.tab-content -->
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- bootstrap datepicker -->
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script src="plugins/daterangepicker/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+  $(function () {
+    $('#datepicker').datepicker({
+      autoclose: true,
+      language: 'zh-CN',
+      format: 'yyyy-mm-dd',
+    });
+    $('#popover').click(function () {
+      $('#popover').popover({
+        html: true,
+        content: '当您的退水模式为根据亏损退水时,也请输入<label>正数</label><br/>如果不会使用退水,请联系<label>客服</label>或<label>代理</label>'
+      });
+      $('#popover').popover('show');
+    });
+    $('#popover2').click(function () {
+      $('#popover2').popover({
+        html: true,
+        content: '当您的退水模式为根据亏损退水时,也请输入<label>正数</label><br/>报表退水最大跨度为<label>60</label>天<br/>如果不会使用退水,请联系<label>客服</label>或<label>代理</label>'
+      });
+      $('#popover2').popover('show');
+    })
+    $('#reservationtime').daterangepicker({
+      timePicker: true, //是否显示小时分钟
+      timePickerIncrement: 60, //时间增量
+      timePicker24Hour: true, //显示月框
+      showDropdowns: true,
+      dateLimit: {
+        days: 60
+      }, //起止时间的最大间隔  
+      locale: {
+        applyLabel: "确定",
+        cancelLabel: "取消",
+        daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+        monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        format: 'YYYY-MM-DD HH:mm:ss'
+      }
+    });
+
+    $('#datetimepicker').daterangepicker({
+      timePicker: true, //是否显示小时分钟
+      timePickerIncrement: 60, //时间增量
+      timePicker24Hour: true, //显示月框
+      showDropdowns: true,
+      dateLimit: {
+        days: 60
+      }, //起止时间的最大间隔 
+      opens: 'right',
+      locale: {
+        applyLabel: "确定",
+        cancelLabel: "取消",
+        daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+        monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        format: 'YYYY-MM-DD HH:mm:ss'
+      }
+    });
+  });
+
+  function start(){
+    var time = $('#datetimepicker').val();
+    $('#userList').dataTable({
+      "destroy": true,
+      "autoWidth": false,
+      "scrollX": true,
+      "ajax":{
+        "url":"Application/ajax_tui.php?t=getuser&time=" + time,
+        "dataSrc": function(data){
+          if(data.length == 0){
+            return data;
+          }
+          return data.data;
+        }
+      }
+    });
+  }
+
+  function onetui(){
+    var mode = $('#tab_1 #mode option:selected').val();
+    var time = $('#datepicker').val();
+    var plan1 = $('#plan1_1').val() + '-' + $('#plan1_2').val();
+    var plan2 = $('#plan2_1').val() + '-' + $('#plan2_2').val();
+    var plan3 = $('#plan3_1').val() + '-' + $('#plan3_2').val();
+    var plan1s = $('#plan1s').val();
+    var plan2s = $('#plan2s').val();
+    var plan3s = $('#plan3s').val();
+
+    if($('#plan1_1').val() == '' || $('#plan1_2').val() == '' || plan1s == ''){
+      alert('至少填写一种方案...');
+      return;
+    }else if(
+      ($('#plan2_1').val() != '' && $('#plan2_2').val() == '' && plan2s == '') || 
+      ($('#plan2_1').val() == '' && $('#plan2_2').val() != '' && plan2s != '') ||
+      ($('#plan2_1').val() != '' && $('#plan2_2').val() != '' && plan2s == '') || 
+      ($('#plan2_1').val() == '' && $('#plan2_2').val() == '' && plan2s != '') ||
+      ($('#plan2_1').val() != '' && $('#plan2_2').val() == '' && plan2s != '') ||
+      ($('#plan2_1').val() == '' && $('#plan2_2').val() != '' && plan2s == '')
+    ){
+      alert('方案2填写后请务必填写完整..');
+      return;
+    }else if(
+      ($('#plan3_1').val() != '' && $('#plan3_2').val() == '' && plan3s == '') || 
+      ($('#plan3_1').val() == '' && $('#plan3_2').val() != '' && plan3s != '') ||
+      ($('#plan3_1').val() != '' && $('#plan3_2').val() != '' && plan3s == '') || 
+      ($('#plan3_1').val() == '' && $('#plan3_2').val() == '' && plan3s != '') ||
+      ($('#plan3_1').val() != '' && $('#plan3_2').val() == '' && plan3s != '') ||
+      ($('#plan3_1').val() == '' && $('#plan3_2').val() != '' && plan3s == '')
+    ){
+      alert('方案3填写后请务必填写完整..');
+      return;
+    }
+
+    if(mode == '-1'){
+      alert('请选择退水模式 ...');
+      return;
+    }
+
+    if(!confirm('确定进行回水操作吗?')){
+      return;
+    }
+
+    $.ajax({
+      url: 'Application/ajax_tui.php?t=onetui',
+      type:'post',
+      data: {time: time,mode: mode,plan1: plan1,plan2: plan2,plan3: plan3,plan1s: plan1s,plan2s: plan2s, plan3s: plan3s},
+      dataType: 'json',
+      success: function(data){
+        if(data.success){
+          $('#tab_1 #tuiTable #tuibody').html('');
+          if(data.tuidata.length > 0 && data.tuidata != null){
+            var json = data.tuidata;
+            var str = '';
+            for(var i=0;i<json.length;i++){
+              str += '<tr>'
+                  +  '<td>' + json[i].id + '</td>'
+                  +  '<td>' + json[i].username + '</td>'
+                  +  '<td>' + json[i].userid + '</td>'
+                  +  '<td>' + json[i].mode + '</td>'
+                  +  '<td>' + json[i].money + '</td>'
+                  +  '</tr>';
+            }
+            $('#tab_1 #tuiTable #tuibody').html(str);
+            $('#tab_1 #tuiTable #tuimode').text(data.mode);
+            $('#tab_1 #tuiTable').dataTable({
+              "destroy": true,
+              "autoWidth": false,
+              "scrollX": true
+            });
+            $('#tab_1 #tuiTable').removeClass('fade');
+          }else{
+            alert('没有对应玩家可以进行回水..请降低条件后再试..');
+          }
+          
+        }else{
+          alert(data.msg);
+        }
+      },
+      error: function(){ }
+    })
+  }
+
+  function twotui(){
+    var mode = $('#tab_2 #mode option:selected').val();
+    var time = $('#reservationtime').val();
+    var plan1 = $('#tab_2 #plan1_1').val() + '-' + $('#tab_2 #plan1_2').val();
+    var plan2 = $('#tab_2 #plan2_1').val() + '-' + $('#tab_2 #plan2_2').val();
+    var plan3 = $('#tab_2 #plan3_1').val() + '-' + $('#tab_2 #plan3_2').val();
+    var plan1s = $('#tab_2 #plan1s').val();
+    var plan2s = $('#tab_2 #plan2s').val();
+    var plan3s = $('#tab_2 #plan3s').val();
+
+    if($('#tab_2 #plan1_1').val() == '' || $('#tab_2 #plan1_2').val() == '' || plan1s == ''){
+      alert('至少填写一种方案...');
+      return;
+    }else if(
+      ($('#tab_2 #plan2_1').val() != '' && $('#tab_2 plan2_2').val() == '' && plan2s == '') || 
+      ($('#tab_2 #plan2_1').val() == '' && $('#tab_2 #plan2_2').val() != '' && plan2s != '') ||
+      ($('#tab_2 #plan2_1').val() != '' && $('#tab_2 #plan2_2').val() != '' && plan2s == '') || 
+      ($('#tab_2 #plan2_1').val() == '' && $('#tab_2 #plan2_2').val() == '' && plan2s != '') ||
+      ($('#tab_2 #plan2_1').val() != '' && $('#tab_2 #plan2_2').val() == '' && plan2s != '') ||
+      ($('#tab_2 #plan2_1').val() == '' && $('#tab_2 #plan2_2').val() != '' && plan2s == '')
+    ){
+      alert('方案2填写后请务必填写完整..');
+      return;
+    }else if(
+      ($('#tab_2 #plan3_1').val() != '' && $('#tab_2 #plan3_2').val() == '' && plan3s == '') || 
+      ($('#tab_2 #plan3_1').val() == '' && $('#tab_2 #plan3_2').val() != '' && plan3s != '') ||
+      ($('#tab_2 #plan3_1').val() != '' && $('#tab_2 #plan3_2').val() != '' && plan3s == '') || 
+      ($('#tab_2 #plan3_1').val() == '' && $('#tab_2 #plan3_2').val() == '' && plan3s != '') ||
+      ($('#tab_2 #plan3_1').val() != '' && $('#tab_2 #plan3_2').val() == '' && plan3s != '') ||
+      ($('#tab_2 #plan3_1').val() == '' && $('#tab_2 #plan3_2').val() != '' && plan3s == '')
+    ){
+      alert('方案3填写后请务必填写完整..');
+      return;
+    }
+
+    if(mode == '-1'){
+      alert('请选择退水模式 ...');
+      return;
+    }
+
+    if(!confirm('确定进行回水操作吗?')){
+      return;
+    }
+
+    $.ajax({
+      url: 'Application/ajax_tui.php?t=twotui',
+      type:'post',
+      data: {time: time,mode: mode,plan1: plan1,plan2: plan2,plan3: plan3,plan1s: plan1s,plan2s: plan2s, plan3s: plan3s},
+      dataType: 'json',
+      success: function(data){
+        if(data.success){
+          $('#tab_2 #tuiTable #tuibody').html('');
+          if(data.tuidata.length > 0 && data.tuidata != null){
+            var json = data.tuidata;
+            var str = '';
+            for(var i=0;i<json.length;i++){
+              str += '<tr>'
+                  +  '<td>' + json[i].id + '</td>'
+                  +  '<td>' + json[i].username + '</td>'
+                  +  '<td>' + json[i].userid + '</td>'
+                  +  '<td>' + json[i].mode + '</td>'
+                  +  '<td>' + json[i].money + '</td>'
+                  +  '</tr>';
+            }
+            $('#tab_2 #tuiTable #tuibody').html(str);
+            $('#tab_2 #tuiTable #tuimode').text(data.mode);
+            $('#tab_2 #tuiTable').dataTable({
+              "destroy": true,
+              "autoWidth": false,
+              "scrollX": true
+            });
+            $('#tab_2 #tuiTable').removeClass('fade');
+          }else{
+            alert('没有对应玩家可以进行回水..请降低条件后再试..');
+          }
+          
+        }else{
+          alert(data.msg);
+        }
+      },
+      error: function(){ }
+    })
+  }
+</script>

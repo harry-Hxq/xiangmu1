@@ -1,0 +1,224 @@
+<?php
+$game = $_GET['game'] == "" ? 'pk10' : $_GET['game'];
+
+?>
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            未结算报表<small>报表查询</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li><a href="#"> 报表查询</a></li>
+            <li class="active">未结算报表</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title">报表查询</h3>
+
+                <div class="box-tools pull-right">
+                    <button onclick="allback();" class="btn btn-primary btn-sm" data-toggle="tooltip" data-title="慎用!会退还未开的投注!">一键退还</button>
+                    <button onclick="alldel();" class="btn btn-danger btn-sm"  data-toggle="tooltip" data-title="慎用!会删除未开的投注!">一键删除</button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="col-md-2">选择游戏</label>
+                                <div class="input-group" style="width: 200px;">
+                                    <select id="searchgame" class="form-control select2" style="width: 100%;">
+                                         <option value="pk10" <? if($game == 'pk10') echo 'selected'; ?>>北京赛车</option>
+                                         <option value="xyft" <? if($game == 'xyft') echo 'selected'; ?>>幸运飞艇</option>
+                                         <option value="xy28" <? if($game == 'xy28') echo 'selected'; ?>>幸运28</option>
+                                         <option value="jnd28" <? if($game == 'jnd28') echo 'selected'; ?>>加拿大28</option>
+                                         <option value="cqssc" <? if($game == 'cqssc') echo 'selected'; ?>>重庆时时彩</option>
+                                         <option value="jsmt" <? if($game == 'jsmt') echo 'selected'; ?>>极速摩托</option>
+                                         <option value="jssc" <? if($game == 'jssc') echo 'selected'; ?>>极速赛车</option>
+                                         <option value="jsssc" <? if($game == 'jsssc') echo 'selected'; ?>>极速时时彩</option>
+                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class=""></div>
+                            </div>
+                        </div>
+                        <div class="box-tools pull-right">
+                            <a href="javascript:search();" class="btn btn-info btn-sm">查询</a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped" id="tableList">
+                    <thead>
+                        <tr>
+                            <th>订单ID</th>
+                            <th>昵称</th>
+                            <th>账号</th>
+                            <th>投注期号</th>
+                            <th>投注内容</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?
+                            switch($game){
+                                case 'pk10': $type = '1'; $order = 'fn_order'; break;
+                                case 'xyft': $type = '2'; $order = 'fn_order'; break;
+                                case 'cqssc': $type = '3'; $order = 'fn_sscorder'; break;
+                                case 'xy28': $type = '4'; $order = 'fn_pcorder'; break;
+                                case 'jnd28': $type = '5'; $order = 'fn_pcorder'; break;
+                                case 'jsmt': $type = '6'; $order = 'fn_mtorder'; break;
+                                case 'jssc': $type = '7'; $order = 'fn_jsscorder'; break;
+                                case 'jsssc': $type = '8'; $order = 'fn_jssscorder'; break;
+                            }
+                            $newterm = get_query_val('fn_open','next_term',"type = '{$type}' order by term desc limit 1");
+                            select_query($order,'*',"roomid = '{$_SESSION['agent_room']}' and status = '未结算'");
+                            while($con = db_fetch_array()){
+                                $cons[] = $con;
+                            }
+                            foreach($cons as $con){
+                                if($game == 'pk10' && strlen($con['term']) > 8) continue;
+                                if($game == 'xyft' && strlen($con['term']) < 8) continue;
+                                if($game == 'xy28' && (int)$con['term'] > 2000000) continue;
+                                if($game == 'jnd28' && (int)$con['term'] < 2000000) continue;
+                                
+                         ?>
+                            <tr>
+                                <td><? echo "#".$con['id']; ?></td>
+                                <td><? echo $con['username']; ?></td>
+                                <td><? echo $con['userid']; ?></td>
+                                <td><? echo $con['term']; ?></td>
+                                <td><? if($game == 'xy28' || $game == 'jnd28'){ echo $con['content'].'/'.$con['money']; }else{ echo $con['mingci'].'/'.$con['content'].'/'.$con['money']; } ?></td>
+                                <td>
+                                    <?
+                                        if($newterm != $con['term']){
+                                            echo '<a href="javascript:back('.$con['id'].');" class="btn btn-success btn-sm">退还</a>&nbsp;&nbsp;<a href="javascript:del('.$con['id'].')" class="btn btn-danger btn-sm">删除</a>';
+                                        }else{
+                                            echo '--';
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="overlay" id="loading">
+                <i class="fa fa-refresh fa-spin"></i>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+    $(function(){
+        $('#tableList').DataTable({
+        });
+        $('#loading').remove();
+    });
+    function search(){
+        var game = $('#searchgame option:selected').val();
+        window.location.href="index.php?m=report&r=none&game=" + game;
+    }
+
+    function del(id){
+        var game = $('#searchgame option:selected').val();
+        if(!confirm('确定删除该投注吗?一旦删除将无法恢复!')){
+            return;
+        }
+        $.ajax({
+            url: 'Application/ajax_delbet.php?t=1',
+            type: 'post',
+            data: { id: id,game: game},
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('删除投注成功..');
+                    window.addEventListener.reload();
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function(){ }
+        });
+    }
+
+    function back(id){
+        var game = $('#searchgame option:selected').val();
+        if(!confirm('确定返还该投注吗?一旦返还将无法恢复!')){
+            return;
+        }
+        $.ajax({
+            url: 'Application/ajax_delbet.php?t=2',
+            type: 'post',
+            data: { id: id,game: game},
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('返还投注成功..');
+                    window.location.reload();
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function(){ }
+        });
+    }
+
+    function allback(){
+        var game = $('#searchgame option:selected').val();
+        if(!confirm('确定返还全部投注吗?一旦返还将无法恢复!')){
+            return;
+        }
+        $.ajax({
+            url: 'Application/ajax_delbet.php?t=4',
+            type: 'post',
+            data: {game: game},
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('返还投注成功..');
+                    window.location.reload();
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function(){ }
+        });
+    }
+
+    function alldel(){
+        var game = $('#searchgame option:selected').val();
+        if(!confirm('确定删除全部投注吗?一旦删除将无法恢复!')){
+            return;
+        }
+        $.ajax({
+            url: 'Application/ajax_delbet.php?t=3',
+            type: 'post',
+            data: {game: game},
+            dataType: 'json',
+            success: function(data){
+                if(data.success){
+                    alert('删除投注成功..');
+                    window.location.reload();
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function(){ }
+        });
+    }
+</script>

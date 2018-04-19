@@ -1,0 +1,148 @@
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            禁言管理
+            <small>您可以在这禁言玩家</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li class="active">禁言管理</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">禁言管理</h3>
+
+                <div class="box-tools pull-right">
+                    <button class="btn btn-primary btn-sm" data-toggle="tooltip" data-title="添加禁言人员" onclick="$('#dialog').modal('toggle')">添加禁言</button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-striped" id="banList">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th style="text-align:center">用户名</th>
+                            <th style="text-align:center">账号</th>
+                            <th style="text-align:center">添加时间</th>
+                            <th style="text-align:center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?
+                        select_query('fn_ban','*',"roomid = {$_SESSION['agent_room']}");
+                        while($con = db_fetch_array()){
+                        ?>
+                            <tr>
+                                <td>
+                                    <? echo $con['id']; ?>
+                                </td>
+                                <td><img src="<? echo $con['headimg']; ?>" width="30" height="30">
+                                    <? echo $con['username']; ?>
+                                </td>
+                                <td>
+                                    <? echo $con['userid']; ?>
+                                </td>
+                                <td>
+                                    <? echo $con['addtime']; ?>
+                                </td>
+                                <td><a href="javascript:delban('<? echo $con['id'];?>')" class="btn btn-primary btn-sm">取消禁言</a></td>
+                            </tr>
+                            <?
+                    }
+                ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<div class="modal fade" id="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">添加禁言</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>选择禁言玩家</label>
+                    <select id="userList" class="form-control select2" style="width: 100%;">
+                    <?
+                       select_query('fn_user','*',"roomid = {$_SESSION['agent_room']}");
+                       while($con = db_fetch_array()){
+                    ?>
+                     <option value="<? echo $con['id']; ?>"><? echo $con['username']; ?></option>
+                    <?
+                      }
+                    ?>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                <button onclick="addban()" type="button" class="btn btn-primary">加入禁言</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script src="plugins/select2/select2.full.min.js"></script>
+<script src="plugins/select2/i18n/zh-CN.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $('#banList').DataTable();
+        $('.select2').select2({
+            language: 'zh-CN'
+        });
+    });
+
+    function delban(id){
+        $.ajax({
+            url: 'Application/ajax_delban.php',
+            type: 'post',
+            dataType: 'json',
+            data: {id: id},
+            success: function(data){
+                if(data.success){
+                    alert('取消禁言成功..');
+                    window.location.href="index.php?m=ban";
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function(){ }
+        })
+    }
+
+    function addban(){
+        var id = $('#userList option:selected').val();
+        $.ajax({
+            url: 'Application/ajax_banuser.php',
+            type: 'post',
+            dataType: 'json',
+            data: {id: id},
+            success: function(data){
+                if(data.success){
+                    alert('添加禁言成功!');
+                }else{
+                    alert(data.msg);
+                }
+            },
+            error: function() { }
+        })
+    }
+</script>

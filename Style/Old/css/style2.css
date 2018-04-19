@@ -1,0 +1,281 @@
+.userinfo1, .userinfo2 {
+	font-size: 28px;
+}
+
+/* ------------------------------------------ */
+.messageWindow {
+	margin: 10px 0 0 0;
+}
+
+#messageLoading {
+	text-align: center;
+	font-size: 32px;
+}
+
+.msgItem {
+	font-size: 32px;
+	color: black;
+	/*padding: 3px;*/
+	/*white-space: nowrap;*/
+	width: 860px;
+	margin: 10px;
+	/* 880-20 */
+}
+
+.msgItem1 {
+	width: 64px;
+	vertical-align: top;
+}
+
+.msgItem1 img {
+	width: 84px;
+	height: 84px;
+	padding-top: 20px;
+}
+
+.msgSys .msgItem2 .msgName {
+	padding: 0 40px 0 15px;
+}
+
+.msgUsr .msgItem2 .msgName {
+	padding: 0 15px 0 40px;
+}
+
+.msgUsr {
+	text-align: left;
+}
+
+.msgSys {
+	text-align: right;
+}
+
+.msgTime {
+	font-size: 18px;
+	color: gray;
+}
+
+.msgName {
+	font-size: 22px;
+	color: black;
+}
+
+.bubble {
+	/*max-width: 600px;*/
+	word-break: break-all;
+	position: relative;
+	padding: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: #aaa solid 1px;
+	display: inline-block;
+	-webkit-box-shadow: 2px 2px 10px 0px #616161;
+	-moz-box-shadow: 2px 2px 10px 0px #616161;
+	box-shadow: 2px 2px 10px 0px #616161;
+}
+
+.bubbleL {
+	margin: 0 10px 0 40px;
+}
+
+.bubbleR {
+	margin: 0 40px 0 10px;
+}
+
+.bubble:after {
+	content: '';
+	position: absolute;
+	border-style: solid;
+	display: block;
+	width: 0;
+	z-index: 1;
+	top: 10px;
+}
+
+.bubbleL:after {
+	border-width: 10px 16px 10px 0;
+	left: -15px;
+}
+
+.bubbleR:after {
+	border-width: 10px 0 10px 16px;
+	right: -15px;
+}
+
+.bubble:before {
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-color: transparent #7F7F7F;
+	display: block;
+	width: 0;
+	z-index: 0;
+	top: 10px;
+}
+
+.bubbleL:before {
+	border-width: 10px 16px 10px 0;
+	left: -16px;
+}
+
+.bubbleR:before {
+	border-width: 10px 0 10px 16px;
+	right: -16px;
+}
+
+/* U1自己 */
+.bubbleU1 {
+	background: #a0e75a;
+}
+
+.bubbleU1:after {
+	border-color: transparent #a0e75a;
+}
+/* 下單 */
+.bubbleU5 {
+	background: #a0e75a;
+}
+
+.bubbleU5:after {
+	border-color: transparent #a0e75a;
+}
+/* U2客服  */
+.bubbleU2 {
+	background: #4ce;
+}
+
+.bubbleU2:after {
+	border-color: transparent #4ce;
+}
+
+/* U3他人 */
+.bubbleU3 {
+	background: #fff;
+}
+
+.bubbleU3:after {
+	border-color: transparent #fff;
+}
+
+/* U4帳務 */
+.bubbleU4 {
+	background: #4ce;
+}
+
+.bubbleU4:after {
+	border-color: transparent #4ce;
+}
+
+
+
+/* S1自動 */
+.bubbleS1 {
+	background: #a0e75a;
+}
+
+.bubbleS1:after {
+	border-color: transparent #a0e75a;
+}
+/* S2客服 */
+.bubbleS2 {
+	background: #4ce;
+}
+
+.bubbleS2:after {
+	border-color: transparent #4ce;
+}
+/* S3開關盤 */
+.bubbleS3 {
+	background: #ffb;
+}
+
+.bubbleS3:after {
+	border-color: transparent #ffb;
+}
+
+/* S4廣播 */
+.bubbleS4 {
+	background: #fbb;
+}
+
+.bubbleS4:after {
+	border-color: transparent #fbb;
+}
+
+.keybord {
+    height: 60px !important;
+    width: auto !important;
+    margin-top: 15px;
+    border-radius: 10px;
+    margin-right: 67px;
+    float: right;
+}
+
+.sendbutton {
+    background-color: #5399e2;
+    color: #fff;
+    padding: 1.5% 2.8%;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    margin-top: 0;
+    margin-left: 0%;
+    height: 66px;
+    width: 105px;
+    font-size: 30px;
+}
+.keybord_div {
+    display: none;
+    text-align: left;
+    background-color: #FFFFBB;
+    font-size: 28px;
+    float: left;
+    margin-left: 1.5%;
+    padding: 3% 3%;
+    border-radius: 7px;
+    width: 140%;
+    box-shadow: -2px 3px 5px #888888;
+    margin-top: 1%;
+    word-wrap: break-word;
+    position: relative;
+}
+.keybord_div em {
+    display: inline-block;
+    font-style: normal;
+    padding: 0;
+    vertical-align: top;
+    margin: 4px 6px;
+    height: 75px;
+    width: 75px;
+    line-height: 75px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 32px;
+    font-weight: bold;
+    background: #666;
+    color: #fff;
+    overflow: hidden;
+}
+.keybord_div em.close {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    background: #999;
+    font-size: 40px;
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+}
+.keybord_div em.c2 {
+    background: #5399e2;
+    width: 120px;
+    color: #fff;
+}
+.keybord_div em.c {
+    background: #FF2F2F;
+    /* width: 100px; */
+}
+
+/* ------------------------------------------ */
+
+/* ------------------------------------------ */

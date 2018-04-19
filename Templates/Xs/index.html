@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>新圣娱乐体验版</title>
+	<meta content="user-scalable=no,maximum-scale=1.0" id="viewport" name="viewport" />
+	<meta name='Robots' content='noindex,nofollow' />
+	<link rel="stylesheet" type="text/css" href="/Style/Xs/static/css/iconfont.css?v=201708022" />
+	<link href="/Style/Xs/Public/css/layout.css?v=201708022" type="text/css" rel="stylesheet" />
+	<link href="/Style/Xs/Public/css/wx.css?v=201708022" type="text/css" rel="stylesheet" />
+	<script src="/Style/Old/js/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var tz_types = ["1", "2", "3", "4", "5", "6", "7", "8", "9"], puri = "";
+	</script>
+	<script src="/Style/Xs/Public/lang/zh_cn.js?v=201708022" type="text/javascript"></script>
+	<script src="/Style/Xs/Public/js/games.js?v=201708022" type="text/javascript"></script>
+	<script src="/Style/Xs/Public/js/pk10.js?v=201708022" type="text/javascript"></script>
+	<script src="/Style/Xs/Public/js/layer.js?v=201708022" type="text/javascript"></script>
+	<script src="/Style/Xs/static/js/xsapp.js?v=201708022" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+		.myuid {
+			text-align: center;
+			font-weight: bold;
+			margin: 0;
+			padding: 0;
+			font-size: 30px;
+			margin-top: -10%;
+			margin-bottom: 5%;
+			color: green;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="frameTOP">
+		<iframe id='ifarms' name="ifarms" scrolling="no" marginwidth='0' marginheight='0' width="100%" border='0' class="ifarms"
+		 frameborder='no'></iframe>
+		<div class="neirong" style="display: none; max-height: 616px; overflow: scroll;">
+			<table id='tables' class="tables" border='0' cellpadding='1' cellspacing='1'>
+			</table>
+		</div>
+		<div class="changlong" style="display: none;">
+			<table style="width: 100%; background-color: rgba(255,255,255,0.7);" border='0' cellpadding='1' cellspacing='1'>
+				<tr>
+					<td width="33.3%">
+						<table id='changlong1' class="tables" border='0' cellpadding='1' cellspacing='1'>
+						</table>
+					</td>
+					<td width="33.3%" style="background-color: rgba(230,230,230,0.7);">
+						<table id='changlong2' class="tables" border='0' cellpadding='1' cellspacing='1'>
+						</table>
+					</td>
+					<td>
+						<table id='changlong3' class="tables" border='0' cellpadding='1' cellspacing='1'>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!--聊天主体  -->
+	<div class="leftdiv">
+		<ul>
+			<li class="ulogo"><img src="/Style/Xs/Public/images/logo.jpg" class="mlogo" /></li>
+			<li class="home" data-id="home"><span>菜单</span></li>
+			<li class="guess" data-id="touzu"><span>竞猜</span></li>
+			<li class="skefu" data-id="kefu"><span>客服<em>0</em></span></li>
+			<li class="logs" data-id="tzlog"><span>记录</span></li>
+			<li class="fresh" data-id="reload"><span>刷新</span></li>
+			<li class="cz" data-id="czhelp"><span>充值</span></li>
+
+		</ul>
+	</div>
+	<div id="frameRIGHTH">
+		<div class="nav_banner">
+			<ul class="lottery">
+				<li class="home" data-id="lottery">
+					<span> <i class="iconfont">&#xe683;</i>频道:北京赛车</span>
+				</li>
+				<li class="dh" data-id="donghua"><span>动画</span></li>
+				<li class="wz" data-id="wenzi"><span>文字</span></li>
+				<li class="cl" data-id="changlong"><span>长龙</span></li>
+				<li class="gz" data-id="guize"><span>规则</span></li>
+				<li class="sx" data-id='reload2'><span>刷新动画</span></li>
+			</ul>
+			<ul class="uinfo">
+				<li class="uno">编号:11713</li>
+				<li class="uname">昵称:南风知我意</li>
+				<li class="money">余点: <b class="balance">0.00</b></li>
+				<li class="oline">在线: <b class="online">185</b>人</li>
+			</ul>
+		</div>
+		<div class='touzu rbox'>
+			<div class="user_messages">
+				<div>
+					<input placeholder="车道/车号/金额" type="text" id='Message' />
+					<img src="/Style/Xs/Public/images/kb.png" class="keybord">
+					<span class="sendemaill">发 送</span>
+				</div>
+				<div class="keybord_div" id="keybord_div">
+				</div>
+			</div>
+			<div class="rightdiv">
+				<div class=saidleft><img src="http://wx.qlogo.cn/mmopen/c2GEn1UcCWcVib3aGk0KuHDdmib3fEbFE8xy9T33pAciacy88nIF620c4JT8HibllwHibc65pxTuB35MRXibomsUdkF8okuIbQ17cO/0"
+					/>
+					<div class=tousaid><span class=tousaid1>草上飞</span>&nbsp;&nbsp;<span class=tousaid2>12:16:23</span></div>
+					<div class=tsf><b></b><span class=neirongsaid>5/小单/30</span></div>
+				</div>
+				<div class=saidright>
+					<img src="/Style/Xs/Public/images/gm.jpg" />
+					<div class=tousaidl>
+						<span class="tousaid2">12:16:20</span>&nbsp;&nbsp;<span class=tousaid1>系统GM</span></div>
+					<div class=ts> <b></b><span class=neirongsaidl style="background:#98E165;">北京赛车<br>期号:632233<br>--距离封盘30秒--</span>
+					</div>
+				</div>
+				<div class=saidright>
+					<img src="/Style/Xs/Public/images/gm.jpg" />
+					<div class=tousaidl>
+						<span class="tousaid2">12:16:20</span>&nbsp;&nbsp;<span class=tousaid1>系统GM</span></div>
+					<div class=ts> <b></b><span class=neirongsaidl style="background:#FFBBBB;">北京赛车<br>期号:632233<br>--距离封盘30秒--</span>
+					</div>
+				</div>
+				<div class=saidright>
+					<img src="/Style/Xs/Public/images/gm.jpg" />
+					<div class=tousaidl>
+						<span class="tousaid2">12:16:20</span>&nbsp;&nbsp;<span class=tousaid1>系统GM</span></div>
+					<div class=ts> <b></b><span class=neirongsaidl>北京赛车<br>期号:632233<br>--距离封盘30秒--</span>
+					</div>
+				</div>
+				<div class=saidleft><img src="http://wx.qlogo.cn/mmopen/Q3auHgzwzM5h41X9aQums3uNXIAdA0BqRMNibvWv1kaB7tc5dNbI6HWVzMgGx3cNDy1ibwdnzcczz1mXX8w3ar2g/0"/>
+					<div class=tousaid><span class=tousaid1>luke</span>&nbsp;&nbsp;<span class=tousaid2>12:16:15</span></div>
+					<div class=tsf><b></b><span class=neirongsaid>C160</span></div>
+				</div>
+			</div>
+		</div>
+		<div class='kefu rbox off'>
+			<div class="user_messages">
+				<input type="text" id='kfs' /> <span id="sendkf">发 送</span>
+			</div>
+			<div class="kfcs">
+				<div class=saidright>
+					<img src="/Style/Xs/Public/images/kefu2.jpg" />
+					<div class=tousaidl>
+						<span class="tousaid2">12:16:34</span>&nbsp;&nbsp;<span class=tousaid1>客服</span></div>
+					<div class=ts> <b></b><span class=neirongsaidl>有任何问题请留言，我们将尽快为您解答。</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tzlog off rbox" data-uri="/Index/mylog/lottery/pk10.html">
+			<p class="loading">数据加载中...</p>
+		</div>
+		<div class="guize off rbox" data-load="0" data-uri="/Index/help/data/guize/lottery/pk10.html">
+			<p class="loading">数据加载中...</p>
+		</div>
+		<div class="czhelp off rbox" data-load="0" data-uri="/Index/help/data/czhelp/lottery/pk10.html">
+			<p class="loading">数据加载中...</p>
+		</div>
+	</div>
+	<div id='ss_menu'></div>
+</body>
+
+</html>
+<script type="text/javascript">
+	site_url = "";
+	var lottery_uri = "/pk10/index.html"; var ws_api = "ws://119.28.64.238:8081", wslnum = 0, wslflg = null;
+	var kefu_head = "/Style/Xs/Public/images/kefu2.jpg", sys_head = "/Style/Xs/Public/images/gm.jpg";
+	var udata = {
+		uid: 11713,
+		type: 'pk10',
+		uname: "南风知我意",
+		headimg: "http://wx.qlogo.cn/mmopen/ajNVdqHZLLCWO37Ln7iavGWjJH0jceGpNZ5gibDtwotiahBl11J1a770Z7fc2vub02aYlEU8GRImeATOXYLXezd7g/0",
+		sign: "3b6c50502dc9b3a0d373ee6c9e2628b0796334c1",
+		time: ""
+	};
+	$(function () {
+		load_slide_menu();
+		var socket_init = function () {
+			socket = new WebSocket(ws_api);
+			socket.onerror = function (event) {
+				if (socket.readyState != 1) {
+					addxitong1(sys_head, '系统GM', '=服务器连接失败=', get_now_time());
+				}
+			};
+			socket.onopen = function (event) {
+				// 发送一个初始化消息
+				var sendMessage = {
+					'act': 'login',
+					'uid': udata.uid,
+					'type': udata.type,
+					'uname': udata.uname,
+					'headimg': udata.headimg,
+					'sign': udata.sign,
+					'time': udata.time,
+				};
+				//					console.log(sendMessage);
+				socket.send(JSON.stringify(sendMessage));
+				// 监听消息
+				socket.onmessage = function (event) {
+					var obj = eval('(' + event.data + ')');
+					if (obj.sign) {
+						udata.sign = obj.sign.key;
+						udata.time = obj.sign.time;
+					}
+					if (obj.balance >= 0) $(".balance").html(obj.balance);
+					if (obj.online) $(".online").html(obj.online);
+					wslnum = 0;
+					switch (obj.code) {
+						case 1:
+							addxitong(obj.headimg || sys_head, obj.uname || '系统GM', obj.msg, obj.time);
+							break;
+						case 2:
+							addxitong1(obj.headimg || sys_head, obj.uname || '系统GM', obj.msg, obj.time);
+							break;
+						case 3:
+							window.ifarms.location.reload()
+							break;
+						case 4:
+							addxitong1(obj.headimg || sys_head, obj.uname || '系统GM', obj.msg, obj.time);
+							online_heart();
+							break;
+						case 100:
+							addxitong3(sys_head, '系统GM', obj.msg, obj.time);
+							break;
+						case 200:
+							addtouzhu(obj.headimg, obj.uname, obj.msg, obj.time);
+							break;
+						case 403:
+							//						console.log("用户信息验证失败，请刷新后重试！");
+							location.href = get_now_url();
+							break;
+						case 666:
+						case 888:
+							show_lottery_data(obj.logs);
+							show_lottery_cl(obj.logs2);
+							setTimeout(function () {
+								//online_heart();
+								$.get('/Index/mylog/lottery/pk10.html').then(function (res) {
+									$(".tzlog").html(res);
+								})							
+}, 5000);
+							if (obj.code == 666) {
+								zy.tips("连接服务成功");
+								addxitong3(sys_head, '系统GM', "服务器连接成功", get_now_time());
+								wslnum = 0;
+								socket_check(1);
+							}
+							break;
+						case 600:
+							kefume(obj.headimg, obj.uname, obj.msg, obj.time);
+							break;
+						case 601:
+							if ($(".kefu").is(':hidden')) {
+								var a = $(".skefu").find('em');
+								var n = a.html() * 1 + 1;
+								$(a).html(n).show();
+							}
+							kefumsg(obj.headimg || kefu_head, obj.uname || '客服', obj.msg, obj.time);
+							break;
+						case 602:
+							kefumsg(obj.headimg || kefu_head, obj.uname || '客服', obj.msg, obj.time);
+							break;
+					}
+					$(".rightdiv >div:gt(100)").remove();
+				};
+				//监听Socket的关闭
+				socket.onclose = function (event) {
+					zy.tips("连接已断开重连中", 2000);
+					addxitong1(sys_head, '系统GM', '=连接已断开=<br>=重新连接中=', get_now_time());
+					setTimeout(function () {
+						socket_check(0);
+					}, 1000)
+				};
+			}
+			var socket_check = function (flg) {
+				if (!socket || socket.readyState != 1) {
+					wslnum++;
+					zy.tips("服务重连中…" + wslnum + "…", 3000);
+					if (wslnum > 10) {
+						addxitong1(sys_head, '系统GM', '=多新连接失败，正尝试刷新页面=', get_now_time());
+						location.href = get_now_url();
+					}
+					else {
+						addxitong1(sys_head, '系统GM', '=第' + wslnum + '次重连服务器中=', get_now_time());
+						socket_init();
+					}
+				}
+				if (flg == 1) {
+					if (flg) clearTimeout(flg);
+					flg = setTimeout(function () { socket_check(1) }, 3000);
+				}
+			}
+			//socket_check();
+		}
+		addxitong3(sys_head, '系统GM', '=正在连接服务器=', get_now_time());
+		socket_init();
+		//竞猜发送
+		$(".sendemaill").click(function () {
+			send_msg();
+		})
+		$(".keybord_div em.c2").on('touchstart', function () {
+			send_msg();
+		});
+		var send_msg = function () {
+			var msg = $("#Message").val();
+			if (msg) {
+				var sendMessage = {
+					'act': 'send',
+					'uid': udata.uid,
+					'uname': udata.uname,
+					'type': udata.type,
+					'headimg': udata.headimg,
+					'sign': udata.sign,
+					'time': udata.time,
+					'content': msg,
+				};
+				var str = JSON.stringify(sendMessage);
+				socket.send(str);
+				$("#Message").val('');
+			}
+		};
+		//客户消息
+		$("#sendkf").click(function () {
+			var msg = $("#kfs").val();
+			if (msg) {
+				var sendMessage = {
+					'act': 'tokefu',
+					'uid': udata.uid,
+					'type': udata.type,
+					'uname': udata.uname,
+					'headimg': udata.headimg,
+					'sign': udata.sign,
+					'time': udata.time,
+					'content': msg,
+				};
+				//				console.log(sendMessage);
+				var str = JSON.stringify(sendMessage);
+				socket.send(str);
+				$("#kfs").val('');
+			}
+
+		});
+		//心跳包
+		//setInterval(function(){
+		//	online_heart();
+		//},30000);
+
+		var online_heart = function () {
+			var sendMessage = { 'act': 'online', 'uid': udata.uid, 'uname': udata.uname, 'type': udata.type, 'sign': udata.sign, 'time': udata.time };
+			var str = JSON.stringify(sendMessage);
+			socket.send(str);
+		}
+		$(document).on("click", "*[event='ajax']", function () {
+			var uri = $(this).data('uri');
+			var pdiv = $(this).parents('.rbox');
+			if (uri) {
+				$.get(uri).then(function (res) {
+					pdiv.html(res);
+				})
+			}
+		});
+		$(document).on("click", ".cs-btn", function () {
+			var that = $(this);
+			layer.open({
+				content: '确定要撤单吗？', btn: ['确定', '关闭'], yes: function (index) {
+					layer.close(index);
+					$.get($(that).data('uri')).then(function (res) {
+						zy.tips(res.info);
+						$.get('/Index/mylog/lottery/pk10.html').then(function (res) {
+							$(".tzlog").html(res);
+						})
+					})
+				}
+			});
+		});
+		$(document).on("click", ".saidleft .neirongsaid", function () {
+			$("#Message").val($(this).text());
+		});
+	});
+
+</script>

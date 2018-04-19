@@ -1,0 +1,85 @@
+<?php
+function getSubstr($str, $leftStr, $rightStr)
+{
+    $left = strpos($str, $leftStr);
+    //echo '左边:'.$left;
+    $right = strpos($str, $rightStr,$left);
+    //echo '<br>右边:'.$right;
+    if($left < 0 or $right < $left) return '';
+    return substr($str, $left + strlen($leftStr), $right-$left-strlen($leftStr));
+}
+?>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            分享房间<small>立即分享您的房间给客户</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li class="active">分享房间</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-solid box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-qrcode"></i>&nbsp;&nbsp;二维码</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" align="center">
+                        <?php
+                            $info = "http://{$_SERVER['HTTP_HOST']}/qr.php?room={$_SESSION['agent_room']}";
+                            //$html = file_get_contents("https://cli.im/api/qrcode/code?text=".$info."&mhid=vBaVXwrmmM8hMHcsL9FUP6I");
+							$html = file_get_contents("https://cli.im/api/qrcode/code?text=".$info."");
+                            $qrcode = getSubstr($html,"<img src=\"","\" id=");
+                        ?>
+                        <img onload="$('#loadding1').remove();" src="<? echo $qrcode; ?>" alt="" width="240" />
+                        <br/>
+                        <label for="">分享您的房间二维码扫描即可进入</label>
+                    </div>
+                    <div class="overlay" id="loadding1">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box box-solid box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-share"></i>&nbsp;&nbsp;短链接</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" align="center">
+					<?php
+					//http://api.t.sina.com.cn/short_url/shorten.json?source=775503426&url_long=
+					$longurl = "http://api.t.sina.com.cn/short_url/shorten.json?source=775503426&url_long=".$info;
+					
+					$r=file_get_contents($longurl);
+					$items = json_decode($r);
+					$surl;
+					foreach($items as $item) {
+					   $surl=$item->url_short;
+					}
+					
+					echo "也可用以下短链接在微信内打开：<br />".$surl;
+					?>
+                    </div>
+                    <!--<div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

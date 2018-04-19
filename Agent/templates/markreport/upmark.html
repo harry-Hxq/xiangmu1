@@ -1,0 +1,193 @@
+<?php
+$sql = '';
+$time = $_GET['time'] == "" ? date('Y/m/d'). ' - ' .date('Y/m/d') : $_GET['time'];
+$type = $_GET['type'];
+$user = $_GET['user'];
+?>
+<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            上分报表<small>分数报表</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+            <li><a href="#"> 分数报表</a></li>
+            <li class="active">上分报表</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-deafault">
+            <div class="box-header with-border">
+                <h3 class="box-title">报表查询</h3>
+
+                <div class="box-tools pull-right">
+                    <a id="popover" tabindex="0" class="btn btn-box-tool" style="font-size:20px" data-toggle="tooltip" title="报表合计是不包含拒绝以及假人的" data-placement="left"><i class="fa fa-info-circle"></i></a>
+                    <button onclick="start();" class="btn btn-primary btn-sm" data-toggle="tooltip" data-title="刷新列表"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="input-group" style="width: 200px;">
+                                    <input id="searchuser" value="<? echo $user; ?>" type="text" class="form-control" data-toggle="tooltip" data-title="%代表任意字符" placeholder="选择查询用户...">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="col-md-2">选择类型</label>
+                                <div class="input-group" style="width: 200px;">
+                                    <select id="searchtype" class="form-control select2" style="width: 100%;">
+                                        <option value="all" <? if($type == 'all') echo 'selected'; ?>>全部</option>
+                                        <option value="up" <? if($type == 'up') echo 'selected'; ?>>上分</option>
+                                        <option value="down" <? if($type == 'down') echo 'selected'; ?>>下分</option>
+                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group" style="width: 300px;">
+                                    <input type="text" class="form-control" placeholder="选择查询日期..." id="daterange" value="<? echo $time; ?>">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info" onclick="search();" >查询</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped" id="tableList">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>头像</th>
+                            <th>用户名</th>
+                            <th>账号</th>
+                            <th>类型</th>
+                            <th>金额</th>
+                            <th>状态</th>
+                            <th>时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?
+                                $time = explode(' - ',$time);
+
+                                $time[0] = date('Y-m-d',strtotime($time[0]));
+                                $time[1] = date('Y-m-d',strtotime($time[1]));
+                    
+                                if($type == 'all') $type = '';
+                                if($type == 'up') $type = '上分';
+                                if($type == 'down') $type = '下分';
+
+                                $people = 0;
+                                $sf = 0;
+                                $xf = 0;
+                                if($user != "") $sql = " and `username` like '{$user}'";
+                                if($type != "") $sql .= " and `type` = '{$type}'";
+                                select_query('fn_upmark','*',"roomid = {$_SESSION['agent_room']} and status != '未处理' and (`time` between '{$time[0]} 00:00:00' and '{$time[1]} 23:59:59')".$sql);
+                                while($con = db_fetch_array()){
+                                    $people += 1;
+                                    if($con['type'] == '上分' && $con['status'] != '已拒绝'){
+                                        $sf += $con['money'];
+                                    }elseif($con['type'] == '下分' && $con['status'] != '已拒绝'){
+                                        $xf += $con['money'];
+                                    }
+                            ?>
+                            <tr>
+                                <td>
+                                    <? echo $con['id']; ?>
+                                </td>
+                                <td><img src="<? echo $con['headimg']; ?>" width="30" height="30"></td>
+                                <td>
+                                    <? echo $con['username']; ?>
+                                </td>
+                                <td>
+                                    <? echo $con['userid']; ?>
+                                </td>
+                                <td>
+                                    <? echo $con['type']; ?>
+                                </td>
+                                <td>
+                                    <? echo $con['money']; ?>
+                                </td>
+                                <td>
+                                    <? echo $con['status']; ?>
+                                </td>
+                                <td>
+                                    <? echo $con['time']; ?>
+                                </td>
+                            </tr>
+                            <? } ?>
+                    </tbody>
+                    <tbody>
+                        <tr style="background-color:#f6fcff;font-weight:bold;font-size:12px;">
+                            <td>全部合计:</td>
+                            <td>--</td>
+                            <td>上分总人数:</td>
+                            <td>
+                                <? echo $people; ?>人</td>
+                            <td>上分总金额:</td>
+                            <td>
+                                <? echo $sf; ?>元</td>
+                            <td>下分总金额:</td>
+                            <td>
+                                <? echo $xf; ?>元</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="overlay" id="loading">
+                <i class="fa fa-refresh fa-spin"></i>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script src="plugins/daterangepicker/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $('#daterange').daterangepicker({
+            timePicker: true, //是否显示小时分钟
+            timePickerIncrement: 60, //时间增量
+            timePicker24Hour: true, //显示月框
+            showDropdowns: true,
+            dateLimit: {
+                days: 60
+            }, //起止时间的最大间隔 
+            opens: 'right',
+            locale: {
+                applyLabel: "确定",
+                cancelLabel: "取消",
+                daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+                monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                format: 'YYYY/MM/DD'
+            }
+        });
+        $('#tableList').DataTable();
+        $('#loading').remove();
+    });
+
+    function start(){
+        window.location.href = 'index.php?m=report&r=up';
+    }
+
+    function search() {
+        var user = $('#searchuser').val();
+        var type = $('#searchtype option:selected').val();
+        var time = $('#daterange').val();
+
+        window.location.href="index.php?m=report&r=up&time=" + time + "&user=" + user + "&type=" + type;
+    }
+
+</script>

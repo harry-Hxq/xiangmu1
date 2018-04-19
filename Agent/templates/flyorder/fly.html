@@ -1,0 +1,371 @@
+<?php
+    if(($version != "尊享版") && ($version != "飞单版")){
+        require 'templates/versionerr.html';
+        exit();
+    }
+    $agent = get_query_val('fn_room','`agent`',array('roomid'=>$_SESSION['agent_room']));
+?>
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="plugins/iCheck/all.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      飞单设置<small>Flyorder Setting</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> 控制台</a></li>
+      <li><a href="#"> 飞单系统</a></li>
+      <li class="active">飞单设置</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+	<?php
+		if(strpos($_SESSION['agent_user'],'jf') !== false || strpos($agent,'jf') !== false){
+	?>
+		<!--a href="http://df6800.com/regad/regmem/feiniao" target="_blank"><img src="/Style/images/banner/jufu.gif" alt="jufu" width="100%"></a-->
+    <?php
+      }else{ //如果是fn的客户 则显示全部广告
+    ?>
+    <span>
+      <!--<a href="http://df6800.com/regad/regmem/feiniao" target="_blank"><img src="/Style/images/banner/esc.gif" alt="esc" width="49%"></a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="http://df6800.com/regad/regmem/feiniao" target="_blank"><img src="/Style/images/banner/esc.gif" alt="jinfu" width="49%"></a>-->
+    </span>
+    <?php
+      }
+    ?>
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title">设置</h3>
+
+        <div class="box-tools pull-right">
+          <button onclick="starttest()" class="btn btn-danger btn-sm">测试登陆</button>
+          <button onclick="formsum()" class="btn btn-primary btn-sm">保存设置</button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="alert alert-info alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h4><i class="icon fa fa-check"></i> 使用教程</h4>
+          为了确保飞单稳定,请您在开盘时务必保证<b>后台在最前端</b>并且网络<b>没有掉线</b>!<br>
+          如果您有需要的盘口,可以提交给我们进行开发 :-)
+        </div>
+          <?
+            $sql = get_query_vals('fn_setting','*',array('roomid'=>$_SESSION['agent_room']));
+
+          ?>
+        <form id="form" action="Application/ajax_flyorder.php?t=save" method="post">
+          <div class="form-group">
+            <label>
+              <input type="radio" name="true" value="false" class="flat-red" <? if($sql['setting_flyorder'] == 'false') echo 'checked'; ?>>
+              关闭飞单
+            </label> &nbsp;&nbsp;
+            <label>
+              <input type="radio" name="true" value="true" class="flat-red" <? if($sql['setting_flyorder'] == 'true') echo 'checked'; ?>>
+              开启飞单
+            </label> &nbsp;&nbsp;
+            <label class="pull-right">
+              飞单游戏:&nbsp;&nbsp;&nbsp;&nbsp;
+              <label>
+                <input type="checkbox" name="flypk10" class="flat-red" <? if($sql['flyorder_pk10'] == 'true') echo 'checked'; ?>>
+                北京赛车
+              </label> &nbsp;&nbsp;
+              <label>
+                <input type="checkbox" name="flyxyft" class="flat-red" <? if($sql['flyorder_xyft'] == 'true') echo 'checked'; ?>>
+                幸运飞艇
+              </label> &nbsp;&nbsp;
+              <label>
+                <input type="checkbox" name="flycqssc" class="flat-red" <? if($sql['flyorder_cqssc'] == 'true') echo 'checked'; ?>>
+                重庆时时彩
+              </label> &nbsp;&nbsp;|&nbsp;&nbsp;
+              <label>
+                <input type="checkbox" name="flyduichong" class="flat-red" <? if($sql['flyorder_duichong'] == 'true') echo 'checked'; ?>>
+                对冲飞盘
+              </label>
+            </label>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">盘口类型</span>
+            <select onchange="selecttype()" id="flytype" name="flytype" class="form-control select2">
+              <option value="-1">请选择飞单平台..</option>
+            <?php
+              if(strpos($agent,'jf') !== false || strpos($_SESSION['agent_user'],'jf') !== false){
+            ?>
+              <option value="jufu" <? if($sql['flyorder_type'] == "jufu"){ echo 'selected'; } ?>>聚富彩票网</option>
+            <?php    
+              }elseif(strpos($agent,'dafeng') !== false || strpos($_SESSION['agent_user'],'dafeng') !== false){
+            ?>
+              <option value="dafeng" <? if($sql['flyorder_type'] == "dafeng"){ echo 'selected'; } ?>>大豐彩票网</option>
+            <?php    
+              }elseif(strpos($agent,'188cp') !== false  || strpos($_SESSION['agent_user'],'188cp') !== false){
+            ?>
+              <option value="188cp" <? if($sql['flyorder_type'] == "188cp"){ echo 'selected'; } ?>>188彩票网</option>
+            <?php    
+              }elseif(strpos($agent,'dy') !== false  || strpos($_SESSION['agent_user'],'dy') !== false){ //毒药专用
+            ?>
+              <option value="SGold" <? if($sql['flyorder_type'] == "SGold"){ echo 'selected'; } ?>>新世纪信誉盘</option>
+            <?php    
+              }else{
+            ?>
+              <option value="guangda" <? if($sql['flyorder_type'] == "guangda"){ echo 'selected'; } ?>>光大彩票网</option>
+              <option value="jinfu" <? if($sql['flyorder_type'] == "jinfu"){ echo 'selected'; } ?>>金福彩票网</option>
+              <option value="esc" <? if($sql['flyorder_type'] == "esc"){ echo 'selected'; } ?>>易时彩彩票网</option>
+              <option value="jufu" <? if($sql['flyorder_type'] == "jufu"){ echo 'selected'; } ?>>聚富彩票网</option>
+              <option value="88cp" <? if($sql['flyorder_type'] == "88cp"){ echo 'selected'; } ?>>88彩票网</option>
+              <option value="188cp" <? if($sql['flyorder_type'] == "188cp"){ echo 'selected'; } ?>>188彩票网</option>
+              <option value="dafeng" <? if($sql['flyorder_type'] == "dafeng"){ echo 'selected'; } ?>>大豐彩票网</option>
+              <option value="SGold" <? if($sql['flyorder_type'] == "SGold"){ echo 'selected'; } ?>>SGWin1 - 网址自定义</option>
+              <option value="SG2" <? if($sql['flyorder_type'] == "SG2"){ echo 'selected'; } ?>>SGWin2 - 网址自定义</option>
+				<option value="IDC1" <? if($sql['flyorder_type'] == "IDC1"){ echo 'selected'; } ?>>IDC1 - 网址自定义</option>
+              <!--option value="dafa" <? if($sql['flyorder_type'] == "dafa"){ echo 'selected'; } ?>>大发彩票网</option>
+              <option value="ali">阿莉彩票网</option>
+              -->
+            <?
+              }
+            ?>
+            </select>
+          </div>
+          <br/>
+          <div class="input-group" id="flysite_i" style="display:none">
+            <span class="input-group-addon">飞单网址</span>
+            <input type="text" name="flysite" id="flysite" value="<? if($sql['flyorder_site'] != ""){ echo $sql['flyorder_site']; }else{ echo '请选择盘口..'; } ?>" class="form-control">
+          </div>
+
+          <div class="input-group" id="flysite_s">
+            <span class="input-group-addon">飞单网址</span>
+            <select id="flysite_select" name="flysite_select" class="form-control select2">
+                
+            </select>
+          </div>
+          <br/>
+          <div class="input-group">
+            <span class="input-group-addon">盘口账号</span>
+            <input class="form-control" name="flyuser" id="flyuser" value="<? echo $sql['flyorder_user']; ?>" type="text" placeholder="输入您的盘口账号">
+          </div>
+          <br/>
+          <div class="input-group">
+            <span class="input-group-addon">盘口密码</span>
+            <input class="form-control" name="flypass" id="flypass" value="<? echo $sql['flyorder_pass']; ?>" type="password" placeholder="输入您的盘口密码">
+          </div>
+          <br/>
+          <div class="input-group" id="vcode" style="display:<? if($sql['flyorder_type'] != 'SGold' && $sql['flyorder_type'] != 'esc' && $sql['flyorder_type'] != 'SG2') echo 'none'; ?>">
+            <span class="input-group-addon">验证码</span>
+            <input class="form-control" name="flycode" id="flycode" type="number" placeholder="输入验证码">
+            <span class="input-group-addon"><a href="javascript:getcode();" id="vcodeimgspan">点击加载</a><a href="javascript:getcode();"><img id="vcodeimg" style="display:none" width="50" height="20"></a></span>
+          </div>
+          <br/>
+        </form>
+        <div class="box box-info">
+          <div class="box-body">
+            <div class="input-group">
+              <span class="input-group-addon">盘口账号</span>
+              <input class="form-control" name="testuser" id="testuser" type="text" placeholder="等待测试登录..." disabled>
+            </div>
+            <br/>
+            <div class="input-group">
+              <span class="input-group-addon">用户余额</span>
+              <input class="form-control" type="number" name="testmoney" id="testmoney" placeholder="等待测试登录..." disabled>
+            </div>
+            <br/>
+            <div class="input-group">
+              <span class="input-group-addon">未结算金额</span>
+              <input class="form-control" type="text" name="weijiemoney" id="weijiemoney" placeholder="等待测试登录..." disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay" style="display:none" id="loading">
+        <i class="fa fa-refresh fa-spin"></i>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- iCheck 1.0.1 -->
+<script src="plugins/iCheck/icheck.min.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/select2.full.min.js"></script>
+<script src="plugins/select2/i18n/zh-CN.js"></script>
+<script>
+  var iscustom = false;
+  var usedomain = "<? echo $sql['flyorder_site']; ?>";
+  $(function () {
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass: 'iradio_flat-green'
+    });
+    $('.select2').select2({
+      language: 'zh-CN'
+    });
+    selecttype();
+  })
+
+  function selecttype(){
+    var type = $('#flytype option:selected').val();
+
+    switch(type){
+      case 'SGold': case'SG2': case'IDC2':
+        $('#flysite_select').html('');
+        $('#vcode').css('display','');
+        $('#flysite_i').css('display','');
+        $('#flysite_s').css('display','none');
+        iscustom = true;
+        break;
+      case 'esc':
+        $('#flysite').val('');
+        $('#vcode').css('display','');
+        $('#flysite_s').css('display','');
+        $('#flysite_i').css('display','none');
+        iscustom = false;
+        loaddomain(type);
+        break;
+      case 'IDC1':
+        $('#flysite_select').html('');
+        $('#vcode').css('display','');
+        $('#flysite_i').css('display','');
+        $('#flysite_s').css('display','none');
+        iscustom = false;
+        loaddomain(type);
+        break;
+      default:
+        $('#flysite').val('');
+        $('#flysite_s').css('display','');
+        $('#vcode').css('display','none');
+        $('#flysite_i').css('display','none');
+        iscustom = false;
+        loaddomain(type);
+        break;
+    }
+  }
+
+  function loaddomain(type){
+    var domain = new Array();
+
+    switch(type){
+      case 'guangda':
+        domain[0] = "http://gdcp188.com";
+        domain[1] = "http://gdcp99.com";
+        domain[2] = "http://gdcp44.com";
+        domain[3] = "http://103.70.224.156";
+        domain[4] = "http://103.70.224.152";
+        break;
+      case 'jinfu':
+        domain[0] = "https://jf8800.com";
+        domain[1] = "https://jf8811.com";
+        break;
+      case 'esc':
+        domain[0] ="http://esc333.com";
+        domain[1] ="http://esc444.com";
+        domain[2] ="http://esc555.com";
+        domain[3] ="http://esc666.com";
+        break;
+      case 'jufu':
+        domain[0] = "http://www.555456.com";
+        domain[1] = "http://www.555654.com";
+        domain[2] = "https://www.nn888.com";
+        domain[3] = "https://www.mm888.com";
+        break;
+      case '88cp':
+        domain[0] = "http://www.888543.com";
+        domain[1] = "http://www.666266.com";
+        domain[2] = "http://www.666366.com";
+        domain[3] = "https://www.222765.com";
+        domain[4] = "https://www.333765.com";
+        break;
+      case '188cp':
+        domain[0] = "http://www.18866cp.com/";
+        domain[1] = "http://188cp7.com/";
+        break;
+      case 'dafeng':
+        domain[0] ="http://df6801.com";
+        domain[1] ="http://df6802.com";
+        domain[2] ="http://df6803.com";
+        domain[3] ="http://df6804.com";
+        break;
+    }
+    var str="";
+    for(var i=0;i<domain.length;i++){
+      if(domain[i] == usedomain){
+        str += "<option value=\"" + domain[i] + "\" selected>" + domain[i] + "</option>";
+        continue;
+      }
+      str += "<option value=\"" + domain[i] + "\">" + domain[i] + "</option>";
+    }
+    $('#flysite_select').html(str);
+
+  }
+
+  function formsum(){
+    if($('#flytype option:selected').val() == '-1'){
+      alert('请选择飞单平台..');
+      return;
+    }
+    if($('#flyuser').val() == ''){
+      alert('请输入平台账号');
+      return;
+    }
+    if($('#flypass').val() == ''){
+      alert('请输入平台密码');
+      return;
+    }
+    $('#flysite').removeAttr('disabled');
+    $('#form').submit();
+  }
+
+  function starttest(){
+    var type = $('#flytype option:selected').val();
+    if(iscustom){
+      var site = $('#flysite').val();
+    }else{
+      var site = $('#flysite_select option:selected').val();
+    }
+    var user = $('#flyuser').val();
+    var pass = $('#flypass').val();
+    var code = $('#flycode').val();
+    
+    $('#loading').css('display','block');
+
+    $.ajax({
+      url: 'Application/ajax_flyorder.php?t=test',
+      data: {type: type,site: site,user: user,pass: pass, code: code},
+      dataType: 'json',
+      type: 'post',
+      success: function( data ){
+        if(data.success){
+          alert('登陆成功..');
+          $('#testuser').val(user);
+          $('#testmoney').val(data.money);
+          $('#weijiemoney').val(data.weijie)
+          $('#loading').css('display','none');
+        }else{
+          alert(data.msg);
+          $('#loading').css('display','none');
+        }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) { }
+    });
+  }
+
+  function getcode(){
+    var type = $('#flytype option:selected').val();
+    var site = $('#flysite').val();
+
+    $.post('Application/ajax_flyorder.php?t=getcode',{type:type, site:site},function(data){
+      if(data.success){
+        $('#vcodeimgspan').css('display','none');
+        console.log(data.code);
+        $('#vcodeimg').attr('src',data.code);
+        $('#vcodeimg').css('display','');
+      }else{
+         $('#vcodeimgspan').text('加载失败')
+      }
+    },'json');
+  }
+</script>

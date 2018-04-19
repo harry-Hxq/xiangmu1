@@ -1,0 +1,214 @@
+<link rel="stylesheet" href="plugins/iCheck/all.css">
+<link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            系统设置
+            <small>在这里设置属于你的系统</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 仪表盘</a></li>
+            <li class="active">系统设置</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <h3 class="box-title">系统设置</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" onclick="$('#form1').submit();" class="btn btn-sm btn-danger">保存</button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form id="form1" enctype='multipart/form-data' action="Application/ajax_savesetting.php?form=form1" method="post">
+                    <div class="form-group">
+                        <label>
+                        <input type="checkbox" name="betOK" class="minimal-red" <? if(get_query_val('fn_setting','setting_tishi',array('roomid'=>$_SESSION['agent_room'])) == 'open') echo 'checked'; ?> >
+                            下注成功提示
+                        </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                        <input type="checkbox" name="cancelBet" class="minimal-red" <? if(get_query_val('fn_setting','setting_cancelbet',array('roomid'=>$_SESSION['agent_room'])) == 'open') echo 'checked'; ?>>
+                            禁止撤单/取消
+                        </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                        <input type="checkbox" name="isChat" class="minimal-red" <? if(get_query_val('fn_setting','setting_ischat',array('roomid'=>$_SESSION['agent_room'])) == 'open') echo 'checked'; ?>>
+                            禁止聊天
+                        </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="form-group">
+                        <label>栏目设置:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <label>
+                        <input type="checkbox" name="display_custom" class="minimal-red" <? if(get_query_val('fn_setting','display_custom',array('roomid'=>$_SESSION['agent_room'])) == 'true') echo 'checked'; ?>>
+                            显示客服栏
+                        </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                        <input type="checkbox" name="display_extend" class="minimal-red" <? if(get_query_val('fn_setting','display_extend',array('roomid'=>$_SESSION['agent_room'])) == 'true') echo 'checked'; ?>>
+                            显示推广栏
+                        </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                        <input type="checkbox" name="display_plan" class="minimal-red" <? if(get_query_val('fn_setting','display_plan',array('roomid'=>$_SESSION['agent_room'])) == 'true') echo 'checked'; ?>>
+                            显示长龙/计划栏
+                        </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                        <input type="checkbox" name="display_game" class="minimal-red" <? if(get_query_val('fn_setting','display_game',array('roomid'=>$_SESSION['agent_room'])) == 'true') echo 'checked'; if($version != '会员版' && $version != '尊享版') echo 'disabled'?>>
+                            显示游戏导航
+                        </label>
+                        <p class="help-block"><i class="icon fa fa-warning"></i> 设置左侧菜单栏目,打钩为显示,不打钩为关闭</p>
+                    </div>
+                    <div class="form-group">
+                        <label>房间名称</label>
+                        <input type="text" name="roomname" class="form-control" value="<? echo get_query_val('fn_room','roomname',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                            placeholder="输入房间名称 ...">
+                    </div>
+                    <div class="form-group">
+                        <label>人数基数</label>
+                        <input type="text" name="people" class="form-control" value="<? echo get_query_val('fn_setting','setting_people',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                            placeholder="在线人数基数(人数基数 + 机器人数 + 用户数 = 在线人数) ...">
+                    </div>
+                    <div class="form-group">
+                        <label>屏蔽关键字</label>
+                        <input type="text" name="wordkeys" class="form-control" value="<? echo get_query_val('fn_setting','setting_wordkeys',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                            placeholder="| 号分割  用户包含设置内容 将无法发送">
+                    </div>
+                    <div class="form-group">
+                        <label>视频文字</label>
+                        <input type="text" name="videoword" class="form-control" value="<? echo get_query_val('fn_setting','setting_video',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                            placeholder="显示在开奖视频上的文字">
+                    </div>
+                    <div class="form-group">
+                        <label>首进游戏</label>
+                        <select class="form-control" name="settinggame">
+                            <? $game = get_query_val('fn_setting','setting_game',array('roomid'=>$_SESSION['agent_room'])); ?>
+                            <option value="pk10" <? if($game == 'pk10') echo 'selected'?>>北京赛车</option>
+                            <option value="xyft" <? if($game == 'xyft') echo 'selected'?>>幸运飞艇</option>
+                            <option value="xy28" <? if($game == 'xy28') echo 'selected'?>>幸运28</option>
+                            <option value="jnd28" <? if($game == 'jnd28') echo 'selected'?>>加拿大28</option>
+                            <option value="cqssc" <? if($game == 'cqssc') echo 'selected'?>>重庆时时彩</option>
+                            <option value="jsmt" <? if($game == 'jsmt') echo 'selected'?>>极速摩托</option>
+                            <option value="jssc" <? if($game == 'jssc') echo 'selected'?>>极速赛车</option>
+                            <option value="jsssc" <? if($game == 'jsssc') echo 'selected'?>>极速时时彩</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">消息1 设置</span>
+                                <input name="msg1_time" type="number" class="form-control" value="<? echo get_query_val('fn_setting','msg1_time',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                                    placeholder="消息1 发送时间...">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">消息2 设置</span>
+                                <input name="msg2_time" type="number" class="form-control" value="<? echo get_query_val('fn_setting','msg2_time',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                                    placeholder="消息2 发送时间...">
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">消息3 设置</span>
+                                <input name="msg3_time" type="number" class="form-control" value="<? echo get_query_val('fn_setting','msg3_time',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                                    placeholder="消息3 发送时间...">
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="col-md-8">
+                            <input name="msg1_cont" type="text" class="form-control" value="<? echo get_query_val('fn_setting','msg1_cont',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                                placeholder="消息1 发送内容...">
+                            <br/>
+                            <input name="msg2_cont" type="text" class="form-control" value="<? echo get_query_val('fn_setting','msg2_cont',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                                placeholder="消息2 发送内容...">
+                            <br/>
+                            <input name="msg3_cont" type="text" class="form-control" value="<? echo get_query_val('fn_setting','msg3_cont',array('roomid'=>$_SESSION['agent_room'])); ?>"
+                                placeholder="消息3 发送内容...">
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?
+                            $domain = get_query_val('fn_setting','setting_qrcode',array('roomid'=>$_SESSION['agent_room']));
+                            if($domain != ""){
+                        ?>
+                            <img src="<? echo $domain; ?>" style="float:right;width:75px;height:75px;">
+                            <?
+                            }
+                        ?>
+                                <label for="exampleInputFile">客服二维码</label>
+                                <input type="file" name="qrcode" accept="image/*">
+                                <p class="help-block">上传您的客服二维码 将会在主页弹出</p>
+                    </div>
+                    <div class="form-group">
+                        <?
+                            $domain = get_query_val('fn_setting','setting_robotsimg',array('roomid'=>$_SESSION['agent_room']));
+                            if($domain != ""){
+                        ?>
+                            <img src="<? echo $domain; ?>" style="float:right;width:75px;height:75px;">
+                            <?
+                            }
+                        ?>
+                                <label for="exampleInputFile">机器人头像</label>
+                                <input type="file" name="robotimg" accept="image/x-png,image/gif,image/jpeg,image/bmp">
+                                <p class="help-block">如不上传 将会显示默认头像</p>
+                    </div>
+                    <div class="form-group">
+                        <?
+                            $domain = get_query_val('fn_setting','setting_sysimg',array('roomid'=>$_SESSION['agent_room']));
+                            if($domain != ""){
+                        ?>
+                            <img src="<? echo $domain; ?>" style="float:right;width:75px;height:75px;">
+                            <?
+                            }
+                        ?>
+                                <label for="exampleInputFile">客服头像</label>
+                                <input type="file" name="customimg" accept="image/x-png,image/gif,image/jpeg,image/bmp">
+                                <p class="help-block">如不上传 将会显示默认头像</p>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-body -->
+        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">客服栏内容设置</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" onclick="$('#form3').submit();" class="btn btn-sm btn-success">保存</button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form id="form3" action="Application/ajax_savesetting.php?form=form3" method="post">
+                                <textarea name="customcont" class="textarea" placeholder="输入客服栏内容" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><? echo get_query_val('fn_setting','setting_kefu',array('roomid'=>$_SESSION['agent_room'])); ?></textarea>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- /.content -->
+</div>
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>
+<script src="plugins/bootstrap-wysihtml5/locale/zh-CN.js"></script>
+<script>
+    $(".textarea").wysihtml5({
+        locale: 'zh-CN',
+        toolbar: {
+            'html': true,
+            'color': true
+        }
+    });
+    $('input[type="checkbox"].minimal-red').iCheck({
+        checkboxClass: 'icheckbox_minimal-red'
+    });
+
+</script>
