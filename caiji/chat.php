@@ -25,6 +25,8 @@ function fengpanSay($game_type,$table,$roomid,$term){
             $nameInfo .= $name.": [".$res."]<br />";
         }
         管理员喊话($term.'期下注核对：<br /> '.$nameInfo.'===============<br />以上未列出的.表示未下注<br /> 如封盘会提示封盘无效.<br /> 没有任何理由需要纠结.<br /> 包括系统遇突发事情时.', $roomid, $game_type);
+    }else{
+        管理员喊话('第 ' .$term. ' 期无人下注', $roomid, $game_type);
     }
 }
 
