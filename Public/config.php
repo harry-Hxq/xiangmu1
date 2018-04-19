@@ -8,7 +8,7 @@ include_once("sql.php");
 $console = "KP";
 $db['host'] = "localhost";
 $db['user'] = "root";
-$db['pass'] = "root";
+$db['pass'] = "harry123";
 $db['name'] = "xiangmu1";
 $dbconn = db_connect($db['host'], $db['user'], $db['pass'], $db['name']);
 $wx['ID'] = 'wx9c044f98156b8e20';
