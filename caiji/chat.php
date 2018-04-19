@@ -1,4 +1,6 @@
 <?php
+header("Content-type:text/html;charset=utf-8");
+date_default_timezone_set("Asia/Shanghai");
 include_once("../Public/config.php");
 function 管理员喊话($Content, $roomid, $game){
     $headimg = get_query_val('fn_setting', 'setting_robotsimg', array('roomid' => $roomid));
@@ -7,26 +9,37 @@ function 管理员喊话($Content, $roomid, $game){
 
 function fengpanSay($game_type,$table){
     $term = get_query_val('fn_open', 'next_term', "`type` = '1' order by `term` desc limit 1");
-//            管理员喊话('------已封盘,截止投注------<br>第' . get_query_val('fn_open', 'next_term', "`type` = '1' order by `term` desc limit 1") . '期投注已经结束<br>请耐心等待开奖<br>开奖视频结果出来后即可正常下注', $roomid, 'pk10');
     管理员喊话('第 ' .$term. ' 期,-----------------封盘----------------以下全接，不改不退，以上全部无效 已投注记录显示为准。', $roomid, 'pk10');
 
     // 下注核对
     select_query($table, '*', "roomid = '{$_SESSION['agent_room']}' and term = '{$term}'");
     $names = [];
     while($con = db_fetch_array()){
-        $names[$con['username']] += $con['content']."/".$con['money']." ";
+        $cons[] = $con;
     }
-    $nameInfo = '';
-    foreach ($names as $name => $res){
-        $nameInfo += $name.": [".$res."]<br />";
-    }
-    管理员喊话($term. '期下注核对：<br /> '.$nameInfo.'
+    var_dump($cons);
+    if(!empty($cons)){
+        foreach ($cons as $c){
+            $names[$c['username']] += $c['content']."/".$c['money']." ";
+        }
+        var_dump($names);
+        $nameInfo = '';
+        foreach ($names as $name => $res){
+            $nameInfo += $name.": [".$res."]<br />";
+        }
+        var_dump($nameInfo);
+        管理员喊话($term. '期下注核对：<br /> '.$nameInfo.'
                             ===============
                             以上未列出的.表示未下注<br /> 
                             如封盘会提示封盘无效.<br /> 
                             没有任何理由需要纠结.<br /> 
                             包括系统遇突发事情时.', $roomid, $game_type);
+    }
+
+
+
 }
+fengpanSay('cqssc','fn_order');
 
 $pkdjs = strtotime(get_query_val('fn_open', 'next_time', "`type` = '1' order by `term` desc limit 1")) - time();
 $xyftdjs = strtotime(get_query_val('fn_open', 'next_time', "`type` = '2' order by `term` desc limit 1")) - time();
@@ -194,7 +207,7 @@ foreach($cons as $con){
         }
         if($jssctime == $jsscdjs){
 //            管理员喊话('------已封盘,截止投注------<br>第' . get_query_val('fn_open', 'next_term', "`type` = '7' order by `term` desc limit 1") . '期投注已经结束<br>请耐心等待开奖<br>开奖视频结果出来后即可正常下注', $roomid, 'jssc');
-            fengpanSay('xyft','fn_jsscorder');
+            fengpanSay('jssc','fn_jsscorder');
         }
         if($msg1_cont != "" && $jsscdjs == $msg1){
             管理员喊话($msg1_cont, $roomid, 'jssc');
@@ -212,7 +225,7 @@ foreach($cons as $con){
         }
         if($jsssctime == $jssscdjs){
 //            管理员喊话('------已封盘,截止投注------<br>第' . get_query_val('fn_open', 'next_term', "`type` = '8' order by `term` desc limit 1") . '期投注已经结束<br>请耐心等待开奖<br>开奖视频结果出来后即可正常下注', $roomid, 'jsssc');
-            fengpanSay('xyft','fn_jssscorder');
+            fengpanSay('jsssc','fn_jssscorder');
         }
         if($msg1_cont != "" && $jssscdjs == $msg1){
             管理员喊话($msg1_cont, $roomid, 'jsssc');
@@ -232,11 +245,11 @@ echo "系统当前时间戳为 ";
 echo "";
 echo time();
 //<!--JS 页面自动刷新 -->
-// echo ("<script type=\"text/javascript\">");
-// echo ("function fresh_page()");    
-// echo ("{");
-// echo ("window.location.reload();");
-// echo ("}"); 
-// echo ("setTimeout('fresh_page()',1000);");      
-// echo ("</script>");
+ echo ("<script type=\"text/javascript\">");
+ echo ("function fresh_page()");
+ echo ("{");
+ echo ("window.location.reload();");
+ echo ("}");
+ echo ("setTimeout('fresh_page()',1000);");
+ echo ("</script>");
 ?>
