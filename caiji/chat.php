@@ -18,7 +18,7 @@ function fengpanSay($game_type,$table,$roomid,$term){
     }
     if(!empty($cons)){
         foreach ($cons as $c){
-            $names[$c['username']] .= $c['content']."/".$c['money']." ";
+            $names[$c['username']] .= $c['mingci']."/".$c['content']."/".$c['money']." ";
         }
         $nameInfo = '';
         foreach ($names as $name => $res){
@@ -26,9 +26,6 @@ function fengpanSay($game_type,$table,$roomid,$term){
         }
         管理员喊话($term.'期下注核对：<br /> '.$nameInfo.'===============<br />以上未列出的.表示未下注<br /> 如封盘会提示封盘无效.<br /> 没有任何理由需要纠结.<br /> 包括系统遇突发事情时.', $roomid, $game_type);
     }
-
-
-
 }
 
 $pkdjs = strtotime(get_query_val('fn_open', 'next_time', "`type` = '1' order by `term` desc limit 1")) - time();
