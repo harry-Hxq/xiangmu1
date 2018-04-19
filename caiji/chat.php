@@ -54,6 +54,10 @@ while($con = db_fetch_array()){
 }
 foreach($cons as $con){
     $roomid = $con['roomid'];
+
+    $term = get_query_val('fn_open', 'next_term', "`type` = '8' order by `term` desc limit 1");
+    fengpanSay('jsssc','fn_jssscorder',$roomid,$term);
+
     $pk10open = get_query_val('fn_lottery1', 'gameopen', array('roomid' => $roomid)) == 'true' ? true : false;
     $xyftopen = get_query_val('fn_lottery2', 'gameopen', array('roomid' => $roomid)) == 'true' ? true : false;
     $cqsscopen = get_query_val('fn_lottery3', 'gameopen', array('roomid' => $roomid)) == 'true' ? true : false;
@@ -138,7 +142,7 @@ foreach($cons as $con){
         if($cqssctime == $cqsscdjs){
             $term = get_query_val('fn_open', 'next_term', "`type` = '3' order by `term` desc limit 1");
 //            管理员喊话('------已封盘,截止投注------<br>第' . get_query_val('fn_open', 'next_term', "`type` = '3' order by `term` desc limit 1") . '期投注已经结束<br>请耐心等待开奖<br>开奖视频结果出来后即可正常下注', $roomid, 'cqssc');
-            fengpanSay('xyft','fn_sscorder',$roomid,$term);
+            fengpanSay('cqssc','fn_sscorder',$roomid,$term);
         }
         if($msg1_cont != "" && $cqsscdjs == $msg1){
             管理员喊话($msg1_cont, $roomid, 'cqssc');
@@ -191,7 +195,7 @@ foreach($cons as $con){
         if($jsmttime == $jsmtdjs){
             $term = get_query_val('fn_open', 'next_term', "`type` = '6' order by `term` desc limit 1");
 //            管理员喊话('------已封盘,截止投注------<br>第' . get_query_val('fn_open', 'next_term', "`type` = '6' order by `term` desc limit 1") . '期投注已经结束<br>请耐心等待开奖<br>开奖视频结果出来后即可正常下注', $roomid, 'jsmt');
-            fengpanSay('xyft','fn_mtorder',$roomid,$term);
+            fengpanSay('jsmt','fn_mtorder',$roomid,$term);
         }
         if($msg1_cont != "" && $jsmtdjs == $msg1){
             管理员喊话($msg1_cont, $roomid, 'jsmt');
