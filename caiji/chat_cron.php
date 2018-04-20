@@ -33,7 +33,7 @@ $do = true;
 $sleepTime = 1;
 $keys = 0;
 while ($do){
-    sleep(0.7);
+    sleep(1);
     echo date("Y-m-d H:i:s")." chat "."\n";
     appLog(date("Y-m-d H:i:s")."\n","chat");
 
