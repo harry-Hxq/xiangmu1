@@ -1,7 +1,9 @@
 <?php
-//header("Content-type:text/html;charset=utf-8");
+set_time_limit(0);
+ignore_user_abort(true);
+header("Content-type:text/html;charset=utf-8");
 date_default_timezone_set("Asia/Shanghai");
-include_once(dirname(__FILE__)."../Public/config.php");
+include_once("../Public/config.php");
 function 管理员喊话($Content, $roomid, $game){
     $headimg = get_query_val('fn_setting', 'setting_robotsimg', array('roomid' => $roomid));
     insert_query("fn_chat", array("username" => "机器人", "headimg" => $headimg, 'content' => $Content, 'addtime' => date('H:i:s'), 'type' => 'S3', 'userid' => 'system', 'game' => $game, 'roomid' => $roomid));
@@ -32,8 +34,8 @@ $sleepTime = 1;
 $keys = 0;
 while ($do){
     sleep(0.7);
-    echo date("Y-m-d H:i:s")."\n";
-    appLog(date("Y-m-d H:i:s")."\n");
+    echo date("Y-m-d H:i:s")." chat "."\n";
+    appLog(date("Y-m-d H:i:s")."\n","chat");
 
     $pkdjs = strtotime(get_query_val('fn_open', 'next_time', "`type` = '1' order by `term` desc limit 1")) - time();
     $xyftdjs = strtotime(get_query_val('fn_open', 'next_time', "`type` = '2' order by `term` desc limit 1")) - time();
@@ -219,6 +221,7 @@ while ($do){
             }
         }
         if($jssscopen){
+
             if($jsssctime + 30 == $jssscdjs){
                 管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'jsssc');
             }

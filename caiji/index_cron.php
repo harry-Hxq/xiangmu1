@@ -1,10 +1,12 @@
 <?php
+set_time_limit(0);
+ignore_user_abort(true);
 $load = 5;
-//header("Content-type:text/html;charset=utf-8");
+header("Content-type:text/html;charset=utf-8");
 date_default_timezone_set("Asia/Shanghai");
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-include_once dirname(__FILE__)."../Public/config.php";
-require dirname(__FILE__)."/jiesuan.php";
+include_once "../Public/config.php";
+require "jiesuan.php";
 if($_GET['t'] == 'test'){
     SSC_jiesuan();
     exit;
@@ -15,6 +17,8 @@ $sleepTime = 1;
 $keys = 0;
 $url = "http://api.woaizy.com/chatkj.php";
 while ($do) {
+    appLog(date("Y-m-d H:i:s")."index"."\n","index");
+    echo date("Y-m-d H:i:s")."\n";
     sleep(4);
     $json = file_get_contents($url);
     $jsondata = json_decode($json);
