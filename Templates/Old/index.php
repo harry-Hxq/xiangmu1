@@ -1,10 +1,10 @@
 <?php include_once(dirname(dirname(dirname(preg_replace('@\(.*\(.*$@', '', __FILE__)))) . "/Public/config.php");
 $sql = get_query_vals('fn_setting', '*', array('roomid' => $_SESSION['roomid']));
-if($_POST['g'] == '' && $_GET['g'] == ''){
+if($_POST['g'] == ''){
     setcookie('game', $sql['setting_game'], time() + 36000000);
     $_COOKIE['game'] = $sql['setting_game'];
 }else{
-    $g = $_POST['g'] ? $_POST['g'] : $_GET['g'];
+    $g = $_POST['g'];
     $version = get_query_val('fn_room', 'version', array('roomid' => $_SESSION['roomid']));
     if($version != '会员版' && $version != '尊享版'){
         echo '<center><strong style="color:red;font-size:150px">不支持此功能</strong></center>';

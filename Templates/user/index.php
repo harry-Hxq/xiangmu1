@@ -135,5 +135,5 @@ $info = getinfo($_SESSION['userid']);
     </div>
 
     </div>
-
+</body>
 </html>
