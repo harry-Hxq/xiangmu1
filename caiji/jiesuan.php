@@ -658,164 +658,164 @@ function JSSSC_jiesuan(){
         }
         if($zym_1 == '总'){
             if($zym_8 == '大' && $zong > 22){
-                $peilv = get_query_val('fn_lottery3', 'zongda', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'zongda', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '小' && $zong < 23){
-                $peilv = get_query_val('fn_lottery3', 'zongxiao', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'zongxiao', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '单' && $zong % 2 != 0){
-                $peilv = get_query_val('fn_lottery3', 'zongdan', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'zongdan', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '双' && $zong % 2 == 0){
-                $peilv = get_query_val('fn_lottery3', 'zongshuang', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'zongshuang', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '龙' && $codes[0] > $codes[4]){
-                $peilv = get_query_val('fn_lottery3', '`long`', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', '`long`', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '虎' && $codes[0] < $codes[4]){
-                $peilv = get_query_val('fn_lottery3', 'hu', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'hu', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '和' && $codes[0] == $codes[4]){
-                $peilv = get_query_val('fn_lottery3', 'he', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'he', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }else{
                 $zym_11 = '-' . $zym_7;
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }
             continue;
         }
         if($zym_1 == '前三'){
             if($zym_8 == '豹子' && $zym_2['豹子'] == true){
-                $peilv = get_query_val('fn_lottery3', 'q_baozi', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'q_baozi', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '顺子' && $zym_2['顺子'] == true){
-                $peilv = get_query_val('fn_lottery3', 'q_shunzi', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'q_shunzi', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '对子' && $zym_2['对子'] == true){
-                $peilv = get_query_val('fn_lottery3', 'q_duizi', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'q_duizi', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '半顺' && $zym_2['半顺'] == true){
-                $peilv = get_query_val('fn_lottery3', 'q_banshun', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'q_banshun', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '杂六' && $zym_2['杂六'] == true){
-                $peilv = get_query_val('fn_lottery3', 'q_zaliu', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'q_zaliu', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }else{
                 $zym_11 = '-' . $zym_7;
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }
             continue;
         }
         if($zym_1 == '中三'){
             if($zym_8 == '豹子' && $zym_3['豹子'] == true){
-                $peilv = get_query_val('fn_lottery3', 'z_baozi', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'z_baozi', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '顺子' && $zym_3['顺子'] == true){
-                $peilv = get_query_val('fn_lottery3', 'z_shunzi', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'z_shunzi', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '对子' && $zym_3['对子'] == true){
-                $peilv = get_query_val('fn_lottery3', 'z_duizi', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'z_duizi', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '半顺' && $zym_3['半顺'] == true){
-                $peilv = get_query_val('fn_lottery3', 'z_banshun', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'z_banshun', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '杂六' && $zym_3['杂六'] == true){
-                $peilv = get_query_val('fn_lottery3', 'z_zaliu', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'z_zaliu', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }else{
                 $zym_11 = '-' . $zym_7;
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }
             continue;
         }
         if($zym_1 == '后三'){
             if($zym_8 == '豹子' && $zym_4['豹子'] == true){
-                $peilv = get_query_val('fn_lottery3', 'h_baozi', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'h_baozi', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '顺子' && $zym_4['顺子'] == true){
-                $peilv = get_query_val('fn_lottery3', 'h_shunzi', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'h_shunzi', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '对子' && $zym_4['对子'] == true){
-                $peilv = get_query_val('fn_lottery3', 'h_duizi', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'h_duizi', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '半顺' && $zym_4['半顺'] == true){
-                $peilv = get_query_val('fn_lottery3', 'h_banshun', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'h_banshun', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '杂六' && $zym_4['杂六'] == true){
-                $peilv = get_query_val('fn_lottery3', 'h_zaliu', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'h_zaliu', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }else{
                 $zym_11 = '-' . $zym_7;
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }
             continue;
@@ -823,38 +823,38 @@ function JSSSC_jiesuan(){
         if((int)$zym_1 > 0){
             $count = (int)$zym_1 - 1;
             if($zym_8 == '大' && (int)$codes[$count] > 4){
-                $peilv = get_query_val('fn_lottery3', 'da', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'da', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '小' && (int)$codes[$count] < 5){
-                $peilv = get_query_val('fn_lottery3', 'xiao', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'xiao', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '单' && (int)$codes[$count] % 2 != 0){
-                $peilv = get_query_val('fn_lottery3', 'dan', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'dan', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == '双' && (int)$codes[$count] % 2 == 0){
-                $peilv = get_query_val('fn_lottery3', 'shuang', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'shuang', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }elseif($zym_8 == $codes[$count]){
-                $peilv = get_query_val('fn_lottery3', 'tema', "`roomid` = '$roomid'");
+                $peilv = get_query_val('fn_lottery8', 'tema', "`roomid` = '$roomid'");
                 $zym_11 = $peilv * (int)$zym_7;
                 用户_上分($user, $zym_11, $roomid, $game, $term, $zym_1 . '/' . $zym_8 . '/' . $zym_7);
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }else{
                 $zym_11 = '-' . $zym_7;
-                update_query("fn_sscorder", array("status" => $zym_11), array('id' => $id));
+                update_query("fn_jssscorder", array("status" => $zym_11), array('id' => $id));
                 continue;
             }
             continue;
