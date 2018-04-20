@@ -534,7 +534,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 .open_form .sub_table thead tr { background-color: #ddd; }
 .open_form .sub_table tbody tr { }
 .open_form .sub_table tbody tr.line_row { background-color: #e8e8e8; }
-.open_form .sub_table tbody tr td { height: 25px; }
+.open_form .sub_table tbody tr td { height: 30px; }
 .open_form .sub_table th { border-bottom: 1px solid #e8e8e8; border-right: 1px solid #e8e8e8; height: 30px; line-height: 30px; font-size: 14px; }
 .open_form .sub_table th p { line-height: 18px; }
 .open_form .sub_table td { border-bottom: 1px solid #e8e8e8; border-right: 1px solid #e8e8e8; text-align: center; padding: 2px; }
