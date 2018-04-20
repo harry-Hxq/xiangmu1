@@ -180,7 +180,7 @@ if($qrcode == ""){
 			</li>
 		<?php }
 ?>
-            <li class="dh" data-id="xzhd"><a href="/Templates/Old/addpage/xzhd.php"><span>下注核对</span></a></li>
+            <li class="dh" data-id="logs"><span>下注核对</span></li>
             <li class="dh" data-id="lsjl"><a href="/Templates/Old/addpage/kjjl.php"><span>历史记录</span></a></li>
             <li class="dh" data-id="donghua"><span>动画</span></li>
             <li class="wz" data-id="wenzi"><span>走势</span></li>
