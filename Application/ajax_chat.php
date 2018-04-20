@@ -1,4 +1,5 @@
 <?php
+
 include_once("../Public/config.php");
 $type = $_GET['type'];
 $BetGame = $_COOKIE['game'];
@@ -107,6 +108,7 @@ case "send": $nickname = $_SESSION['username'];
         }else{
             $fengpan = false;
         }
+        appLog('jssc:'.$BetTerm.'--'.$time.'--'.$djs);
     }elseif($BetGame == 'jsssc'){
         $BetTerm = get_query_val('fn_open', 'next_term', "type = 8 order by term desc limit 1");
         $time = (int)get_query_val('fn_lottery8', 'fengtime');

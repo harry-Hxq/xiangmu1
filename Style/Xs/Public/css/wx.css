@@ -357,7 +357,7 @@ display:inline-block;float:clear;
 	font-size:30px;
 	text-shadow:1px 1px 1px #000;
 	border-radius:2rem;
-	line-height:1.5rem;
+	line-height:3.5rem;
 	background:rgba(0,0,0,.8);
 }
 .layui-m-layercont font,.tipfont{font-size: 40px !important; color: red;}
