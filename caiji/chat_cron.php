@@ -1,7 +1,7 @@
 <?php
 //header("Content-type:text/html;charset=utf-8");
 date_default_timezone_set("Asia/Shanghai");
-include_once("../Public/config.php");
+include_once(dirname(__FILE__)."../Public/config.php");
 function 管理员喊话($Content, $roomid, $game){
     $headimg = get_query_val('fn_setting', 'setting_robotsimg', array('roomid' => $roomid));
     insert_query("fn_chat", array("username" => "机器人", "headimg" => $headimg, 'content' => $Content, 'addtime' => date('H:i:s'), 'type' => 'S3', 'userid' => 'system', 'game' => $game, 'roomid' => $roomid));

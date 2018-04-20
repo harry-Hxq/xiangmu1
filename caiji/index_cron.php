@@ -3,8 +3,8 @@ $load = 5;
 //header("Content-type:text/html;charset=utf-8");
 date_default_timezone_set("Asia/Shanghai");
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-include_once "../Public/config.php";
-require "jiesuan.php";
+include_once dirname(__FILE__)."../Public/config.php";
+require dirname(__FILE__)."jiesuan.php";
 if($_GET['t'] == 'test'){
     SSC_jiesuan();
     exit;
