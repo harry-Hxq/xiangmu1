@@ -74,7 +74,7 @@ case "send": $nickname = $_SESSION['username'];
         }
     }elseif($BetGame == 'xy28'){
         $BetTerm = get_query_val('fn_open', 'next_term', "type = 4 order by term desc limit 1");
-        $time = (int)get_query_val('fn_lottery4', 'fengtime');
+        $time = (int)get_query_val('fn_lottery4', 'fengtime', array('roomid' => $_SESSION['roomid']));
         $djs = strtotime(get_query_val('fn_open', 'next_time', 'type = 4 order by term desc limit 1')) - time();
         if($djs < $time){
             $fengpan = true;
@@ -83,7 +83,7 @@ case "send": $nickname = $_SESSION['username'];
         }
     }elseif($BetGame == 'jnd28'){
         $BetTerm = get_query_val('fn_open', 'next_term', "type = 5 order by term desc limit 1");
-        $time = (int)get_query_val('fn_lottery5', 'fengtime');
+        $time = (int)get_query_val('fn_lottery5', 'fengtime', array('roomid' => $_SESSION['roomid']));
         $djs = strtotime(get_query_val('fn_open', 'next_time', 'type = 5 order by term desc limit 1')) - time();
         if($djs < $time){
             $fengpan = true;
@@ -92,7 +92,7 @@ case "send": $nickname = $_SESSION['username'];
         }
     }elseif($BetGame == 'jsmt'){
         $BetTerm = get_query_val('fn_open', 'next_term', "type = 6 order by term desc limit 1");
-        $time = (int)get_query_val('fn_lottery6', 'fengtime');
+        $time = (int)get_query_val('fn_lottery6', 'fengtime', array('roomid' => $_SESSION['roomid']));
         $djs = strtotime(get_query_val('fn_open', 'next_time', 'type = 6 order by term desc limit 1')) - time();
         if($djs < $time){
             $fengpan = true;
@@ -101,7 +101,7 @@ case "send": $nickname = $_SESSION['username'];
         }
     }elseif($BetGame == 'jssc'){
         $BetTerm = get_query_val('fn_open', 'next_term', "type = 7 order by term desc limit 1");
-        $time = (int)get_query_val('fn_lottery7', 'fengtime');
+        $time = (int)get_query_val('fn_lottery7', 'fengtime', array('roomid' => $_SESSION['roomid']));
         $djs = strtotime(get_query_val('fn_open', 'next_time', 'type = 7 order by term desc limit 1')) - time();
         if($djs < $time){
             $fengpan = true;
@@ -111,7 +111,7 @@ case "send": $nickname = $_SESSION['username'];
         appLog('jssc:'.$BetTerm.'--'.$time.'--'.$djs);
     }elseif($BetGame == 'jsssc'){
         $BetTerm = get_query_val('fn_open', 'next_term', "type = 8 order by term desc limit 1");
-        $time = (int)get_query_val('fn_lottery8', 'fengtime');
+        $time = (int)get_query_val('fn_lottery8', 'fengtime', array('roomid' => $_SESSION['roomid']));
         $djs = strtotime(get_query_val('fn_open', 'next_time', 'type = 8 order by term desc limit 1')) - time();
         if($djs < $time){
             $fengpan = true;
