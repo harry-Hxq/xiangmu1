@@ -244,6 +244,6 @@ echo time();
  echo ("{");
  echo ("window.location.reload();");
  echo ("}");
- echo ("setTimeout('fresh_page()',1000);");
+ echo ("setTimeout('fresh_page()',500);");
  echo ("</script>");
 ?>
