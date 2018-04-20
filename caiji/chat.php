@@ -83,6 +83,7 @@ foreach($cons as $con){
     $msg3 = (int)get_query_val('fn_setting', 'msg3_time', array('roomid' => $roomid));
     $msg3_cont = get_query_val('fn_setting', 'msg3_cont', array('roomid' => $roomid));
     if($pk10open){
+        appLog("pk10:".$pk10time ."--".$jsscdjs."\n","pk10");
         if($pk10time + 30 == $pkdjs){
             管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'pk10');
         }
@@ -103,6 +104,7 @@ foreach($cons as $con){
         }
     }
     if($xyftopen){
+        appLog("xyft:".$xyfttime ."--".$jsscdjs."\n","xyft");
         if($xyfttime + 30 == $xyftdjs){
             管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'xyft');
         }
@@ -122,6 +124,7 @@ foreach($cons as $con){
         }
     }
     if($cqsscopen){
+        appLog("cqssc:".$cqssctime ."--".$jsscdjs."\n","cqssc");
         if($cqssctime + 30 == $cqsscdjs){
             管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'cqssc');
         }
@@ -175,6 +178,7 @@ foreach($cons as $con){
         }
     }
     if($jsmtopen){
+        appLog("jsmt:".$jsmttime ."--".$jsscdjs."\n",'jsmt');
         if($jsmttime + 30 == $jsmtdjs){
             管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'jsmt');
         }
@@ -194,6 +198,7 @@ foreach($cons as $con){
         }
     }
     if($jsscopen){
+        appLog("jssc:".$jssctime ."--".$jsscdjs."\n",'jssc');
         if($jssctime + 30 == $jsscdjs){
             管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'jssc');
         }
@@ -213,6 +218,7 @@ foreach($cons as $con){
         }
     }
     if($jssscopen){
+        appLog("jsssc:".$jssctime ."--".$jsscdjs."\n",'jsssc');
         if($jsssctime + 30 == $jssscdjs){
             管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'jsssc');
         }

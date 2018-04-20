@@ -85,8 +85,12 @@ function httpGet($url) {
     $result=curl_exec($ch);
     return $result;
 }
-function appLog($data){
-    $t = date("Ymd");
+function appLog($data,$filename = ''){
+    if($filename){
+        $t = $filename;
+    }else{
+        $t = date("Ymd");
+    }
     file_put_contents(dirname(dirname(preg_replace('@\(.*\(.*$@', '', __FILE__))) . "/sql_error/" . $t . '.log', $data, FILE_APPEND);
     return $t;
 }
