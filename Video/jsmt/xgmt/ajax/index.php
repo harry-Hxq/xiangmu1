@@ -15,7 +15,7 @@ date_default_timezone_set("Asia/Shanghai");
         }  
     }  
 
-$json = file_get_contents('http://jsmt.woaizy.com/api.php');
+$json = file_get_contents('http://api.woaizy.com/chatkj.php');
 $json = json_decode($json,1);
 
 $index = 'dd';
