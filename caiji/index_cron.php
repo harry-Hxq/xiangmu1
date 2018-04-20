@@ -16,7 +16,6 @@ $keys = 0;
 $url = "http://api.woaizy.com/chatkj.php";
 while ($do) {
     sleep(4);
-    appLog(date("Y-m-d H:i:s") . "\n");
     $json = file_get_contents($url);
     $jsondata = json_decode($json);
     $typearr['bjpk10'] = 1;
