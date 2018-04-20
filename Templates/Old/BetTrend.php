@@ -364,15 +364,7 @@ $game = $_COOKIE['game'];
         </table>
         <div class="sub_hr"></div>
         <div style="height: 4.4rem;text-align: center;font-size: 60px;">
-            <?php
-                if($page == 1) {
-                    ?>
-                    <?php }else {?>
-                    <a href="/Templates/Old/BetTrend.php?page=<?php echo $page-1 ?>">上一页</a>
-                    <?php
-                }
-            ?>
-            ?>
+            <a <?php if($page == 1) echo "style='display:none'"; ?> href="/Templates/Old/BetTrend.php?page=<?php echo $page-1 ?>">上一页</a>
             <a href="/Templates/Old/BetTrend.php?page=<?php echo $page+1 ?>">下一页</a>
             <a
                 <?php echo "href='/qr.php?room={$_SESSION['roomid']}&g={$_COOKIE['game']}'"; ?>

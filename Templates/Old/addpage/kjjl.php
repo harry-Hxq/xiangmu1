@@ -73,7 +73,7 @@ $list = db_query(sprintf("select * from `fn_open` where `type`=%d order by `term
     </tbody>
 </table>
 <!-- 		    </div> -->
-<div style="height: 4.4rem;text-align: center;font-size: 60px;">
+<div style="height: 1.4rem;text-align: center;font-size: 36px;padding: 8px;margin: 10px;">
     <a href="/fo/youxi/kjjl.html?r=8&pd=1&page=1">上一页</a>
     <a href="/fo/youxi/kjjl.html?r=8&pd=1&page=2">下一页</a>
     <a
