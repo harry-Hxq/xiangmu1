@@ -594,6 +594,7 @@ function JSSSC_jiesuan(){
     while($con = db_fetch_array()){
         $cons[] = $con;
     }
+    var_dump($cons);
     foreach($cons as $con){
         $id = $con['id'];
         $roomid = $con['roomid'];
@@ -604,6 +605,7 @@ function JSSSC_jiesuan(){
         $zym_7 = $con['money'];
         $game = '极速时时彩';
         $opencode = get_query_val('fn_open', 'code', "`term` = '$term' and `type` = '8'");
+        var_dump($opencode);
         if($opencode == "")continue;
         $codes = explode(',', $opencode);
         if(count($codes) != 5){
