@@ -455,3 +455,5 @@ h4#game-gtype{padding: 20px 10px; display: block; text-align: center;}
 .pour-info .sub-btn{ padding:0 0 40px; overflow: hidden;text-align: center;}
 .pour-info .sub-btn a{width: 45%;height: 100px;text-align: center;line-height: 100px; color: #fff; font-size: 36px; border-radius: 10px;-webkit-border-radius: 10px; background:#482E14; margin: 0 2%;display: inline-block;}
 .pour-info .sub-btn a.confirm{background: #b72401;}
+
+.hideli {display: none}

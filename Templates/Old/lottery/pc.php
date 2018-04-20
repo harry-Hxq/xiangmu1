@@ -633,7 +633,7 @@ if($qrcode == ""){
 			<?php if($sql['display_game'] != 'false'){
 ?>
 			<ul class="lottery">
-				<li <?php if($pk10open == 'false')echo 'class="gray"';
+				<li <?php if($pk10open == 'false')echo 'class="gray hideli"';
 ?>>
 					<a <?php if($pk10open == 'false'){
     echo 'href="#" class="gray"';
@@ -645,7 +645,7 @@ if($qrcode == ""){
 						<font>北京赛车</font>
 					</a>
 				</li>
-				<li <?php if($xyftopen == 'false')echo 'class="gray"';
+				<li <?php if($xyftopen == 'false')echo 'class="gray hideli"';
 ?>>
 					<a <?php if($xyftopen == 'false'){
     echo 'href="#" class="gray"';
@@ -657,7 +657,7 @@ if($qrcode == ""){
 						<font>幸运飞艇</font>
 					</a>
 				</li>
-				<li <?php if($cqsscopen == 'false')echo 'class="gray"';
+				<li <?php if($cqsscopen == 'false')echo 'class="gray hideli"';
 ?>>
 					<a <?php if($cqsscopen == 'false'){
     echo 'href="#" class="gray"';
@@ -669,7 +669,7 @@ if($qrcode == ""){
 						<font>重庆时时彩</font>
 					</a>
 				</li>
-				<li <?php if($xy28open == 'false')echo 'class="gray"';
+				<li <?php if($xy28open == 'false')echo 'class="gray hideli"';
 ?>>
 					<a <?php if($xy28open == 'false'){
     echo 'href="#" class="gray"';
@@ -681,7 +681,7 @@ if($qrcode == ""){
 						<font>幸运28</font>
 					</a>
 				</li>
-				<li <?php if($jnd28open == 'false')echo 'class="gray"';
+				<li <?php if($jnd28open == 'false')echo 'class="gray hideli"';
 ?>>
 					<a <?php if($jnd28open == 'false'){
     echo 'href="#" class="gray"';
@@ -693,7 +693,7 @@ if($qrcode == ""){
 						<font>加拿大28</font>
 					</a>
 				</li>
-				<li <?php if($jsmtopen == 'false')echo 'class="gray"';
+				<li <?php if($jsmtopen == 'false')echo 'class="gray hideli"';
 ?>>
 					<a <?php if($jsmtopen == 'false'){
     echo 'href="#" class="gray"';
@@ -705,7 +705,7 @@ if($qrcode == ""){
 						<font>极速摩托</font>
 					</a>
 				</li>
-				<li <?php if($jsscopen == 'false')echo 'class="gray"';
+				<li <?php if($jsscopen == 'false')echo 'class="gray hideli"';
 ?>>
 					<a <?php if($jsscopen == 'false'){
     echo 'href="#" class="gray"';
@@ -717,7 +717,7 @@ if($qrcode == ""){
 						<font>极速赛车</font>
 					</a>
 				</li>
-				<li <?php if($jssscopen == 'false')echo 'class="gray"';
+				<li <?php if($jssscopen == 'false')echo 'class="gray hideli"';
 ?>>
 					<a <?php if($jssscopen == 'false'){
     echo 'href="#" class="gray"';
@@ -729,7 +729,7 @@ if($qrcode == ""){
 						<font>极速时时彩</font>
 					</a>
 				</li>	
-				<li <?php if($kuai3open == 'false')echo 'class="gray"';
+				<li <?php if($kuai3open == 'false')echo 'class="gray hideli"';
 ?>>
 					<a <?php if($kuai3open == 'false'){
     echo 'href="#" class="gray"';
