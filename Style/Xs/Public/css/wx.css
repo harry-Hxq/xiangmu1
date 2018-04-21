@@ -168,18 +168,18 @@ margin-left: 1%;
     width:0px;  
     border-width:10px;  
     border-style:solid;  
-    border-color:transparent  transparent transparent #FFFFBB;  
+    border-color:transparent  transparent transparent #f79000;
 	float: right;
 	margin-top: 3%;
 	
 } 
-.ts{float: right;max-width: 80%;min-width: 50%; width: auto;}
+.ts{float: right; width: 69%;}
 .neirongsaidl{
-	background-color: #FFFFBB;
+	background-color: #f79000;
 	font-size: 28px;padding: 3% 3%;
 	border-radius:7px;
 	float: right;
-	max-width: 80%;
+	width: 93%;
 	box-shadow: -2px 3px 5px #888888;
 	margin-bottom: 3%;
     white-space: pre-wrap;

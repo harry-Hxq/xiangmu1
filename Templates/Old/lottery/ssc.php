@@ -165,7 +165,7 @@ if($qrcode == ""){
         <?php if($sql['display_custom'] != 'false'){
             ?><li class="skefu" data-id="skefu"><span>客服<em>0</em></span></li><?php }
         ?>
-        <li class="logs" data-id="logs"><span>记录</span></li>
+<!--        <li class="logs" data-id="logs"><span>记录</span></li>-->
         <li class="caiwu" data-id="caiwu"><span>财务</span></li>
         <?php if($sql['display_extend'] != 'false'){
             ?><li class="tg" data-id="tgzq"><span>推广</span></li><?php }

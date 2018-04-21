@@ -127,6 +127,15 @@ wx.ready(function(){
 <script type="text/javascript" src="/Style/Old/js/chat.js"></script>
 <script type="text/javascript" src="/Style/Old/js/pk10.js"></script>
 <!-- ./New Templates Update -->
+<div class="get-top" id="get-top" style="
+    width: 80px;
+    height: 80px;
+    background-image:url(/Style/images/gettop.png) ;
+    position: fixed;
+    opacity: 0.8;
+    bottom: 115px;
+    right: 80px;">
+</div>
 
 <iframe onload="iFrameHeight2();" src="/Templates/Old/shipin.php" name="ifarms" width="980" height="630" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" id="ifarms" class="ifarms"></iframe>
 <!-- 信息框 -->
@@ -161,7 +170,7 @@ if($qrcode == ""){
         <?php if($sql['display_custom'] != 'false'){
             ?><li class="skefu" data-id="skefu"><span>客服<em>0</em></span></li><?php }
         ?>
-        <li class="logs" data-id="logs"><span>记录</span></li>
+<!--        <li class="logs" data-id="logs"><span>记录</span></li>-->
         <li class="caiwu" data-id="caiwu"><span>财务</span></li>
         <?php if($sql['display_extend'] != 'false'){
             ?><li class="tg" data-id="tgzq"><span>推广</span></li><?php }
@@ -931,7 +940,6 @@ if($qrcode == ""){
 	</div>
 	<iframe width="880" height="0" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" id="iframe" class="iframe" style="display:none" onload="iFrameHeight();"/>
 </div>
-<div class="get-top">111</div>
 <div class="zytips"><div>数据加载中..</div></div>
 </body>
 </html>

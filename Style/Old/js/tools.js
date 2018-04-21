@@ -1,7 +1,6 @@
 var tz_types = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 $(function () {
 
-	console.log(11);
     $("#get-top").on("click",function () {
         console.log(33);
         $('html,body').animate({

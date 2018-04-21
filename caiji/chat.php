@@ -9,7 +9,7 @@ function 管理员喊话($Content, $roomid, $game){
 }
 
 function fengpanSay($game_type,$table,$roomid,$term){
-    管理员喊话('第 ' .$term. ' 期,-----------------封盘----------------以下全接，不改不退，以上全部无效 以投注记录显示为准。', $roomid, $game_type);
+    管理员喊话('第 ' .$term. ' 期,--------封盘---------<br/>以下全接，不改不退，以上全部无效 以投注记录显示为准。', $roomid, $game_type);
 
     // 下注核对
     select_query($table, '*', "roomid = '{$_SESSION['agent_room']}' and term = '{$term}'");
@@ -127,7 +127,7 @@ foreach($cons as $con){
         if($cqssctime + 30 == $cqsscdjs){
             管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'cqssc');
         }
-        if($cqssctime == $cqsscdjs || $cqssctime+1 == $cqsscdjs || $cqssctime-1 == $cqsscdjs){
+        if($cqssctime == $cqsscdjs){
             $term = get_query_val('fn_open', 'next_term', "`type` = '3' order by `term` desc limit 1");
 //            管理员喊话('------已封盘,截止投注------<br>第' . get_query_val('fn_open', 'next_term', "`type` = '3' order by `term` desc limit 1") . '期投注已经结束<br>请耐心等待开奖<br>开奖视频结果出来后即可正常下注', $roomid, 'cqssc');
             fengpanSay('cqssc','fn_sscorder',$roomid,$term);
@@ -252,6 +252,6 @@ echo $end - $start.'<br />';
  echo ("{");
  echo ("window.location.reload();");
  echo ("}");
- echo ("setTimeout('fresh_page()',900);");
+ echo ("setTimeout('fresh_page()',1000);");
  echo ("</script>");
 ?>
