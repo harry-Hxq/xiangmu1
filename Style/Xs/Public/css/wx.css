@@ -34,16 +34,16 @@ a{cursor: pointer; text-decoration: none;}
 .neirong.minmax{ max-height:600px;}
 .user_messages{}
 .user_messages img{width: 80px;height: 80px;display:block;float: left;}
-.user_messages input{width:52%;height:70px;display:block;float: left;
+.user_messages input{width:45%;height:80px;display:block;float: left;
 	margin-left: 1.5%;margin-top: 1%;
 	font-size: 33px;
 border:1px solid #ccc;
 text-indent: 8px;
 }
 .user_messages span{float: left;}
-.txtbet{background-color: #666; color: #fff;padding: 1.5% 1.2%;border:1px solid #ccc; border-radius:  0.5rem;margin-top: 1.4%;margin-left: 1%;}
+.txtbet{font-size: 30px;background-color: #666; color: #fff;padding: 1.5% 1.2%;border:1px solid #ccc; border-radius:  0.5rem;margin-top: 1.4%;margin-left: 1%;}
 .txtbet.on{background-color: #5399e2;}
-.sendemaill{background-color: #5399e2;color: #fff;
+.sendemaill{background-color: #d50808;color: #fff;width: 151px;font-size: 30px;
 			padding: 1.5% 2.8%; color:000;border:1px solid #ccc; border-radius:  0.5rem;margin-top: 1.4%;margin-left: 1%;}
 .gray { 
     -webkit-filter: grayscale(100%);
@@ -53,7 +53,7 @@ text-indent: 8px;
     filter: grayscale(100%);
     filter: gray;
 }
-.keybord{ height: 60px !important; width: auto !important;margin-top: 1.5%; border-radius: 10px; margin-left: 0.5rem;}
+.keybord{ height: 72px !important; width: auto !important;margin-top: 1.5%; border-radius: 10px; margin-left: 0.5rem;}
 .keybord_div{
 	display: none;
 	text-align: left;
