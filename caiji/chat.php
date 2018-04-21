@@ -1,4 +1,5 @@
 <?php
+$start = time();
 header("Content-type:text/html;charset=utf-8");
 date_default_timezone_set("Asia/Shanghai");
 include_once("../Public/config.php");
@@ -237,11 +238,14 @@ foreach($cons as $con){
     }
 }
 echo "PK10倒计时:" . $pkdjs . '<br>' . '幸运飞艇倒计时:' . $xyftdjs . '|' . $xyfttime . '<br>' . '重庆时时彩倒计时:' . $cqsscdjs . '<br>' . '幸运28倒计时:' . $pcdjs . '<br>' . '加拿大28倒计时:' . $jnddjs . '<br>' . '极速摩托倒计时:' . $jsmtdjs . '<br>' . '极速赛车倒计时:' . $jsscdjs . '<br>' . '极速时时彩倒计时:' . $jssscdjs;
-
+$end = time();
 //zepto 20171013
 echo "系统当前时间戳为 ";
 echo "";
-echo time();
+echo time().'<br />';
+echo "程序执行时间 ";
+echo "";
+echo $end - $start.'<br />';
 //<!--JS 页面自动刷新 -->
  echo ("<script type=\"text/javascript\">");
  echo ("function fresh_page()");
