@@ -5429,13 +5429,13 @@ function zhangdanSay($game_name,$game_type,$table,$term){
 
         foreach ($cons as $c){
             $names[$c['username']] .= $c['mingci']."/".$c['content']."/".$c['money']." ";
-            $yinkui[$c['username']] += $c['status'];
+            $yinkui[$c['username']] += $c['status'] + $c['money'];
         }
         $roomlist = array_unique(array_column($cons,'roomid'));
         $nameInfo = '';
         foreach ($names as $name => $res){
             $nameInfo .= $name.": [".$res."]<br />";
-            $nameInfo .= "盈亏：".$yinkui[$name].'<br />';
+            $nameInfo .= "当期盈亏：".$yinkui[$name].'<br />';
             $nameInfo .= '========================='.'<br />';
         }
         $content = "-------开奖核对--------".'<br />';
