@@ -9,7 +9,7 @@ function 管理员喊话($Content, $roomid, $game){
 }
 
 function fengpanSay($game_type,$table,$roomid,$term){
-    管理员喊话('第 ' .$term. ' 期,--------封盘---------<br/>以下全接，不改不退，以上全部无效 以投注记录显示为准。', $roomid, $game_type);
+    管理员喊话('--------封盘线--------<br/>期号：'.$term.'<br />以下全接，不改不退，以上全部无效 以投注记录显示为准。', $roomid, $game_type);
 
     // 下注核对
     select_query($table, '*', "roomid = '{$_SESSION['agent_room']}' and term = '{$term}'");
@@ -25,7 +25,7 @@ function fengpanSay($game_type,$table,$roomid,$term){
         foreach ($names as $name => $res){
             $nameInfo .= $name.": [".$res."]<br />";
         }
-        管理员喊话($term.'期下注核对：<br /> '.$nameInfo.'===============<br />以上未列出的.表示未下注<br /> 如封盘会提示封盘无效.<br /> 没有任何理由需要纠结.<br /> 包括系统遇突发事情时.', $roomid, $game_type);
+        管理员喊话($term.'--------下注核对--------：<br /> 期号：'.$term.'<br />==============='.$nameInfo.'===============<br />以上未列出的.表示未下注<br /> 如封盘会提示封盘无效.<br /> 没有任何理由需要纠结.<br /> 包括系统遇突发事情时.', $roomid, $game_type);
     }
 }
 
