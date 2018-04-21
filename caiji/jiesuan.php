@@ -5429,7 +5429,12 @@ function zhangdanSay($game_name,$game_type,$table,$term){
 
         foreach ($cons as $c){
             $names[$c['username']] .= $c['mingci']."/".$c['content']."/".$c['money']." ";
-            $yinkui[$c['username']] += $c['status'] - $c['money'];
+            if($c['status'] < 0){
+                $yinkui[$c['username']] += $c['status'];
+            }else{
+                $yinkui[$c['username']] += $c['status'] - $c['money'];
+            }
+            
         }
         $roomlist = array_unique(array_column($cons,'roomid'));
         $nameInfo = '';
