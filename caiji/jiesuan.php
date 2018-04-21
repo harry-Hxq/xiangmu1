@@ -860,9 +860,6 @@ function JSSSC_jiesuan($qihao=''){
         }
     }
     zhangdanSay('jsssc',8,'fn_jssscorder',$qihao);
-
-
-
 }
 function jiesuan($qihao=''){
     select_query("fn_order", '*', array("status" => "未结算"));
@@ -2239,7 +2236,7 @@ function jiesuan($qihao=''){
     }
     zhangdanSay('bjpk10',1,'fn_order',$qihao);
 }
-function MT_jiesuan(){
+function MT_jiesuan($qihao=''){
     select_query("fn_mtorder", '*', array("status" => "未结算"));
     while($con = db_fetch_array()){
         $cons[] = $con;
@@ -3609,8 +3606,9 @@ function MT_jiesuan(){
             }
         }
     }
+    zhangdanSay('jsmt',6,'fn_mtorder',$qihao);
 }
-function JSSC_jiesuan(){
+function JSSC_jiesuan($qihao=''){
     select_query("fn_jsscorder", '*', array("status" => "未结算"));
     while($con = db_fetch_array()){
         $cons[] = $con;
@@ -4981,6 +4979,7 @@ function JSSC_jiesuan(){
             }
         }
     }
+    zhangdanSay('jssc',7,'fn_jsscorder',$qihao);
 }
 function K3_jiesuan($addterm = "", $addcode=""){
 	if($addterm != "" && $addcode != ""){
@@ -5434,7 +5433,7 @@ function zhangdanSay($game_name,$game_type,$table,$term){
             }else{
                 $yinkui[$c['username']] += $c['status'] - $c['money'];
             }
-            
+
         }
         $roomlist = array_unique(array_column($cons,'roomid'));
         $nameInfo = '';
