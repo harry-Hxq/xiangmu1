@@ -1,74 +1,74 @@
-* * * * * curl -o /mnt/crontmp/cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 5; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 10; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 15; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 20; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 25; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 30; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 35; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 40; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 45; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 50; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
-* * * * * sleep 55; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/index_cron.php
+* * * * * curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 5; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 10; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 15; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 20; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 25; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 30; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 35; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 40; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 45; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 50; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
+* * * * * sleep 55; curl -I 'http://127.0.0.1:8099/caiji/index_cron.php'
 
 
-* * * * * curl -o /mnt/crontmp/cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 1; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 2; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 3; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 4; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 5; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 6; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 7; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 8; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 9; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 10; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 11; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 12; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 13; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 14; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 15; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 16; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 17; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 18; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 19; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 20; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 21; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 22; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 23; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 24; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 25; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 26; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 27; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 28; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 29; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 30; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 31; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 32; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 33; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 34; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 35; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 36; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 37; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 38; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 39; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 40; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 41; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 42; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 43; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 44; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 45; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 46; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 47; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 48; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 49; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 50; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 51; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 52; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 53; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 54; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 55; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 56; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 57; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 58; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
-* * * * * sleep 59; curl -o /mnt/crontmp/chat_cron.log http://www.guoyanchao.xyz/caiji/chat_cron.php
+* * * * * curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 1; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 2; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 3; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 4; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 5; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 6; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 7; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 8; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 9; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 10; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 11; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 12; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 13; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 14; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 15; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 16; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 17; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 18; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 19; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 20; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 21; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 22; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 23; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 24; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 25; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 26; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 27; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 28; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 29; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 30; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 31; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 32; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 33; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 34; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 35; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 36; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 37; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 38; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 39; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 40; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 41; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 42; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 43; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 44; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 45; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 46; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 47; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 48; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 49; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 50; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 51; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 52; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 53; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 54; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 55; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 56; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 57; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 58; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'
+* * * * * sleep 59; curl -I 'http://127.0.0.1:8099/caiji/chat_cron.php'

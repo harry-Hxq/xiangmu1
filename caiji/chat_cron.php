@@ -1,6 +1,5 @@
 <?php
 
-appLog(date("Y-m-d H:i:s")."chat".'<br />','chat');
 header("Content-type:text/html;charset=utf-8");
 date_default_timezone_set("Asia/Shanghai");
 include_once("../Public/config.php");
@@ -8,7 +7,7 @@ function 管理员喊话($Content, $roomid, $game){
     $headimg = get_query_val('fn_setting', 'setting_robotsimg', array('roomid' => $roomid));
     insert_query("fn_chat", array("username" => "机器人", "headimg" => $headimg, 'content' => $Content, 'addtime' => date('H:i:s'), 'type' => 'S3', 'userid' => 'system', 'game' => $game, 'roomid' => $roomid));
 }
-
+appLog(date("Y-m-d H:i:s")."chat".'<br />','chat');
 function fengpanSay($game_type,$table,$roomid,$term){
     管理员喊话('第 ' .$term. ' 期,-----------------封盘----------------以下全接，不改不退，以上全部无效 以投注记录显示为准。', $roomid, $game_type);
 
