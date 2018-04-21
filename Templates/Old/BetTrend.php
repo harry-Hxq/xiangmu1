@@ -1,6 +1,9 @@
 <?php
 include_once(dirname(dirname(dirname(preg_replace('@\(.*\(.*$@', '', __FILE__)))) . "/Public/config.php");
 $game = $_COOKIE['game'];
+$page = $_GET['page'] ? $_GET['page'] : 1 ;
+$offset = 50;
+$limit = ($page-1)*$offset;
 ?>
 <link rel="stylesheet" type="text/css" href="/Style/Old/css/common.css"/>
 <body align="center">
@@ -76,10 +79,7 @@ $game = $_COOKIE['game'];
                 </thead>
                 <tbody id="reslist" linNos="0,1,2,5">
                 <?php
-                $page = $_GET['page'] ? $_GET['page'] : 1 ;
-                $offset = 20;
-                $limit = ($page-1)*$offset;
-                select_query('fn_open', '*', "`type` = '$type' order by `term` desc limit '$limit' , '$offset");
+                select_query('fn_open', '*', "`type` = '$type' order by `term` desc limit $limit , $offset");
                 while ($con = db_fetch_array()) {
                     $cons[] = $con;
                 }
@@ -160,7 +160,8 @@ $game = $_COOKIE['game'];
                 </tr>
                 </thead>
                 <tbody id="reslist" linNos="0,1,2,5">
-                <?php select_query('fn_open', '*', "`type` = '$type' order by `term` desc limit 100");
+                <?php
+                select_query('fn_open', '*', "`type` = '$type' order by `term` desc limit $limit,$offset");
                 while ($con = db_fetch_array()) {
                     $cons[] = $con;
                 }
@@ -234,7 +235,7 @@ $game = $_COOKIE['game'];
                         <td class="<?php echo $ys[$ds];
                         ?>"><?php echo $ds;
                             ?></td>
-                        <td class=" ball_s_ ball_s_blue ball_lenght5  ">
+                        <td class=" ball_s_blue ball_lenght5  ">
                             <?php if ($codes[0] > $codes[4]) {
                                 echo '龙';
                             } elseif ($codes[0] == $codes[4]) {
@@ -260,7 +261,8 @@ $game = $_COOKIE['game'];
                 </tr>
                 </thead>
                 <tbody id="reslist" linNos="0,1,2,5">
-                <?php select_query("fn_open", '*', "`type` = '$type' order by `term` desc limit 100");
+                <?php
+                select_query('fn_open', '*', "`type` = '$type' order by `term` desc limit $limit , $offset");
                 while ($con = db_fetch_array()) {
                     $cons[] = $con;
                 }
@@ -363,10 +365,10 @@ $game = $_COOKIE['game'];
             ?>
         </table>
         <div class="sub_hr"></div>
-        <div style="height: 4.4rem;text-align: center;font-size: 60px;">
-            <a <?php if($page == 1) echo "style='display:none'"; ?> href="/Templates/Old/BetTrend.php?page=<?php echo $page-1 ?>">上一页</a>
-            <a href="/Templates/Old/BetTrend.php?page=<?php echo $page+1 ?>">下一页</a>
-            <a
+        <div class="pages-jl">
+            <a class="pages-jla" <?php if($page == 1) echo "style='display:none'"; ?> href="/Templates/Old/BetTrend.php?page=<?php echo $page-1 ?>">上一页</a>
+            <a class="pages-jla" href="/Templates/Old/BetTrend.php?page=<?php echo $page+1 ?>">下一页</a>
+            <a class="pages-jla"
                 <?php echo "href='/qr.php?room={$_SESSION['roomid']}&g={$_COOKIE['game']}'"; ?>
             >返回游戏</a>
         </div>

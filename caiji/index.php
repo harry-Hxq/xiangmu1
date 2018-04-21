@@ -67,7 +67,7 @@ foreach ($jsondata as $i) {
             SSC_jiesuan(); //重庆时时彩
         }
         if ($code == 'jsssc') {
-            JSSSC_jiesuan(); //极速时时彩
+            JSSSC_jiesuan($qihao); //极速时时彩
         }
         if ($code == 'jssc') {
             JSSC_jiesuan(); //极速赛车

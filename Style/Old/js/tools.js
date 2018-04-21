@@ -1,5 +1,14 @@
 var tz_types = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 $(function () {
+
+	console.log(11);
+    $("#get-top").on("click",function () {
+        console.log(33);
+        $('html,body').animate({
+            scrollTop: 0
+        }, 700);
+    });
+
 	$(".keybord").on('touchstart', function () {
 		$(this).toggleClass("gray");
 		$(".keybord_div").toggle();
@@ -190,3 +199,5 @@ zy.tips = function (msg, time) {
 		$(".zytips").fadeOut('fast');
 	}, time * 1000);
 }
+
+//回到顶部

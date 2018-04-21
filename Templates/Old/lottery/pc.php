@@ -122,7 +122,7 @@ wx.ready(function(){
 <script type="text/javascript" src="/Style/Old/js/chat.js"></script>
 <script type="text/javascript" src="/Style/Old/js/pc.js"></script>
 <!-- ./New Templates Update -->
-
+<div class="get-top">111</div>
 <iframe onload="iFrameHeight2();" src="/Templates/Old/shipin.php" name="ifarms" width="980" height="630" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" id="ifarms" class="ifarms"></iframe>
 <!-- 信息框 -->
 <div class="modal fade" id="msgdialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" align="left">
@@ -179,14 +179,14 @@ if($qrcode == ""){
 ?>
             <li class="dh" data-id="logs"><span>下注核对</span></li>
             <li class="dh"><a href="/Templates/Old/BetTrend.php"><span>历史记录</span></a></li>
-            <li class="dh" data-id="donghua"><span>动画</span></li>
+<!--            <li class="dh" data-id="donghua"><span>动画</span></li>-->
 <!--            <li class="wz" data-id="wenzi"><span>走势</span></li>-->
             <?php if($sql['display_plan'] != 'false'){
             ?><!--<li class="cl" data-id="changlong"><span>长龙</span></li>--><?php }
         ?>
 
             			<li class="sx" data-id="reload2"><span>刷新动画</span></li>
-            			<li class="smallwindows" data-id="smallwindows"><span>小窗</span></li>
+<!--            			<li class="smallwindows" data-id="smallwindows"><span>小窗</span></li>-->
 		</ul>
 		<ul class="uinfo">
 			<li class="uname">昵称:<?php echo $_SESSION['username'];

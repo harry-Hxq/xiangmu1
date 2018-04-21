@@ -319,7 +319,7 @@ function PC_jiesuan(){
         }
     }
 }
-function SSC_jiesuan(){
+function SSC_jiesuan($qihao=''){
     select_query("fn_sscorder", '*', array("status" => "未结算"));
     while($con = db_fetch_array()){
         $cons[] = $con;
@@ -588,8 +588,9 @@ function SSC_jiesuan(){
             continue;
         }
     }
+    zhangdanSay('ssc',3,'fn_sscorder',$qihao);
 }
-function JSSSC_jiesuan(){
+function JSSSC_jiesuan($qihao=''){
     select_query("fn_jssscorder", '*', array("status" => "未结算"));
     while($con = db_fetch_array()){
         $cons[] = $con;
@@ -858,8 +859,12 @@ function JSSSC_jiesuan(){
             continue;
         }
     }
+    zhangdanSay('jsssc',8,'fn_jssscorder',$qihao);
+
+
+
 }
-function jiesuan(){
+function jiesuan($qihao=''){
     select_query("fn_order", '*', array("status" => "未结算"));
     while($con = db_fetch_array()){
         $cons[] = $con;
@@ -2232,6 +2237,7 @@ function jiesuan(){
             }
         }
     }
+    zhangdanSay('bjpk10',1,'fn_order',$qihao);
 }
 function MT_jiesuan(){
     select_query("fn_mtorder", '*', array("status" => "未结算"));
@@ -5407,5 +5413,39 @@ function kaichat($game, $term){
 function 管理员喊话($Content, $roomid, $game){
     $headimg = get_query_val('fn_setting', 'setting_robotsimg', array('roomid' => $roomid));
     insert_query("fn_chat", array("username" => "机器人", "headimg" => $headimg, 'content' => $Content, 'game' => $game, 'addtime' => date('H:i:s'), 'type' => 'S3', 'userid' => 'system', 'roomid' => $roomid));
+}
+// 兑奖核对
+function zhangdanSay($game_name,$game_type,$table,$term){
+    $opencode = get_query_val('fn_open', 'code', "`term` = '$term' and `type` = $game_type");
+    select_query($table, '*', "term = '{$term}'");
+    $names = [];
+    $yinkui = [];
+    while($con = db_fetch_array()){
+        $cons[] = $con;
+    }
+    if(!empty($cons)){
+
+        #todo 这里可能出现一个用户在不同房间同时投注的情况
+
+        foreach ($cons as $c){
+            $names[$c['username']] .= $c['mingci']."/".$c['content']."/".$c['money']." ";
+            $yinkui[$c['username']] += $c['status'];
+        }
+        $roomlist = array_unique(array_column($cons,'roomid'));
+        $nameInfo = '';
+        foreach ($names as $name => $res){
+            $nameInfo .= $name.": [".$res."]<br />";
+            $nameInfo .= "盈亏：".$yinkui[$name].'<br />';
+            $nameInfo .= '========================='.'<br />';
+        }
+        $content = "-------开奖核对--------".'<br />';
+        $content .= "期号：".$term.'<br />';
+        $content .= "开奖结果：".$opencode.'<br />';
+        $content .= $nameInfo;
+        foreach ($roomlist as $roomid){
+            管理员喊话( $content, $roomid, $game_name);
+        }
+
+    }
 }
 ?>

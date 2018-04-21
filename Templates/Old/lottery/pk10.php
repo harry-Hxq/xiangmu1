@@ -183,14 +183,14 @@ if($qrcode == ""){
 ?>
             <li class="dh" data-id="logs"><span>下注核对</span></li>
             <li class="dh"><a href="/Templates/Old/BetTrend.php"><span>历史记录</span></a></li>
-            <li class="dh" data-id="donghua"><span>动画</span></li>
+<!--            <li class="dh" data-id="donghua"><span>动画</span></li>-->
             <!--            <li class="wz" data-id="wenzi"><span>走势</span></li>-->
             <?php if($sql['display_plan'] != 'false'){
             ?><!--<li class="cl" data-id="changlong"><span>长龙</span></li>--><?php }
         ?>
 
             <li class="sx" data-id="reload2"><span>刷新动画</span></li>
-            <li class="smallwindows" data-id="smallwindows"><span>小窗</span></li>
+<!--            <li class="smallwindows" data-id="smallwindows"><span>小窗</span></li>-->
         </ul>
 		<ul class="uinfo">
 			<li class="uname">昵称:<?php echo $_SESSION['username'];
@@ -931,7 +931,7 @@ if($qrcode == ""){
 	</div>
 	<iframe width="880" height="0" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" id="iframe" class="iframe" style="display:none" onload="iFrameHeight();"/>
 </div>
-
+<div class="get-top">111</div>
 <div class="zytips"><div>数据加载中..</div></div>
 </body>
 </html>
