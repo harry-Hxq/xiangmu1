@@ -161,18 +161,18 @@ if($qrcode == ""){
                 ?>" class="mlogo"></a></li>
         <li class="home" data-id="home"><span>菜单</span></li>
         <li class="fresh" data-id="reload"><span>刷新</span></li>
-        <li class="guess" data-id="guess"><span>竞猜</span></li>
         <?php if($sql['display_custom'] != 'false'){
             ?><li class="skefu" data-id="skefu"><span>客服<em>0</em></span></li><?php }
         ?>
-<!--        <li class="logs" data-id="logs"><span>记录</span></li>-->
+        <!--        <li class="logs" data-id="logs"><span>记录</span></li>-->
         <li class="caiwu" data-id="caiwu"><span>财务</span></li>
         <?php if($sql['display_extend'] != 'false'){
             ?><li class="tg" data-id="tgzq"><span>推广</span></li><?php }
         ?>
         <li class="gz" data-id="guize"><span>规则</span></li>
-		<!--li class="cz" data-id="cz"><span>充值</span></li-->
-	</ul>
+        <li class="guess" data-id="guess"><span>大厅</span></li>
+        <!--li class="cz" data-id="cz"><span>充值</span></li-->
+    </ul>
 </div>
 <div id="frameRIGHTH">
 	<div class="nav_banner">
@@ -185,7 +185,7 @@ if($qrcode == ""){
 			</li>
 		<?php }
 ?>
-            <li class="dh" data-id="logs"><span>下注核对</span></li>
+            <li class="dh" style="border: 2px solid #d50808" data-id="logs"><span style="background: #d50808">个人流水</span></li>
             <li class="dh"><a href="/Templates/Old/BetTrend.php"><span>历史记录</span></a></li>
 <!--            <li class="dh" data-id="donghua"><span>动画</span></li>-->
             <!--            <li class="wz" data-id="wenzi"><span>走势</span></li>-->
