@@ -43,7 +43,7 @@ text-indent: 8px;
 .user_messages span{float: left;}
 .txtbet{font-size: 30px;background-color: #666; color: #fff;padding: 1.5% 1.2%;border:1px solid #ccc; border-radius:  0.5rem;margin-top: 1.4%;margin-left: 1%;}
 .txtbet.on{background-color: #5399e2;}
-.sendemaill{background-color: #d50808;color: #fff;width: 151px;font-size: 30px;
+.sendemaill{background-color: #d50808;color: #fff;width: 151px;font-size: 30px;    text-align: center;
 			padding: 1.5% 2.8%; color:000;border:1px solid #ccc; border-radius:  0.5rem;margin-top: 1.4%;margin-left: 1%;}
 .gray { 
     -webkit-filter: grayscale(100%);
