@@ -103,6 +103,7 @@ foreach($cons as $con){
         }
     }
     if($xyftopen){
+        appLog("xyft:".$xyfttime ."--".$jsscdjs."\n","xyft");
         if($xyfttime + 30 == $xyftdjs){
             管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'xyft');
         }
@@ -214,7 +215,7 @@ foreach($cons as $con){
         }
     }
     if($jssscopen){
-
+        appLog("xyft:".$jsssctime ."--".$jsscdjs."\n","jsssc");
         if($jsssctime + 30 == $jssscdjs){
             管理员喊话('------距离封盘还有30秒------<br>请需要下注的用户尽快投注', $roomid, 'jsssc');
         }

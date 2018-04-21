@@ -148,11 +148,11 @@ switch ($type) {
             } elseif (substr($content, 0, 3) == '查') {
 
                 // 发送当前期的投注明细
-                sendCurrencyOrder();
+//                sendCurrencyOrder();
 
-//            $fenshuchange = true;
-//            $sfmoney = substr($content, 3);
-//            if((int)$sfmoney > 0)插入上分($_SESSION['username'], $_SESSION['userid'], $sfmoney);
+                $fenshuchange = true;
+                $sfmoney = substr($content, 3);
+                if((int)$sfmoney > 0)插入上分($_SESSION['username'], $_SESSION['userid'], $sfmoney);
             } elseif (substr($content, 0, 6) == '下分') {
                 $fenshuchange = true;
                 $xfmoney = substr($content, 6);
