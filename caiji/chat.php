@@ -25,7 +25,7 @@ function fengpanSay($game_type,$table,$roomid,$term){
         foreach ($names as $name => $res){
             $nameInfo .= $name.": [".$res."]<br />";
         }
-        管理员喊话($term.'--------下注核对--------：<br /> 期号：'.$term.'<br />==============='.$nameInfo.'===============<br />以上未列出的.表示未下注<br /> 如封盘会提示封盘无效.<br /> 没有任何理由需要纠结.<br /> 包括系统遇突发事情时.', $roomid, $game_type);
+        管理员喊话('--------下注核对--------：<br /> 期号：'.$term.'<br />===============<br />'.$nameInfo.'<br />===============<br />以上未列出的.表示未下注<br /> 如封盘会提示封盘无效.<br /> 没有任何理由需要纠结.<br /> 包括系统遇突发事情时.', $roomid, $game_type);
     }
 }
 
