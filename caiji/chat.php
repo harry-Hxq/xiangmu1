@@ -12,12 +12,12 @@ function fengpanSay($game_type,$table,$roomid,$term){
     管理员喊话('--------封盘线--------<br/>期号：'.$term.'<br />以下全接，不改不退，以上全部无效 以投注记录显示为准。', $roomid, $game_type);
 
     // 下注核对
-    select_query($table, '*', "roomid = '{$_SESSION['agent_room']}' and term = '{$term}'");
+    select_query($table, '*', "roomid = '{$roomid}' and term = '{$term}'");
     $names = [];
     while($con = db_fetch_array()){
         $cons[] = $con;
     }
-    appLog('table:'.$table.'term:'.$term.''."\n");
+    appLog('table:'.$table.'--term:'.$term.'--roomid:'.$roomid."\n");
     appLog('当前期下注'.count($cons)."\n");
 
     if(!empty($cons)){
