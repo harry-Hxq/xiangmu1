@@ -137,9 +137,10 @@ wx.ready(function(){
     bottom: 115px;
     right: 80px;">
 </div>
-
+<div style="-webkit-overflow-scrolling: touch;overflow-y: scroll; ">
 <iframe onload="iFrameHeight2();" src="/Templates/Old/shipin.php" name="ifarms" width="980" height="630" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" id="ifarms" class="ifarms"></iframe>
-<!-- 信息框 -->
+</div>
+    <!-- 信息框 -->
 <div class="modal fade" id="msgdialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" align="left">
   <div class="modal-dialog">
     <div class="modal-content">
