@@ -2234,7 +2234,7 @@ function jiesuan($qihao=''){
             }
         }
     }
-    zhangdanSay('bjpk10',1,'fn_order',$qihao);
+    zhangdanSay('pk10',1,'fn_order',$qihao);
 }
 function MT_jiesuan($qihao=''){
     select_query("fn_mtorder", '*', array("status" => "未结算"));
