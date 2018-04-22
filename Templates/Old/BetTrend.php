@@ -2,7 +2,7 @@
 include_once(dirname(dirname(dirname(preg_replace('@\(.*\(.*$@', '', __FILE__)))) . "/Public/config.php");
 $game = $_COOKIE['game'];
 $page = $_GET['page'] ? $_GET['page'] : 1 ;
-$offset = 20;
+$offset = 50;
 $limit = ($page-1)*$offset;
 ?>
 <link rel="stylesheet" type="text/css" href="/Style/Old/css/common.css"/>
