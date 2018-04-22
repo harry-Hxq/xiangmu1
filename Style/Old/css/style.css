@@ -2,7 +2,8 @@
 
 body {
 	font-family: Arial, Helvetica, sans-serif;
-	background: #000 url(/Style/images/bg03b.jpg);
+	/*background: #000 url(/Style/images/bg03b.jpg);*/
+	background: #badeeb;;
 	font-size: 24px;
 }
 

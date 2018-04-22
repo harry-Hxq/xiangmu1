@@ -1,7 +1,7 @@
 <?php
 include_once("../Public/config.php");
 
-if($_GET['aa']!='aaa555'){
+if($_GET['aa']!='harrytest'){
 	echo "ERROR ENTRY."; exit;
 
 }
