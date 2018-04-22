@@ -193,7 +193,7 @@ if($qrcode == ""){
 ?>
             <li class="dh" style="border: 2px solid #d50808" data-id="logs"><span style="background: #d50808">个人流水</span></li>
 <!--            <li class="dh"><a href="/Templates/Old/BetTrend.php"><span>历史记录</span></a></li>-->
-<!--            <li class="dh" data-id="donghua"><span>动画</span></li>-->
+            <li class="dh" data-id="donghua"><span>动画</span></li>
                         <li class="wz" data-id="wenzi"><span>历史记录</span></li>
             <?php if($sql['display_plan'] != 'false'){
             ?><!--<li class="cl" data-id="changlong"><span>长龙</span></li>--><?php }
