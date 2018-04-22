@@ -5422,6 +5422,7 @@ function zhangdanSay($game_name,$game_type,$table,$term){
     while($con = db_fetch_array()){
         $cons[] = $con;
     }
+    appLog($game_name."-- term:".$term."总投注：".count($cons)."\n");
     if(!empty($cons)){
 
         #todo 这里可能出现一个用户在不同房间同时投注的情况
