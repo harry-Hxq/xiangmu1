@@ -1,5 +1,11 @@
 var interval = null;
 $(function() {
+
+	//加载完成自动播放背景音乐
+    Media = document.getElementById("bgsound");
+    Media.src = "sound/bg.mp3";
+    Media.play();
+
 	videoTools.createNum();
 	setTimeout(function() {
 		setTimeout(function() {
