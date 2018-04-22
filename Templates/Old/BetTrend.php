@@ -365,13 +365,13 @@ $limit = ($page-1)*$offset;
             ?>
         </table>
         <div class="sub_hr"></div>
-        <div class="pages-jl">
-            <a class="pages-jla" <?php if($page == 1) echo "style='display:none'"; ?> href="/Templates/Old/BetTrend.php?page=<?php echo $page-1 ?>">上一页</a>
-            <a class="pages-jla" href="/Templates/Old/BetTrend.php?page=<?php echo $page+1 ?>">下一页</a>
-            <a class="pages-jla"
-                <?php echo "href='/qr.php?room={$_SESSION['roomid']}&g={$_COOKIE['game']}'"; ?>
-            >返回游戏</a>
-        </div>
+<!--        <div class="pages-jl">-->
+<!--            <a class="pages-jla" --><?php //if($page == 1) echo "style='display:none'"; ?><!-- href="/Templates/Old/BetTrend.php?page=--><?php //echo $page-1 ?><!--">上一页</a>-->
+<!--            <a class="pages-jla" href="/Templates/Old/BetTrend.php?page=--><?php //echo $page+1 ?><!--">下一页</a>-->
+<!--            <a class="pages-jla"-->
+<!--                --><?php //echo "href='/qr.php?room={$_SESSION['roomid']}&g={$_COOKIE['game']}'"; ?>
+<!--            >返回游戏</a>-->
+<!--        </div>-->
     </div>
 </div>
 <div class="clear"></div>

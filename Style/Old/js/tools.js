@@ -8,6 +8,15 @@ $(function () {
         }, 700);
     });
 
+    $(document).scroll(function() {
+        console.log($(this).scrollTop())
+        if($(this).scrollTop() > 10) {
+            $("#get-top").show();
+        } else {
+            $("#get-top").hide();
+        }
+    });
+
 	$(".keybord").on('touchstart', function () {
 		$(this).toggleClass("gray");
 		$(".keybord_div").toggle();
