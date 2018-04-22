@@ -137,7 +137,7 @@ wx.ready(function(){
     bottom: 115px;
     right: 80px;">
 </div>
-<div style="-webkit-overflow-scrolling: touch;overflow-y: scroll; ">
+<div style="-webkit-overflow-scrolling: touch;overflow-y: scroll;height: 630px; ">
 <iframe onload="iFrameHeight2();" src="/Templates/Old/shipin.php" name="ifarms" width="980" height="630" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" id="ifarms" class="ifarms"></iframe>
 </div>
     <!-- 信息框 -->
