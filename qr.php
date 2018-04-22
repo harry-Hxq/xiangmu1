@@ -6,7 +6,7 @@ $room = $_GET['room'];
 $agent = $_GET['agent'];
 $g = $_GET['g']; //pk10,xyft,cqssc,xy28,jnd28,jsmt,jssc,jsssc
 
-$wx['ID'] = 'wx9c044f98156b8e20';
+$wx['ID'] = 'wxf5f6852960c17ca7';
 $time = date('Y-m-d H:i:s', time());
 //make code
 $oauth = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $wx["ID"] . "&redirect_uri=" . urlencode("http://" . $_SERVER["HTTP_HOST"] . "/qr.php?agent=" . $_GET['agent'] . "&g=" . $_GET['g'] . "&room=" . $_GET['room']) . "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
