@@ -146,11 +146,15 @@
 		</div>
 	</body>
 	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="js/victor1.0.js?t=11"></script>
+	<script type="text/javascript" src="js/victor1.0.js"></script>
 	<script>
 		var term = "";
 		ifopen = true;
 		
 		getajax();
+
+        $(function() {
+            $("#bgsound")[0].play();
+        })
 	</script>
 </html>

@@ -5,7 +5,7 @@ $(function() {
 
 	//加载完成自动播放背景音乐
     // $("#bgsound").attr("src", "sound/bg.mp3");
-    $("#bgsound")[0].play();
+    // $("#bgsound")[0].play();
     // videoTools.sounds.soundsT.play("bgsound");
 
 	setTimeout(function() {
