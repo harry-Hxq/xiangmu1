@@ -254,6 +254,6 @@ echo $end - $start.'<br />';
  echo ("{");
  echo ("window.location.reload();");
  echo ("}");
- echo ("setTimeout('fresh_page()',1000);");
+ echo ("setTimeout('fresh_page()',800);");
  echo ("</script>");
 ?>
