@@ -1,12 +1,12 @@
 var interval = null;
 $(function() {
 
-	//加载完成自动播放背景音乐
-    Media = document.getElementById("bgsound");
-    Media.src = "sound/bg.mp3";
-    Media.play();
-
 	videoTools.createNum();
+
+	//加载完成自动播放背景音乐
+    $("#bgsound").attr("src", "sound/bg.mp3");
+    videoTools.sounds.soundsT.play("bgsound");
+
 	setTimeout(function() {
 		setTimeout(function() {
 			$(".loading").fadeOut(600);
