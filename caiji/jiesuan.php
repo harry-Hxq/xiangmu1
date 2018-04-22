@@ -3,7 +3,7 @@
     update_query('fn_user', array('money' => '+=' . $Money), array('userid' => $Userid, 'roomid' => $room));
     insert_query("fn_marklog", array("userid" => $Userid, 'type' => '上分', 'content' => $term . '期' . $game . '中奖派彩' . $content, 'money' => $Money, 'roomid' => $room, 'addtime' => 'now()'));
 }
-function PC_jiesuan(){
+function PC_jiesuan($qihao=''){
     select_query("fn_pcorder", '*', array("status" => "未结算"));
     while($con = db_fetch_array()){
         $cons[] = $con;

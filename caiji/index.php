@@ -58,25 +58,25 @@ foreach ($jsondata as $i) {
     if ($topcode[0] <> $qihao) {
         insert_query('fn_open', array('term' => $qihao, 'code' => $opencode, 'time' => $opentime, 'type' => $typeid, 'next_term' => $next_term, 'next_time' => $nexttime));
         if ($code == 'bjkl8' || $code == 'cakeno') {
-            PC_jiesuan(); //加拿大28  幸运28
+            PC_jiesuan($qihao); //加拿大28  幸运28
         }
         if ($code == 'jsmt') {
-            MT_jiesuan(); //极速摩托
+            MT_jiesuan($qihao); //极速摩托
         }
         if ($code == 'cqssc') {
-            SSC_jiesuan(); //重庆时时彩
+            SSC_jiesuan($qihao); //重庆时时彩
         }
         if ($code == 'jsssc') {
             JSSSC_jiesuan($qihao); //极速时时彩
         }
         if ($code == 'jssc') {
-            JSSC_jiesuan(); //极速赛车
+            JSSC_jiesuan($qihao); //极速赛车
         }
         if ($code == 'bjpk10' || $code == 'mlaft') {
-            jiesuan(); //幸运飞艇  北京赛车
+            jiesuan($qihao); //幸运飞艇  北京赛车
         }
         if ($code == 'jsk3') {
-            K3_jiesuan(); //快三娱乐
+            K3_jiesuan($qihao); //快三娱乐
         }
         kaichat($code, $next_term);
         echo "更新 $code 成功！<br>";
