@@ -82,8 +82,8 @@ $(function () {
 				$("#ss_menu").show().find('ul.lottery').show();
 				break;
 			case "reload":
-				//location.href = "http://" + location.host + "/?room=" + info['roomid'];
-				window.location.reload();
+				location.href = "http://" + location.host + "qr.php/?room=" + info['roomid'];
+				// window.location.reload();
 				break;
 			case "reload2":
 				document.ifarms.location.reload();
